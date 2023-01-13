@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.serialOutput = new System.Windows.Forms.RichTextBox();
+            this.connectToSerial = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -49,32 +49,35 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ports = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.recenterGyro = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.scanPorts = new System.Windows.Forms.Button();
+            this.disconnectSerial = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // serialOutput
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 13);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(390, 218);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.serialOutput.Location = new System.Drawing.Point(13, 13);
+            this.serialOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.serialOutput.Name = "serialOutput";
+            this.serialOutput.Size = new System.Drawing.Size(390, 218);
+            this.serialOutput.TabIndex = 0;
+            this.serialOutput.Text = "";
             // 
-            // button1
+            // connectToSerial
             // 
-            this.button1.Location = new System.Drawing.Point(272, 239);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 35);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "CONNECT";
-            this.button1.UseVisualStyleBackColor = true;
+            this.connectToSerial.Location = new System.Drawing.Point(289, 239);
+            this.connectToSerial.Margin = new System.Windows.Forms.Padding(4);
+            this.connectToSerial.Name = "connectToSerial";
+            this.connectToSerial.Size = new System.Drawing.Size(114, 35);
+            this.connectToSerial.TabIndex = 2;
+            this.connectToSerial.Text = "CONNECT";
+            this.connectToSerial.UseVisualStyleBackColor = true;
+            this.connectToSerial.Click += new System.EventHandler(this.connectToSerial_Click);
             // 
             // textBox1
             // 
@@ -275,13 +278,14 @@
             this.label5.Text = "ANGLE LIMITS";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox1
+            // ports
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 245);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(203, 25);
-            this.comboBox1.TabIndex = 23;
+            this.ports.FormattingEnabled = true;
+            this.ports.Location = new System.Drawing.Point(13, 245);
+            this.ports.Name = "ports";
+            this.ports.Size = new System.Drawing.Size(150, 25);
+            this.ports.TabIndex = 23;
+            this.ports.SelectedValueChanged += new System.EventHandler(this.ports_SelectedValueChanged);
             // 
             // button2
             // 
@@ -293,15 +297,16 @@
             this.button2.Text = "UPDATE";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // recenterGyro
             // 
-            this.button3.Location = new System.Drawing.Point(806, 291);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(165, 42);
-            this.button3.TabIndex = 25;
-            this.button3.Text = "RE-CENTER";
-            this.button3.UseVisualStyleBackColor = true;
+            this.recenterGyro.Location = new System.Drawing.Point(806, 291);
+            this.recenterGyro.Margin = new System.Windows.Forms.Padding(4);
+            this.recenterGyro.Name = "recenterGyro";
+            this.recenterGyro.Size = new System.Drawing.Size(165, 42);
+            this.recenterGyro.TabIndex = 25;
+            this.recenterGyro.Text = "RE-CENTER";
+            this.recenterGyro.UseVisualStyleBackColor = true;
+            this.recenterGyro.Click += new System.EventHandler(this.recenterGyro_Click);
             // 
             // button4
             // 
@@ -333,17 +338,42 @@
             this.comboBox2.Size = new System.Drawing.Size(172, 25);
             this.comboBox2.TabIndex = 28;
             // 
+            // scanPorts
+            // 
+            this.scanPorts.Location = new System.Drawing.Point(170, 239);
+            this.scanPorts.Margin = new System.Windows.Forms.Padding(4);
+            this.scanPorts.Name = "scanPorts";
+            this.scanPorts.Size = new System.Drawing.Size(111, 35);
+            this.scanPorts.TabIndex = 29;
+            this.scanPorts.Text = "SCAN";
+            this.scanPorts.UseVisualStyleBackColor = true;
+            this.scanPorts.Click += new System.EventHandler(this.scanPorts_Click);
+            // 
+            // disconnectSerial
+            // 
+            this.disconnectSerial.Location = new System.Drawing.Point(289, 239);
+            this.disconnectSerial.Margin = new System.Windows.Forms.Padding(4);
+            this.disconnectSerial.Name = "disconnectSerial";
+            this.disconnectSerial.Size = new System.Drawing.Size(114, 35);
+            this.disconnectSerial.TabIndex = 30;
+            this.disconnectSerial.Text = "DISCONNECT";
+            this.disconnectSerial.UseVisualStyleBackColor = true;
+            this.disconnectSerial.Visible = false;
+            this.disconnectSerial.Click += new System.EventHandler(this.disconnectSerial_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.disconnectSerial);
+            this.Controls.Add(this.scanPorts);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.recenterGyro);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ports);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox2);
@@ -363,12 +393,13 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.connectToSerial);
+            this.Controls.Add(this.serialOutput);
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -377,8 +408,8 @@
 
         #endregion
 
-        private RichTextBox richTextBox1;
-        private Button button1;
+        private RichTextBox serialOutput;
+        private Button connectToSerial;
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
@@ -398,11 +429,13 @@
         private CheckBox checkBox2;
         private Label label4;
         private Label label5;
-        private ComboBox comboBox1;
+        private ComboBox ports;
         private Button button2;
-        private Button button3;
+        private Button recenterGyro;
         private Button button4;
         private CheckBox checkBox3;
         private ComboBox comboBox2;
+        private Button scanPorts;
+        private Button disconnectSerial;
     }
 }
