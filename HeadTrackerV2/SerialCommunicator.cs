@@ -18,6 +18,8 @@ namespace HeadTrackerV2
 
         public SerialCommunicator(Action<String> printToTextbox)
         {
+            this.printToTextbox = printToTextbox;
+
             mySerialPort = new SerialPort();
             mySerialPort.BaudRate = 9600;
             mySerialPort.Parity = Parity.None;
@@ -26,7 +28,7 @@ namespace HeadTrackerV2
             mySerialPort.Handshake = Handshake.None;
             mySerialPort.RtsEnable = true;
             mySerialPort.DataReceived += new SerialDataReceivedEventHandler(dataRecived);
-            this.printToTextbox = printToTextbox;
+            
             //<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
             //<1> //reset view
             //<2 sensX sensY sensZ checksum>
@@ -84,7 +86,7 @@ namespace HeadTrackerV2
             String data = mySerialPort.ReadExisting();
             if (data != null)
             {
-                Console.WriteLine("\"" + data + "\"");
+                printToTextbox(data);
             }
 
 

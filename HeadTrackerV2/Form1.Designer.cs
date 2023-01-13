@@ -57,6 +57,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.scanPorts = new System.Windows.Forms.Button();
             this.disconnectSerial = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serialOutput
@@ -67,6 +68,7 @@
             this.serialOutput.Size = new System.Drawing.Size(390, 218);
             this.serialOutput.TabIndex = 0;
             this.serialOutput.Text = "";
+            this.serialOutput.TextChanged += new System.EventHandler(this.serialOutput_TextChanged);
             // 
             // connectToSerial
             // 
@@ -361,11 +363,22 @@
             this.disconnectSerial.Visible = false;
             this.disconnectSerial.Click += new System.EventHandler(this.disconnectSerial_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(580, 406);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(165, 42);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "TURN OFF";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.disconnectSerial);
             this.Controls.Add(this.scanPorts);
             this.Controls.Add(this.comboBox2);
@@ -437,5 +450,6 @@
         private ComboBox comboBox2;
         private Button scanPorts;
         private Button disconnectSerial;
+        private Button button1;
     }
 }

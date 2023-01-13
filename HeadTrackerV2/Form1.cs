@@ -24,7 +24,12 @@ namespace HeadTrackerV2
 
         public void printToSerialOutput(String s)
         {
-            serialOutput.Text += s + '\n';
+            if (InvokeRequired)
+            { 
+                this.Invoke(new MethodInvoker(delegate {
+                    serialOutput.Text += s + '\n';
+                }));
+            }
         }
 
         private void scanPorts_Click(object sender, EventArgs e)
@@ -61,6 +66,12 @@ namespace HeadTrackerV2
         private void ports_SelectedValueChanged(object sender, EventArgs e)
         {
             serial.setCOMPort(ports.Text);
+        }
+
+        private void serialOutput_TextChanged(object sender, EventArgs e)
+        {
+            serialOutput.SelectionStart = serialOutput.Text.Length;
+            serialOutput.ScrollToCaret();
         }
     }
 }
