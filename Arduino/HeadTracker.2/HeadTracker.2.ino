@@ -19,9 +19,9 @@
 #define EE_YAW_ANGLE_LIMIT 41
 #define EE_ROLL_ANGLE_LIMIT 45
 // 1 byte
-#define EE_USE_EXPONENTIAL_MODE 46
-#define EE_USE_SMOOTHNESS 47
-#define EE_IS_ON 48
+#define EE_USE_EXPONENTIAL_MODE 49
+#define EE_USE_SMOOTHNESS 50
+#define EE_IS_ON 51
 
 #define MAX_VALUE 32766
 #define MAX_MESSAGE_LENGTH 16
@@ -46,6 +46,8 @@ float rollScale = 1.0;
 
 MPU6050 mpu6050(Wire);
 
+byte _version = 0;
+
 float pitchSensitivity = 0;
 float yawSensitivity = 0;
 float rollSensitivity = 0;
@@ -54,9 +56,9 @@ float pitchExponential = 0;
 float yawExponential = 0;
 float rollExponential = 0;
 
-float pitchOffset = 0;
-float yawOffset = 0;
-float rollOffset = 0;
+float gyroPitchOffset = 0;
+float gyroYawOffset = 0;
+float gyroRollOffset = 0;
 
 float pitchLimit = 0;
 float yawLimit = 0;
@@ -65,6 +67,8 @@ float rollLimit = 0;
 bool useExponentialMode = false;
 bool useSmoothness = false;
 bool isOn = false;
+
+
 
 void setup() {
 
@@ -77,8 +81,33 @@ void setup() {
   //mpu6050.calcGyroOffsets(true); //This is is not a necessary call. works fine without it.
   //mpu6050.setGyroOffsets(-2.56, 1.28, -0.88);
 
-  //float f = 523.4;
-  //EEPROM.put(EE_PITCH_SENSITIVITY, f);
+  
+  /*byte b = 1;
+  EEPROM.put(EE_VERSION, b);
+
+  float f = 123.00f;
+  EEPROM.put(EE_PITCH_SENSITIVITY, f);
+  EEPROM.put(EE_YAW_SENSITIVITY, f);
+  EEPROM.put(EE_ROLL_SENSITIVITY, f);
+
+  EEPROM.put(EE_PITCH_EXPONENTIAL, f);
+  EEPROM.put(EE_YAW_EXPONENTIAL, f);
+  EEPROM.put(EE_ROLL_EXPONENTIAL, f);
+  
+  EEPROM.put(EE_PITCH_OFFSET, f);
+  EEPROM.put(EE_YAW_OFFSET, f);
+  EEPROM.put(EE_ROLL_OFFSET, f);
+  
+  EEPROM.put(EE_PITCH_ANGLE_LIMIT, f);
+  EEPROM.put(EE_YAW_ANGLE_LIMIT, f);
+  EEPROM.put(EE_ROLL_ANGLE_LIMIT, f);
+
+  bool bo = true;
+  EEPROM.put(EE_USE_EXPONENTIAL_MODE, bo);
+  EEPROM.put(EE_USE_SMOOTHNESS, bo);
+  EEPROM.put(EE_IS_ON, bo);*/
+  
+  EEPROM.get(EE_VERSION, _version);
 
   EEPROM.get(EE_PITCH_SENSITIVITY, pitchSensitivity);
   EEPROM.get(EE_YAW_SENSITIVITY, yawSensitivity);
@@ -88,9 +117,9 @@ void setup() {
   EEPROM.get(EE_YAW_EXPONENTIAL, yawExponential);
   EEPROM.get(EE_ROLL_EXPONENTIAL, rollExponential);
 
-  EEPROM.get(EE_PITCH_OFFSET, pitchOffset);
-  EEPROM.get(EE_YAW_OFFSET, yawOffset);
-  EEPROM.get(EE_ROLL_OFFSET, rollOffset);
+  EEPROM.get(EE_PITCH_OFFSET, gyroPitchOffset);
+  EEPROM.get(EE_YAW_OFFSET, gyroYawOffset);
+  EEPROM.get(EE_ROLL_OFFSET, gyroRollOffset);
 
   EEPROM.get(EE_PITCH_ANGLE_LIMIT, pitchLimit);
   EEPROM.get(EE_YAW_ANGLE_LIMIT, yawLimit);
@@ -117,8 +146,6 @@ void loop()
   }
   
   updatePRY();
-
-  Serial.println(isOn);
   
   Gamepad.yAxis(pitch);
   Gamepad.xAxis(yaw);
@@ -196,7 +223,15 @@ void reciveMessage(){
 
   // print info to client
   if(msg[1] == '0'){
-      Serial.println("nnnnn");
+      Serial.println("=============================================");
+      Serial.print("Version: "); Serial.print(_version); Serial.print("\tTemp: "); Serial.println(mpu6050.getTemp());
+      Serial.print("Pitch: "); Serial.print(pitch); Serial.print("\tYaw: "); Serial.print(yaw); Serial.print("\tRoll: "); Serial.println(roll); 
+      Serial.print("SenP: "); Serial.print(pitchSensitivity); Serial.print("\tSenY: "); Serial.print(yawSensitivity); Serial.print("\tSenR: "); Serial.println(rollSensitivity); 
+      Serial.print("ExpP: "); Serial.print(pitchExponential); Serial.print("\tExpY: "); Serial.print(yawExponential); Serial.print("\tExpR: "); Serial.println(rollExponential); 
+      Serial.print("OffP: "); Serial.print(gyroPitchOffset); Serial.print("\tOffY: "); Serial.print(gyroYawOffset); Serial.print("\tOffR: "); Serial.println(gyroRollOffset); 
+      Serial.print("LimP: "); Serial.print(pitchLimit); Serial.print("\tLimY: "); Serial.print(yawLimit); Serial.print("\tLimR: "); Serial.println(rollLimit); 
+      Serial.print("ExpMode: "); Serial.print(useExponentialMode); Serial.print("\tSmooth: "); Serial.print(useSmoothness); Serial.print("\tON: "); Serial.println(isOn); 
+      Serial.println("=============================================");
   }
 
   // zero the gyros
@@ -204,4 +239,77 @@ void reciveMessage(){
       zeroMPU6050();
   }
   
+}
+
+void setSensitivity(float pitch, float yaw, float roll){
+  pitchSensitivity = pitch;
+  EEPROM.put(EE_PITCH_SENSITIVITY, pitch);
+
+  yawSensitivity = yaw;
+  EEPROM.put(EE_YAW_SENSITIVITY, yaw);
+
+  rollSensitivity = roll;
+  EEPROM.put(EE_ROLL_SENSITIVITY, roll);
+
+  Serial.println("Uppdated sensitivity values");
+}
+
+void setExponential(float pitch, float yaw, float roll){
+  pitchExponential = pitch;
+  EEPROM.put(EE_PITCH_EXPONENTIAL, pitch);
+
+  yawExponential = yaw;
+  EEPROM.put(EE_YAW_EXPONENTIAL, yaw);
+
+  rollExponential = roll;
+  EEPROM.put(EE_ROLL_EXPONENTIAL, roll);
+
+  Serial.println("Uppdated exponential values");
+}
+
+void setOffset(float pitch, float yaw, float roll){
+  pitchOffset = pitch;
+  EEPROM.put(EE_PITCH_OFFSET, pitch);
+
+  yawOffset = yaw;
+  EEPROM.put(EE_YAW_OFFSET, yaw);
+
+  rollOffset = roll;
+  EEPROM.put(EE_ROLL_OFFSET, roll);
+
+  Serial.println("Uppdated offset values");
+}
+
+void setLimit(float pitch, float yaw, float roll){
+  pitchLimit = pitch;
+  EEPROM.put(EE_PITCH_ANGLE_LIMIT, pitch);
+
+  yawLimit = yaw;
+  EEPROM.put(EE_YAW_ANGLE_LIMIT, yaw);
+
+  rollLimit = roll;
+  EEPROM.put(EE_ROLL_ANGLE_LIMIT, roll);
+
+  Serial.println("Uppdated angle limits values");
+}
+
+void setExponentialMode(bool enable){
+  useExponentialMode = enable;
+  EEPROM.put(EE_USE_EXPONENTIAL_MODE, enable);
+
+  Serial.println("Uppdated exponential mode");
+}
+
+void setSmoothness(bool enable){
+  useSmoothness = enable;
+  EEPROM.put(EE_USE_SMOOTHNESS, enable);
+
+  Serial.println("Uppdated smoothness");
+}
+
+void setIsOn(bool enable){
+  isOn = enable;
+  EEPROM.put(EE_IS_ON, enable);
+
+  Serial.println("Uppdated ON / OFF");
 }
