@@ -22,5 +22,29 @@ namespace HeadTrackerV2.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool individualExp {
+            get {
+                return ((bool)(this["individualExp"]));
+            }
+            set {
+                this["individualExp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool individualSens {
+            get {
+                return ((bool)(this["individualSens"]));
+            }
+            set {
+                this["individualSens"] = value;
+            }
+        }
     }
 }

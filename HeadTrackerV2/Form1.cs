@@ -13,6 +13,18 @@ namespace HeadTrackerV2
         private void Form1_Load(object sender, EventArgs e)
         {
             serial = new SerialCommunicator(printToSerialOutput);
+
+
+            //Save the values
+            individualSens.DataBindings.Add("Checked", Properties.Settings.Default, "individualSens", true, DataSourceUpdateMode.OnPropertyChanged);
+            individualExp.DataBindings.Add("Checked", Properties.Settings.Default, "individualExp", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            //Bind commonSens to individualSens checkbox
+            commonSens.DataBindings.Add(nameof(commonSens.Visible), individualSens, nameof(individualSens.Checked), true, DataSourceUpdateMode.OnPropertyChanged);
+
+            //Bind commonExp to individualExp checkbox
+            commonExp.DataBindings.Add(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked), true, DataSourceUpdateMode.OnPropertyChanged);
+        
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -22,6 +34,7 @@ namespace HeadTrackerV2
             Application.Exit();
         }
 
+        // ----------------- SERIAL ----------------- 
         public void printToSerialOutput(String s)
         {
             if (InvokeRequired)
@@ -58,11 +71,6 @@ namespace HeadTrackerV2
             disconnectSerial.Visible = false;
         }
 
-        private void recenterGyro_Click(object sender, EventArgs e)
-        {
-            serial.resetView();
-        }
-
         private void ports_SelectedValueChanged(object sender, EventArgs e)
         {
             serial.setCOMPort(ports.Text);
@@ -73,5 +81,24 @@ namespace HeadTrackerV2
             serialOutput.SelectionStart = serialOutput.Text.Length;
             serialOutput.ScrollToCaret();
         }
+
+
+        // ----------------- GYRO ----------------- 
+        private void recenterGyro_Click(object sender, EventArgs e)
+        {
+            serial.resetView();
+        }
+
+        private void individualSens_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void individualExp_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
