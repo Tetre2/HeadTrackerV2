@@ -38,7 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.ports = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.getGyroDataBtn = new System.Windows.Forms.Button();
             this.recenterGyro = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.smoothness = new System.Windows.Forms.CheckBox();
@@ -177,16 +177,17 @@
             this.ports.Text = "Choose COM Port";
             this.ports.SelectedValueChanged += new System.EventHandler(this.ports_SelectedValueChanged);
             // 
-            // button2
+            // getGyroDataBtn
             // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(806, 406);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(165, 42);
-            this.button2.TabIndex = 24;
-            this.button2.Text = "UPDATE";
-            this.button2.UseVisualStyleBackColor = true;
+            this.getGyroDataBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.getGyroDataBtn.Location = new System.Drawing.Point(806, 406);
+            this.getGyroDataBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.getGyroDataBtn.Name = "getGyroDataBtn";
+            this.getGyroDataBtn.Size = new System.Drawing.Size(165, 42);
+            this.getGyroDataBtn.TabIndex = 24;
+            this.getGyroDataBtn.Text = "GET GYRO DATA";
+            this.getGyroDataBtn.UseVisualStyleBackColor = true;
+            this.getGyroDataBtn.Click += new System.EventHandler(this.getGyroDataBtn_Click);
             // 
             // recenterGyro
             // 
@@ -479,7 +480,7 @@
             this.Controls.Add(this.smoothness);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.recenterGyro);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.getGyroDataBtn);
             this.Controls.Add(this.ports);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -514,7 +515,7 @@
         private Label label4;
         private Label label5;
         private ComboBox ports;
-        private Button button2;
+        private Button getGyroDataBtn;
         private Button recenterGyro;
         private Button button4;
         private CheckBox smoothness;

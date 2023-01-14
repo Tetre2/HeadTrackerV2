@@ -34,7 +34,7 @@ void setup() {
 
   Wire.begin();
   mpu6050.begin();
-  mpu6050.calcGyroOffsets(true); //This is is not a necessary call. works fine without it.
+  //mpu6050.calcGyroOffsets(true); //This is is not a necessary call. works fine without it.
   //mpu6050.setGyroOffsets(-2.56, 1.28, -0.88);
 
 }
@@ -53,6 +53,18 @@ void loop()
       reciveMessage();
   }
   
+  updatePRY();
+
+  //Serial.println("dddd");
+  
+  Gamepad.yAxis(pitch);
+  Gamepad.xAxis(yaw);
+  Gamepad.zAxis(roll);
+  Gamepad.write();
+
+}
+
+void updatePRY(){
   mpu6050.update();
   pitch = mpu6050.getAngleX();
   roll = mpu6050.getAngleY();
@@ -76,34 +88,22 @@ void loop()
   roll -= offsetRoll;
   yaw -= offsetYaw;
 
-  float p = map(pitch, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
-  float y = map(yaw, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
-  float r = map(roll, -100, 100, -127, 127);
-
-  Serial.print(pitch);
-  Serial.print(" ");
-  Serial.print(p);
-  Serial.print(" ");
-  Serial.print(yaw);
-  Serial.print(" ");
-  Serial.print(y);
-  Serial.print(" ");
-  Serial.print(roll);
-  Serial.print(" ");
-  Serial.print(r);
-  Serial.println();
-  
-  Gamepad.yAxis(p);
-  Gamepad.xAxis(y);
-  Gamepad.zAxis(roll);
-  Gamepad.write();
-
+  pitch = map(pitch, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
+  yaw = map(yaw, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
+  roll = map(roll, -100, 100, -127, 127);
 }
 
-//New Protocol - Using 0 - 9 as commands
-//<7> // calibrate gyro
-//<8> // reset view
-//<9 sensX sensY sensZ expX expY expZ loop onOff debug checksum>
+// ----- Protocol -----
+//<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
+//<1> //reset view
+//<2 sensX sensY sensZ checksum>
+//<3 expX expY expZ checksum>
+//<4 offsetX offsetY offsetZ checksum>
+//<5 limitX limitY limitZ checksum>
+//<6> //Toggle Smoothness
+//<7> //run calibrateGyro
+//<8> //Turn on/off
+
 void reciveMessage(){
   String msg = new char[MAX_MESSAGE_LENGTH];
   while(Serial.available() && msg.length() != MAX_MESSAGE_LENGTH){
@@ -131,8 +131,13 @@ void reciveMessage(){
       return;
   }
 
+  // print info to client
+  if(msg[1] == '0'){
+      Serial.println("nnnnn");
+  }
+
   // zero the gyros
-  if(msg[1] == '8'){
+  if(msg[1] == '1'){
       zeroMPU6050();
   }
   

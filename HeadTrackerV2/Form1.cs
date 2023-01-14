@@ -106,11 +106,17 @@ namespace HeadTrackerV2
         // ----------------- SERIAL ----------------- 
         public void printToSerialOutput(String s)
         {
+
+            Console.WriteLine(s);
             if (InvokeRequired)
             { 
                 this.Invoke(new MethodInvoker(delegate {
                     serialOutput.Text += s + '\n';
                 }));
+            }
+            else
+            {
+                serialOutput.Text += s + '\n';
             }
         }
 
@@ -168,6 +174,9 @@ namespace HeadTrackerV2
 
         }
 
- 
+        private void getGyroDataBtn_Click(object sender, EventArgs e)
+        {
+            serial.getGyroData();
+        }
     }
 }

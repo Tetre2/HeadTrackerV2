@@ -28,15 +28,17 @@ namespace HeadTrackerV2
             mySerialPort.Handshake = Handshake.None;
             mySerialPort.RtsEnable = true;
             mySerialPort.DataReceived += new SerialDataReceivedEventHandler(dataRecived);
-            
+
+            // ----- Protocol -----
             //<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
             //<1> //reset view
             //<2 sensX sensY sensZ checksum>
             //<3 expX expY expZ checksum>
-            //<4 loop>
-            //<5 onOff>
-            //<6 debug> show x,y,z
+            //<4 offsetX offsetY offsetZ checksum>
+            //<5 limitX limitY limitZ checksum>
+            //<6> //Toggle Smoothness
             //<7> //run calibrateGyro
+            //<8> //Turn on/off
 
         }
 
@@ -72,6 +74,7 @@ namespace HeadTrackerV2
             try
             {
                 mySerialPort.Open();
+                printToTextbox("Connected to device!");
             }
             catch (Exception)
             {
@@ -114,27 +117,48 @@ namespace HeadTrackerV2
 
         }
 
+        private void writeToSerial(String message)
+        {
+            if (mySerialPort != null && mySerialPort.IsOpen)
+            {
+                mySerialPort.Write(message);
+            }
+            else
+            {
+                printToTextbox("ERROR: Not connected to a device!");
+            }
+        }
+
+        public void getGyroData()
+        {
+            writeToSerial("<0>");
+        }
 
         public void resetView()
         {
-            mySerialPort.Write("<8>");
+            writeToSerial("<1>");
         }
+
         public void calibrateGyro()
         {
-            mySerialPort.Write("<7>");
+            writeToSerial("<7>");
         }
+
         public void setSensitivity(Byte pitch, Byte yaw, Byte roll)
         {
 
         }
+
         public void setExponentialView(Byte pitch, Byte yaw, Byte roll)
         {
 
         }
+
         public void setClampView(bool enable)
         {
 
         }
+
         public void setEnabled(bool enable)
         {
 
