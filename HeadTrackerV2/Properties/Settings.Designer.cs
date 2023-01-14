@@ -226,5 +226,17 @@ namespace HeadTrackerV2.Properties {
                 this["smoothness"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string useExp {
+            get {
+                return ((string)(this["useExp"]));
+            }
+            set {
+                this["useExp"] = value;
+            }
+        }
     }
 }

@@ -54,6 +54,9 @@ namespace HeadTrackerV2
 
             //Save the values for the Smoothness checkbox
             smoothness.DataBindings.Add(nameof(smoothness.Checked), Properties.Settings.Default, "smoothness", true, ds);
+
+            //Save the values for the useExponential checkbox
+            useExp.DataBindings.Add(nameof(useExp.Checked), Properties.Settings.Default, "useExp", true, ds);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

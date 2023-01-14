@@ -60,6 +60,7 @@
             this.rollExp = new System.Windows.Forms.TextBox();
             this.pitchOffset = new System.Windows.Forms.TextBox();
             this.commonExp = new System.Windows.Forms.TextBox();
+            this.useExp = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // serialOutput
@@ -180,7 +181,7 @@
             // getGyroDataBtn
             // 
             this.getGyroDataBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.getGyroDataBtn.Location = new System.Drawing.Point(806, 406);
+            this.getGyroDataBtn.Location = new System.Drawing.Point(365, 308);
             this.getGyroDataBtn.Margin = new System.Windows.Forms.Padding(4);
             this.getGyroDataBtn.Name = "getGyroDataBtn";
             this.getGyroDataBtn.Size = new System.Drawing.Size(165, 42);
@@ -262,7 +263,7 @@
             // button1
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(580, 406);
+            this.button1.Location = new System.Drawing.Point(181, 308);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(165, 42);
@@ -453,12 +454,26 @@
             this.commonExp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
             this.commonExp.Leave += new System.EventHandler(this.validateInput);
             // 
+            // useExp
+            // 
+            this.useExp.AutoSize = true;
+            this.useExp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.useExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.useExp.Location = new System.Drawing.Point(311, 364);
+            this.useExp.Margin = new System.Windows.Forms.Padding(4);
+            this.useExp.Name = "useExp";
+            this.useExp.Size = new System.Drawing.Size(251, 31);
+            this.useExp.TabIndex = 61;
+            this.useExp.Text = "USE EXPONENTIAL";
+            this.useExp.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.useExp);
             this.Controls.Add(this.commonExp);
             this.Controls.Add(this.pitchOffset);
             this.Controls.Add(this.rollExp);
@@ -537,5 +552,6 @@
         private TextBox rollExp;
         private TextBox pitchOffset;
         private TextBox commonExp;
+        private CheckBox useExp;
     }
 }
