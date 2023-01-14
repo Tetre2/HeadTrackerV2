@@ -60,7 +60,6 @@
             this.maskedTextBox12 = new System.Windows.Forms.MaskedTextBox();
             this.commonExp = new System.Windows.Forms.MaskedTextBox();
             this.commonSens = new System.Windows.Forms.MaskedTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // serialOutput
@@ -418,7 +417,7 @@
             // 
             this.commonExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonExp.Location = new System.Drawing.Point(423, 109);
+            this.commonExp.Location = new System.Drawing.Point(423, 135);
             this.commonExp.Mask = "0000.0";
             this.commonExp.Name = "commonExp";
             this.commonExp.PromptChar = '0';
@@ -430,7 +429,7 @@
             // 
             this.commonSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonSens.Location = new System.Drawing.Point(423, 48);
+            this.commonSens.Location = new System.Drawing.Point(423, 68);
             this.commonSens.Mask = "0000.0";
             this.commonSens.Name = "commonSens";
             this.commonSens.PromptChar = '0';
@@ -438,19 +437,11 @@
             this.commonSens.TabIndex = 46;
             this.commonSens.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(241, 342);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 25);
-            this.textBox1.TabIndex = 47;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 461);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.commonSens);
             this.Controls.Add(this.commonExp);
             this.Controls.Add(this.maskedTextBox12);
@@ -528,6 +519,5 @@
         private MaskedTextBox maskedTextBox12;
         private MaskedTextBox commonExp;
         private MaskedTextBox commonSens;
-        private TextBox textBox1;
     }
 }

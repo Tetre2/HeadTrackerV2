@@ -42,7 +42,29 @@ namespace HeadTrackerV2
 
         public void close()
         {
-            mySerialPort.Close();
+            if (mySerialPort.IsOpen)
+            {
+                Thread CloseDown = new Thread(new ThreadStart(CloseSerialOnExit)); //close port in new thread to avoid hang
+                CloseDown.Start(); //close port in new thread to avoid hang
+            }
+        }
+
+        private void CloseSerialOnExit()
+        {
+            try
+            {
+                mySerialPort.Close(); //close the serial port
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); //catch any serial port closing error messages
+            }
+            //this.Invoke(new EventHandler(NowClose)); //now close back in the main thread
+        }
+
+        private void NowClose(object sender, EventArgs e)
+        {
+            //this.Close(); //now close the form
         }
 
         public bool open()
@@ -64,7 +86,7 @@ namespace HeadTrackerV2
         {
             try
             {
-                close();//Dont know if necessary
+                //close();//Dont know if necessary
                 mySerialPort.PortName = port;
             }
             catch (Exception)
