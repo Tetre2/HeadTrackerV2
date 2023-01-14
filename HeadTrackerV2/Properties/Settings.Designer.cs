@@ -46,5 +46,173 @@ namespace HeadTrackerV2.Properties {
                 this["individualSens"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string pitchSens {
+            get {
+                return ((string)(this["pitchSens"]));
+            }
+            set {
+                this["pitchSens"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string yawSens {
+            get {
+                return ((string)(this["yawSens"]));
+            }
+            set {
+                this["yawSens"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string rollSens {
+            get {
+                return ((string)(this["rollSens"]));
+            }
+            set {
+                this["rollSens"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string commonSens {
+            get {
+                return ((string)(this["commonSens"]));
+            }
+            set {
+                this["commonSens"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pitchExp {
+            get {
+                return ((string)(this["pitchExp"]));
+            }
+            set {
+                this["pitchExp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string yawExp {
+            get {
+                return ((string)(this["yawExp"]));
+            }
+            set {
+                this["yawExp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string rollExp {
+            get {
+                return ((string)(this["rollExp"]));
+            }
+            set {
+                this["rollExp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string commonExp {
+            get {
+                return ((string)(this["commonExp"]));
+            }
+            set {
+                this["commonExp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pitchOffset {
+            get {
+                return ((string)(this["pitchOffset"]));
+            }
+            set {
+                this["pitchOffset"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string yawOffset {
+            get {
+                return ((string)(this["yawOffset"]));
+            }
+            set {
+                this["yawOffset"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string rollOffset {
+            get {
+                return ((string)(this["rollOffset"]));
+            }
+            set {
+                this["rollOffset"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pitchLimit {
+            get {
+                return ((string)(this["pitchLimit"]));
+            }
+            set {
+                this["pitchLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string yawLimit {
+            get {
+                return ((string)(this["yawLimit"]));
+            }
+            set {
+                this["yawLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string rollLimit {
+            get {
+                return ((string)(this["rollLimit"]));
+            }
+            set {
+                this["rollLimit"] = value;
+            }
+        }
     }
 }

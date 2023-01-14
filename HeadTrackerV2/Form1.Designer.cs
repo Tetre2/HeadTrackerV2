@@ -46,20 +46,20 @@
             this.scanPorts = new System.Windows.Forms.Button();
             this.disconnectSerial = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox7 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox8 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox9 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox10 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox11 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox12 = new System.Windows.Forms.MaskedTextBox();
-            this.commonExp = new System.Windows.Forms.MaskedTextBox();
-            this.commonSens = new System.Windows.Forms.MaskedTextBox();
+            this.pitchSens = new System.Windows.Forms.TextBox();
+            this.yawSens = new System.Windows.Forms.TextBox();
+            this.rollSens = new System.Windows.Forms.TextBox();
+            this.commonSens = new System.Windows.Forms.TextBox();
+            this.pitchExp = new System.Windows.Forms.TextBox();
+            this.yawOffset = new System.Windows.Forms.TextBox();
+            this.rollOffset = new System.Windows.Forms.TextBox();
+            this.pitchLimit = new System.Windows.Forms.TextBox();
+            this.yawLimit = new System.Windows.Forms.TextBox();
+            this.rollLimit = new System.Windows.Forms.TextBox();
+            this.yawExp = new System.Windows.Forms.TextBox();
+            this.rollExp = new System.Windows.Forms.TextBox();
+            this.pitchOffset = new System.Windows.Forms.TextBox();
+            this.commonExp = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // serialOutput
@@ -269,193 +269,209 @@
             this.button1.Text = "TURN OFF";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox1
+            // pitchSens
             // 
-            this.maskedTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox1.Location = new System.Drawing.Point(423, 48);
-            this.maskedTextBox1.Mask = "0000.0";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.PromptChar = '0';
-            this.maskedTextBox1.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox1.TabIndex = 33;
-            this.maskedTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pitchSens.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pitchSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pitchSens.Location = new System.Drawing.Point(423, 48);
+            this.pitchSens.Name = "pitchSens";
+            this.pitchSens.PlaceholderText = "Sens";
+            this.pitchSens.Size = new System.Drawing.Size(105, 35);
+            this.pitchSens.TabIndex = 47;
+            this.pitchSens.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pitchSens.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.pitchSens.Leave += new System.EventHandler(this.validateInput);
             // 
-            // maskedTextBox2
+            // yawSens
             // 
-            this.maskedTextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox2.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox2.Location = new System.Drawing.Point(549, 48);
-            this.maskedTextBox2.Mask = "0000.0";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.PromptChar = '0';
-            this.maskedTextBox2.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox2.TabIndex = 34;
-            this.maskedTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yawSens.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.yawSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.yawSens.Location = new System.Drawing.Point(549, 48);
+            this.yawSens.Name = "yawSens";
+            this.yawSens.PlaceholderText = "Sens";
+            this.yawSens.Size = new System.Drawing.Size(105, 35);
+            this.yawSens.TabIndex = 48;
+            this.yawSens.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yawSens.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.yawSens.Leave += new System.EventHandler(this.validateInput);
             // 
-            // maskedTextBox3
+            // rollSens
             // 
-            this.maskedTextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox3.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox3.Location = new System.Drawing.Point(673, 48);
-            this.maskedTextBox3.Mask = "0000.0";
-            this.maskedTextBox3.Name = "maskedTextBox3";
-            this.maskedTextBox3.PromptChar = '0';
-            this.maskedTextBox3.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox3.TabIndex = 35;
-            this.maskedTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox4
-            // 
-            this.maskedTextBox4.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox4.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox4.Location = new System.Drawing.Point(423, 109);
-            this.maskedTextBox4.Mask = "0000.0";
-            this.maskedTextBox4.Name = "maskedTextBox4";
-            this.maskedTextBox4.PromptChar = '0';
-            this.maskedTextBox4.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox4.TabIndex = 36;
-            this.maskedTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox5
-            // 
-            this.maskedTextBox5.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox5.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox5.Location = new System.Drawing.Point(423, 176);
-            this.maskedTextBox5.Mask = "0000.0";
-            this.maskedTextBox5.Name = "maskedTextBox5";
-            this.maskedTextBox5.PromptChar = '0';
-            this.maskedTextBox5.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox5.TabIndex = 37;
-            this.maskedTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox6
-            // 
-            this.maskedTextBox6.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox6.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox6.Location = new System.Drawing.Point(423, 239);
-            this.maskedTextBox6.Mask = "0000.0";
-            this.maskedTextBox6.Name = "maskedTextBox6";
-            this.maskedTextBox6.PromptChar = '0';
-            this.maskedTextBox6.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox6.TabIndex = 38;
-            this.maskedTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox7
-            // 
-            this.maskedTextBox7.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox7.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox7.Location = new System.Drawing.Point(549, 109);
-            this.maskedTextBox7.Mask = "0000.0";
-            this.maskedTextBox7.Name = "maskedTextBox7";
-            this.maskedTextBox7.PromptChar = '0';
-            this.maskedTextBox7.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox7.TabIndex = 39;
-            this.maskedTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox8
-            // 
-            this.maskedTextBox8.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox8.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox8.Location = new System.Drawing.Point(673, 109);
-            this.maskedTextBox8.Mask = "0000.0";
-            this.maskedTextBox8.Name = "maskedTextBox8";
-            this.maskedTextBox8.PromptChar = '0';
-            this.maskedTextBox8.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox8.TabIndex = 40;
-            this.maskedTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox9
-            // 
-            this.maskedTextBox9.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox9.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox9.Location = new System.Drawing.Point(549, 176);
-            this.maskedTextBox9.Mask = "0000.0";
-            this.maskedTextBox9.Name = "maskedTextBox9";
-            this.maskedTextBox9.PromptChar = '0';
-            this.maskedTextBox9.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox9.TabIndex = 41;
-            this.maskedTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox10
-            // 
-            this.maskedTextBox10.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox10.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox10.Location = new System.Drawing.Point(673, 176);
-            this.maskedTextBox10.Mask = "0000.0";
-            this.maskedTextBox10.Name = "maskedTextBox10";
-            this.maskedTextBox10.PromptChar = '0';
-            this.maskedTextBox10.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox10.TabIndex = 42;
-            this.maskedTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox11
-            // 
-            this.maskedTextBox11.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox11.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox11.Location = new System.Drawing.Point(549, 239);
-            this.maskedTextBox11.Mask = "0000.0";
-            this.maskedTextBox11.Name = "maskedTextBox11";
-            this.maskedTextBox11.PromptChar = '0';
-            this.maskedTextBox11.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox11.TabIndex = 43;
-            this.maskedTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // maskedTextBox12
-            // 
-            this.maskedTextBox12.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.maskedTextBox12.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.maskedTextBox12.Location = new System.Drawing.Point(673, 239);
-            this.maskedTextBox12.Mask = "0000.0";
-            this.maskedTextBox12.Name = "maskedTextBox12";
-            this.maskedTextBox12.PromptChar = '0';
-            this.maskedTextBox12.Size = new System.Drawing.Size(105, 35);
-            this.maskedTextBox12.TabIndex = 44;
-            this.maskedTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // commonExp
-            // 
-            this.commonExp.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.commonExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonExp.Location = new System.Drawing.Point(423, 135);
-            this.commonExp.Mask = "0000.0";
-            this.commonExp.Name = "commonExp";
-            this.commonExp.PromptChar = '0';
-            this.commonExp.Size = new System.Drawing.Size(357, 35);
-            this.commonExp.TabIndex = 45;
-            this.commonExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollSens.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.rollSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rollSens.Location = new System.Drawing.Point(673, 48);
+            this.rollSens.Name = "rollSens";
+            this.rollSens.PlaceholderText = "Sens";
+            this.rollSens.Size = new System.Drawing.Size(105, 35);
+            this.rollSens.TabIndex = 49;
+            this.rollSens.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollSens.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.rollSens.Leave += new System.EventHandler(this.validateInput);
             // 
             // commonSens
             // 
             this.commonSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.commonSens.Location = new System.Drawing.Point(423, 68);
-            this.commonSens.Mask = "0000.0";
             this.commonSens.Name = "commonSens";
-            this.commonSens.PromptChar = '0';
-            this.commonSens.Size = new System.Drawing.Size(357, 35);
-            this.commonSens.TabIndex = 46;
+            this.commonSens.PlaceholderText = "Sens";
+            this.commonSens.Size = new System.Drawing.Size(355, 35);
+            this.commonSens.TabIndex = 50;
             this.commonSens.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.commonSens.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.commonSens.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // pitchExp
+            // 
+            this.pitchExp.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pitchExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pitchExp.Location = new System.Drawing.Point(423, 109);
+            this.pitchExp.Name = "pitchExp";
+            this.pitchExp.PlaceholderText = "Exp";
+            this.pitchExp.Size = new System.Drawing.Size(105, 35);
+            this.pitchExp.TabIndex = 51;
+            this.pitchExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pitchExp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.pitchExp.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // yawOffset
+            // 
+            this.yawOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.yawOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.yawOffset.Location = new System.Drawing.Point(549, 176);
+            this.yawOffset.Name = "yawOffset";
+            this.yawOffset.PlaceholderText = "Offset";
+            this.yawOffset.Size = new System.Drawing.Size(105, 35);
+            this.yawOffset.TabIndex = 52;
+            this.yawOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yawOffset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.yawOffset.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // rollOffset
+            // 
+            this.rollOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.rollOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rollOffset.Location = new System.Drawing.Point(673, 176);
+            this.rollOffset.Name = "rollOffset";
+            this.rollOffset.PlaceholderText = "Offset";
+            this.rollOffset.Size = new System.Drawing.Size(105, 35);
+            this.rollOffset.TabIndex = 53;
+            this.rollOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollOffset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.rollOffset.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // pitchLimit
+            // 
+            this.pitchLimit.AcceptsReturn = true;
+            this.pitchLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pitchLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pitchLimit.Location = new System.Drawing.Point(423, 239);
+            this.pitchLimit.Name = "pitchLimit";
+            this.pitchLimit.PlaceholderText = "Limit";
+            this.pitchLimit.Size = new System.Drawing.Size(105, 35);
+            this.pitchLimit.TabIndex = 54;
+            this.pitchLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pitchLimit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.pitchLimit.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // yawLimit
+            // 
+            this.yawLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.yawLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.yawLimit.Location = new System.Drawing.Point(549, 239);
+            this.yawLimit.Name = "yawLimit";
+            this.yawLimit.PlaceholderText = "Limit";
+            this.yawLimit.Size = new System.Drawing.Size(105, 35);
+            this.yawLimit.TabIndex = 55;
+            this.yawLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yawLimit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.yawLimit.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // rollLimit
+            // 
+            this.rollLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.rollLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rollLimit.Location = new System.Drawing.Point(673, 239);
+            this.rollLimit.Name = "rollLimit";
+            this.rollLimit.PlaceholderText = "Limit";
+            this.rollLimit.Size = new System.Drawing.Size(105, 35);
+            this.rollLimit.TabIndex = 56;
+            this.rollLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollLimit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.rollLimit.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // yawExp
+            // 
+            this.yawExp.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.yawExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.yawExp.Location = new System.Drawing.Point(549, 109);
+            this.yawExp.Name = "yawExp";
+            this.yawExp.PlaceholderText = "Exp";
+            this.yawExp.Size = new System.Drawing.Size(105, 35);
+            this.yawExp.TabIndex = 57;
+            this.yawExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yawExp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.yawExp.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // rollExp
+            // 
+            this.rollExp.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.rollExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rollExp.Location = new System.Drawing.Point(673, 109);
+            this.rollExp.Name = "rollExp";
+            this.rollExp.PlaceholderText = "Exp";
+            this.rollExp.Size = new System.Drawing.Size(105, 35);
+            this.rollExp.TabIndex = 58;
+            this.rollExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollExp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.rollExp.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // pitchOffset
+            // 
+            this.pitchOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pitchOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pitchOffset.Location = new System.Drawing.Point(423, 176);
+            this.pitchOffset.Name = "pitchOffset";
+            this.pitchOffset.PlaceholderText = "Offset";
+            this.pitchOffset.Size = new System.Drawing.Size(105, 35);
+            this.pitchOffset.TabIndex = 59;
+            this.pitchOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pitchOffset.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.pitchOffset.Leave += new System.EventHandler(this.validateInput);
+            // 
+            // commonExp
+            // 
+            this.commonExp.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.commonExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.commonExp.Location = new System.Drawing.Point(423, 125);
+            this.commonExp.Name = "commonExp";
+            this.commonExp.PlaceholderText = "Exp";
+            this.commonExp.Size = new System.Drawing.Size(355, 35);
+            this.commonExp.TabIndex = 60;
+            this.commonExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.commonExp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDownHandler);
+            this.commonExp.Leave += new System.EventHandler(this.validateInput);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(984, 461);
-            this.Controls.Add(this.commonSens);
             this.Controls.Add(this.commonExp);
-            this.Controls.Add(this.maskedTextBox12);
-            this.Controls.Add(this.maskedTextBox11);
-            this.Controls.Add(this.maskedTextBox10);
-            this.Controls.Add(this.maskedTextBox9);
-            this.Controls.Add(this.maskedTextBox8);
-            this.Controls.Add(this.maskedTextBox7);
-            this.Controls.Add(this.maskedTextBox6);
-            this.Controls.Add(this.maskedTextBox5);
-            this.Controls.Add(this.maskedTextBox4);
-            this.Controls.Add(this.maskedTextBox3);
-            this.Controls.Add(this.maskedTextBox2);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.pitchOffset);
+            this.Controls.Add(this.rollExp);
+            this.Controls.Add(this.yawExp);
+            this.Controls.Add(this.rollLimit);
+            this.Controls.Add(this.yawLimit);
+            this.Controls.Add(this.pitchLimit);
+            this.Controls.Add(this.rollOffset);
+            this.Controls.Add(this.yawOffset);
+            this.Controls.Add(this.pitchExp);
+            this.Controls.Add(this.commonSens);
+            this.Controls.Add(this.rollSens);
+            this.Controls.Add(this.yawSens);
+            this.Controls.Add(this.pitchSens);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.disconnectSerial);
             this.Controls.Add(this.scanPorts);
@@ -480,6 +496,7 @@
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.Form1_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -505,19 +522,19 @@
         private Button scanPorts;
         private Button disconnectSerial;
         private Button button1;
-        private MaskedTextBox maskedTextBox1;
-        private MaskedTextBox maskedTextBox2;
-        private MaskedTextBox maskedTextBox3;
-        private MaskedTextBox maskedTextBox4;
-        private MaskedTextBox maskedTextBox5;
-        private MaskedTextBox maskedTextBox6;
-        private MaskedTextBox maskedTextBox7;
-        private MaskedTextBox maskedTextBox8;
-        private MaskedTextBox maskedTextBox9;
-        private MaskedTextBox maskedTextBox10;
-        private MaskedTextBox maskedTextBox11;
-        private MaskedTextBox maskedTextBox12;
-        private MaskedTextBox commonExp;
-        private MaskedTextBox commonSens;
+        private TextBox pitchSens;
+        private TextBox yawSens;
+        private TextBox rollSens;
+        private TextBox commonSens;
+        private TextBox pitchExp;
+        private TextBox yawOffset;
+        private TextBox rollOffset;
+        private TextBox pitchLimit;
+        private TextBox yawLimit;
+        private TextBox rollLimit;
+        private TextBox yawExp;
+        private TextBox rollExp;
+        private TextBox pitchOffset;
+        private TextBox commonExp;
     }
 }
