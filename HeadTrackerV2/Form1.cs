@@ -51,6 +51,9 @@ namespace HeadTrackerV2
             pitchLimit.DataBindings.Add(nameof(pitchLimit.Text), Properties.Settings.Default, "pitchLimit", true, ds);
             yawLimit.DataBindings.Add(nameof(yawLimit.Text), Properties.Settings.Default, "yawLimit", true, ds);
             rollLimit.DataBindings.Add(nameof(rollLimit.Text), Properties.Settings.Default, "rollLimit", true, ds);
+
+            //Save the values for the Smoothness checkbox
+            smoothness.DataBindings.Add(nameof(smoothness.Checked), Properties.Settings.Default, "smoothness", true, ds);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

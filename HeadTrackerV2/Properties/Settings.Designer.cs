@@ -214,5 +214,17 @@ namespace HeadTrackerV2.Properties {
                 this["rollLimit"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool smoothness {
+            get {
+                return ((bool)(this["smoothness"]));
+            }
+            set {
+                this["smoothness"] = value;
+            }
+        }
     }
 }

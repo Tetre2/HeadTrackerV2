@@ -41,7 +41,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.recenterGyro = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.smoothness = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.scanPorts = new System.Windows.Forms.Button();
             this.disconnectSerial = new System.Windows.Forms.Button();
@@ -211,18 +211,18 @@
             this.button4.Text = "RECALIBRATE";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // smoothness
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox3.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox3.Location = new System.Drawing.Point(580, 364);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(200, 31);
-            this.checkBox3.TabIndex = 27;
-            this.checkBox3.Text = "SMOOTHNESS";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.smoothness.AutoSize = true;
+            this.smoothness.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.smoothness.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.smoothness.Location = new System.Drawing.Point(580, 364);
+            this.smoothness.Margin = new System.Windows.Forms.Padding(4);
+            this.smoothness.Name = "smoothness";
+            this.smoothness.Size = new System.Drawing.Size(200, 31);
+            this.smoothness.TabIndex = 27;
+            this.smoothness.Text = "SMOOTHNESS";
+            this.smoothness.UseVisualStyleBackColor = true;
             // 
             // comboBox2
             // 
@@ -476,7 +476,7 @@
             this.Controls.Add(this.disconnectSerial);
             this.Controls.Add(this.scanPorts);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.smoothness);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.recenterGyro);
             this.Controls.Add(this.button2);
@@ -517,7 +517,7 @@
         private Button button2;
         private Button recenterGyro;
         private Button button4;
-        private CheckBox checkBox3;
+        private CheckBox smoothness;
         private ComboBox comboBox2;
         private Button scanPorts;
         private Button disconnectSerial;
