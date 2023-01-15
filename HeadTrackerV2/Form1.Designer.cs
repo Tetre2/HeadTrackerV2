@@ -61,6 +61,7 @@
             this.pitchOffset = new System.Windows.Forms.TextBox();
             this.commonExp = new System.Windows.Forms.TextBox();
             this.useExp = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // serialOutput
@@ -276,6 +277,7 @@
             this.pitchSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pitchSens.Location = new System.Drawing.Point(423, 48);
+            this.pitchSens.MaxLength = 6;
             this.pitchSens.Name = "pitchSens";
             this.pitchSens.PlaceholderText = "Sens";
             this.pitchSens.Size = new System.Drawing.Size(105, 35);
@@ -289,6 +291,7 @@
             this.yawSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.yawSens.Location = new System.Drawing.Point(549, 48);
+            this.yawSens.MaxLength = 6;
             this.yawSens.Name = "yawSens";
             this.yawSens.PlaceholderText = "Sens";
             this.yawSens.Size = new System.Drawing.Size(105, 35);
@@ -302,6 +305,7 @@
             this.rollSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rollSens.Location = new System.Drawing.Point(673, 48);
+            this.rollSens.MaxLength = 6;
             this.rollSens.Name = "rollSens";
             this.rollSens.PlaceholderText = "Sens";
             this.rollSens.Size = new System.Drawing.Size(105, 35);
@@ -315,6 +319,7 @@
             this.commonSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.commonSens.Location = new System.Drawing.Point(423, 68);
+            this.commonSens.MaxLength = 6;
             this.commonSens.Name = "commonSens";
             this.commonSens.PlaceholderText = "Sens";
             this.commonSens.Size = new System.Drawing.Size(355, 35);
@@ -328,6 +333,7 @@
             this.pitchExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pitchExp.Location = new System.Drawing.Point(423, 109);
+            this.pitchExp.MaxLength = 6;
             this.pitchExp.Name = "pitchExp";
             this.pitchExp.PlaceholderText = "Exp";
             this.pitchExp.Size = new System.Drawing.Size(105, 35);
@@ -341,6 +347,7 @@
             this.yawOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.yawOffset.Location = new System.Drawing.Point(549, 176);
+            this.yawOffset.MaxLength = 6;
             this.yawOffset.Name = "yawOffset";
             this.yawOffset.PlaceholderText = "Offset";
             this.yawOffset.Size = new System.Drawing.Size(105, 35);
@@ -354,6 +361,7 @@
             this.rollOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rollOffset.Location = new System.Drawing.Point(673, 176);
+            this.rollOffset.MaxLength = 6;
             this.rollOffset.Name = "rollOffset";
             this.rollOffset.PlaceholderText = "Offset";
             this.rollOffset.Size = new System.Drawing.Size(105, 35);
@@ -368,6 +376,7 @@
             this.pitchLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pitchLimit.Location = new System.Drawing.Point(423, 239);
+            this.pitchLimit.MaxLength = 6;
             this.pitchLimit.Name = "pitchLimit";
             this.pitchLimit.PlaceholderText = "Limit";
             this.pitchLimit.Size = new System.Drawing.Size(105, 35);
@@ -381,6 +390,7 @@
             this.yawLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.yawLimit.Location = new System.Drawing.Point(549, 239);
+            this.yawLimit.MaxLength = 6;
             this.yawLimit.Name = "yawLimit";
             this.yawLimit.PlaceholderText = "Limit";
             this.yawLimit.Size = new System.Drawing.Size(105, 35);
@@ -394,6 +404,7 @@
             this.rollLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rollLimit.Location = new System.Drawing.Point(673, 239);
+            this.rollLimit.MaxLength = 6;
             this.rollLimit.Name = "rollLimit";
             this.rollLimit.PlaceholderText = "Limit";
             this.rollLimit.Size = new System.Drawing.Size(105, 35);
@@ -407,6 +418,7 @@
             this.yawExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.yawExp.Location = new System.Drawing.Point(549, 109);
+            this.yawExp.MaxLength = 6;
             this.yawExp.Name = "yawExp";
             this.yawExp.PlaceholderText = "Exp";
             this.yawExp.Size = new System.Drawing.Size(105, 35);
@@ -420,6 +432,7 @@
             this.rollExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rollExp.Location = new System.Drawing.Point(673, 109);
+            this.rollExp.MaxLength = 6;
             this.rollExp.Name = "rollExp";
             this.rollExp.PlaceholderText = "Exp";
             this.rollExp.Size = new System.Drawing.Size(105, 35);
@@ -433,6 +446,7 @@
             this.pitchOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pitchOffset.Location = new System.Drawing.Point(423, 176);
+            this.pitchOffset.MaxLength = 6;
             this.pitchOffset.Name = "pitchOffset";
             this.pitchOffset.PlaceholderText = "Offset";
             this.pitchOffset.Size = new System.Drawing.Size(105, 35);
@@ -446,6 +460,7 @@
             this.commonExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.commonExp.Location = new System.Drawing.Point(423, 125);
+            this.commonExp.MaxLength = 6;
             this.commonExp.Name = "commonExp";
             this.commonExp.PlaceholderText = "Exp";
             this.commonExp.Size = new System.Drawing.Size(355, 35);
@@ -467,12 +482,23 @@
             this.useExp.Text = "USE EXPONENTIAL";
             this.useExp.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(469, 423);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 62;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.useExp);
             this.Controls.Add(this.commonExp);
             this.Controls.Add(this.pitchOffset);
@@ -553,5 +579,6 @@
         private TextBox pitchOffset;
         private TextBox commonExp;
         private CheckBox useExp;
+        private Button button2;
     }
 }

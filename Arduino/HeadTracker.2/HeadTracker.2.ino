@@ -24,7 +24,7 @@
 #define EE_IS_ON 51
 
 #define MAX_VALUE 32766
-#define MAX_MESSAGE_LENGTH 16
+#define MAX_MESSAGE_LENGTH 48
 
 float pitch = 0; 
 float roll = 0;
@@ -131,16 +131,8 @@ void setup() {
 
 }
 
-void zeroMPU6050(){
-  //Center the Joystick at current position
-  offsetPitch += pitch;
-  offsetRoll += roll;
-  offsetYaw += yaw;
-}
-
 void loop() 
-{
-
+{  
   if(Serial.available()){
       reciveMessage();
   }
@@ -190,16 +182,26 @@ void updatePRY(){
 //<3 expX expY expZ checksum>
 //<4 offsetX offsetY offsetZ checksum>
 //<5 limitX limitY limitZ checksum>
-//<6> //Toggle Smoothness
+//<6 bool> //Toggle Smoothness
 //<7> //run calibrateGyro
-//<8> //Turn on/off
+//<8 bool> //Turn on/off
 
 void reciveMessage(){
+  delay(20);
   String msg = new char[MAX_MESSAGE_LENGTH];
   while(Serial.available() && msg.length() != MAX_MESSAGE_LENGTH){
         char inChar = (char)Serial.read();
         msg += inChar;
     }
+
+  
+  Serial.print("Arduino got: "); Serial.println(msg);
+
+  Serial.print("Arduino got: ");
+  for(int i = 0; i < msg.length(); i++){
+    Serial.print((uint8_t)msg[i], HEX);
+  }
+  Serial.println();
 
   // Get start and end index for message
   int startIndex = 0;
@@ -212,8 +214,7 @@ void reciveMessage(){
       endIndex = i;
     }
   }
-
-  // substring the message, POSSIBLE overflow on end index
+  // substring the message
   msg = msg.substring(startIndex, endIndex + 1);
 
   //return if not correct message type
@@ -221,9 +222,133 @@ void reciveMessage(){
       return;
   }
 
-  // print info to client
+
+  //Convert msg to a char array
+  char messageCharArray[msg.length() + 1];
+  msg.toCharArray(messageCharArray, msg.length() + 1);
+
+  //<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
   if(msg[1] == '0'){
-      Serial.println("=============================================");
+      printInfo();
+  }
+
+  //<1> //reset view
+  if(msg[1] == '1'){
+      zeroMPU6050();
+  }
+
+  //<2 sensX sensY sensZ checksum>
+  if(msg[1] == '2'){
+
+    float buf[3];
+    getFloatsFromMsg(buf, messageCharArray, msg.length() + 1);
+    Serial.print(buf[0]); Serial.print(" "); Serial.print(buf[1]); Serial.print(" "); Serial.println(buf[2]);
+
+    if(buf[0] == -1.0f && buf[1] == -1.0f && buf[2] == -1.0f){
+      Serial.println("ERROR: Checksum does not match!");
+      return;
+    }
+
+    setSensitivity(buf[0], buf[1], buf[2]);
+  
+  }
+    
+  
+  //<3 expX expY expZ checksum>
+  if(msg[1] == '3'){
+
+  }
+
+  //<4 offsetX offsetY offsetZ checksum>
+  if(msg[1] == '4'){
+
+  }
+
+  //<5 limitX limitY limitZ checksum>
+  if(msg[1] == '5'){
+      
+  }
+
+  //<6 bool> //Toggle Smoothness
+  if(msg[1] == '6'){
+
+  }
+
+  //<7> //run calibrateGyro
+  if(msg[1] == '7'){
+
+  }
+
+  //<8 bool> //Turn on/off
+  if(msg[1] == '8'){
+
+  }
+  
+
+}
+
+void getFloatsFromMsg(float (& result) [3], char message[], int len){
+  float p = 0;
+  float y = 0;
+  float r = 0;
+  float checksum = 0;
+
+  int lenOfPitch = 0;
+  int lenOfYaw = 0;
+  int lenOfRoll = 0;
+  int lenOfChecksum = 0;
+  
+  int val = 0;
+  for(int i = 2; i < len; i++){
+    if(message[i] == ';'){
+      if(val == 0){
+        lenOfPitch = i - 2;
+      }else if(val == 1){
+        lenOfYaw = i - (lenOfPitch + 3);
+      }else if(val == 2){
+        lenOfRoll = i - (lenOfPitch + lenOfYaw + 4);
+      }
+      val++;
+    }
+
+    if(message[i] == '>'){
+      lenOfChecksum = i - (lenOfPitch + lenOfYaw + lenOfRoll + 5);
+      
+      
+      break;
+    }
+  }
+  
+  p = bytesToFloat(lenOfPitch, message + 2);
+  
+  y = bytesToFloat(lenOfYaw, message + 2 + lenOfPitch + 1);
+  
+  r = bytesToFloat(lenOfRoll, message + 2 + lenOfPitch + 1 + lenOfYaw + 1);
+  
+  checksum = bytesToFloat(lenOfChecksum, message + 2 + lenOfPitch + 1 + lenOfYaw + 1 + lenOfRoll + 1);
+
+  Serial.print(p); Serial.print(" "); Serial.print(y); Serial.print(" "); Serial.print(r); Serial.print(" "); Serial.println(checksum);
+
+  if(checksum == (int)((p + y + r))){
+    result[0] = p;
+    result[1] = y;
+    result[2] = r;
+  }else{
+    result[0] = -1;
+    result[1] = -1;
+    result[2] = -1;
+  }
+
+}
+
+float bytesToFloat(int lengthOfFloat, int address){
+  char destP[lengthOfFloat + 1];
+  memcpy (destP, address, lengthOfFloat);
+  return atof(destP);
+}
+
+void printInfo(){
+      Serial.println("========================================");
       Serial.print("Version: "); Serial.print(_version); Serial.print("\tTemp: "); Serial.println(mpu6050.getTemp());
       Serial.print("Pitch: "); Serial.print(pitch); Serial.print("\tYaw: "); Serial.print(yaw); Serial.print("\tRoll: "); Serial.println(roll); 
       Serial.print("SenP: "); Serial.print(pitchSensitivity); Serial.print("\tSenY: "); Serial.print(yawSensitivity); Serial.print("\tSenR: "); Serial.println(rollSensitivity); 
@@ -231,14 +356,16 @@ void reciveMessage(){
       Serial.print("OffP: "); Serial.print(gyroPitchOffset); Serial.print("\tOffY: "); Serial.print(gyroYawOffset); Serial.print("\tOffR: "); Serial.println(gyroRollOffset); 
       Serial.print("LimP: "); Serial.print(pitchLimit); Serial.print("\tLimY: "); Serial.print(yawLimit); Serial.print("\tLimR: "); Serial.println(rollLimit); 
       Serial.print("ExpMode: "); Serial.print(useExponentialMode); Serial.print("\tSmooth: "); Serial.print(useSmoothness); Serial.print("\tON: "); Serial.println(isOn); 
-      Serial.println("=============================================");
-  }
+      Serial.println("========================================");
+}
 
-  // zero the gyros
-  if(msg[1] == '1'){
-      zeroMPU6050();
-  }
+void zeroMPU6050(){
+  //Center the Joystick at current position
+  offsetPitch += pitch;
+  offsetRoll += roll;
+  offsetYaw += yaw;
   
+  Serial.println("View reset");
 }
 
 void setSensitivity(float pitch, float yaw, float roll){
@@ -268,13 +395,13 @@ void setExponential(float pitch, float yaw, float roll){
 }
 
 void setOffset(float pitch, float yaw, float roll){
-  pitchOffset = pitch;
+  gyroPitchOffset = pitch;
   EEPROM.put(EE_PITCH_OFFSET, pitch);
 
-  yawOffset = yaw;
+  gyroYawOffset = yaw;
   EEPROM.put(EE_YAW_OFFSET, yaw);
 
-  rollOffset = roll;
+  gyroRollOffset = roll;
   EEPROM.put(EE_ROLL_OFFSET, roll);
 
   Serial.println("Uppdated offset values");

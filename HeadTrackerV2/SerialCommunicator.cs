@@ -36,9 +36,9 @@ namespace HeadTrackerV2
             //<3 expX expY expZ checksum>
             //<4 offsetX offsetY offsetZ checksum>
             //<5 limitX limitY limitZ checksum>
-            //<6> //Toggle Smoothness
+            //<6 bool> //Toggle Smoothness
             //<7> //run calibrateGyro
-            //<8> //Turn on/off
+            //<8 bool> //Turn on/off
 
         }
 
@@ -129,6 +129,18 @@ namespace HeadTrackerV2
             }
         }
 
+        private void writeToSerial(Byte[] message)
+        {
+            if (mySerialPort != null && mySerialPort.IsOpen)
+            {
+                mySerialPort.Write(message, 0, message.Length);
+            }
+            else
+            {
+                printToTextbox("ERROR: Not connected to a device!");
+            }
+        }
+
         public void getGyroData()
         {
             writeToSerial("<0>");
@@ -144,12 +156,30 @@ namespace HeadTrackerV2
             writeToSerial("<7>");
         }
 
-        public void setSensitivity(Byte pitch, Byte yaw, Byte roll)
+        public void setSensitivity(float pitch, float yaw, float roll)
         {
+            byte checksum = (byte)(pitch + yaw + roll);
+            String s = "<2" + pitch.ToString().Replace(',','.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
+            writeToSerial(s);
 
+            /*byte[] pitchArr = BitConverter.GetBytes(pitch);
+            byte[] yawArr = BitConverter.GetBytes(yaw);
+            byte[] rollArr = BitConverter.GetBytes(roll);
+            byte[] checksum = BitConverter.GetBytes(pitch + yaw + roll);
+
+            byte[] msg = { (byte) '<', (byte) '2',
+                pitchArr[0], (byte) ';', pitchArr[1], (byte) ';', pitchArr[2], (byte) ';', pitchArr[3], (byte) ';',
+                yawArr[0], (byte) ';', yawArr[1], (byte) ';', yawArr[2], (byte) ';', yawArr[3], (byte) ';',
+                rollArr[0], (byte) ';', rollArr[1], (byte) ';', rollArr[2], (byte) ';', rollArr[3], (byte) ';',
+                checksum[0], (byte) ';', checksum[1], (byte) ';', checksum[2], (byte) ';', checksum[3],
+                (byte) '>' };
+
+            string hexString = Convert.ToHexString(msg);
+
+            Console.WriteLine($"   Hex value: \"{hexString}\"");*/
         }
 
-        public void setExponentialView(Byte pitch, Byte yaw, Byte roll)
+        public void setExponentialView(float pitch, float yaw, float roll)
         {
 
         }

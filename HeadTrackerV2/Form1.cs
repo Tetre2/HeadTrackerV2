@@ -79,15 +79,8 @@ namespace HeadTrackerV2
             if (sender != null && sender is TextBox)
             {
                 TextBox textBox = sender as TextBox;
-
-                try
-                {
-                    float.Parse(textBox.Text);
-                }
-                catch (Exception)
-                {
-                    textBox.Text = "";
-                }
+                bool isValidFloat = float.TryParse(textBox.Text, out float result);
+                if (!isValidFloat) { textBox.Text = ""; }
             }
         }
 
@@ -180,6 +173,30 @@ namespace HeadTrackerV2
         private void getGyroDataBtn_Click(object sender, EventArgs e)
         {
             serial.getGyroData();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            bool isValidFloat = float.TryParse(pitchSens.Text, out float result1);
+            isValidFloat = float.TryParse(yawSens.Text, out float result2) && isValidFloat;
+            isValidFloat = float.TryParse(rollSens.Text, out float result3) && isValidFloat;
+            if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
+
+            if (individualSens.Checked)
+            {
+                Console.WriteLine("dddd");
+                float pitch = float.Parse(pitchSens.Text);
+                float yaw = float.Parse(yawSens.Text);
+                float roll = float.Parse(rollSens.Text);
+                serial.setSensitivity(pitch, yaw, roll);
+            }
+            else
+            {
+                Console.WriteLine("aaaa");
+                float sens = float.Parse(commonSens.Text);
+                serial.setSensitivity(sens, sens, sens);
+            }
         }
     }
 }
