@@ -68,11 +68,13 @@ bool useExponentialMode = false;
 bool useSmoothness = false;
 bool isOn = false;
 
-
+float floatCreationBuffer[3];
+String messageBuffer = new char[MAX_MESSAGE_LENGTH];
 
 void setup() {
 
   Serial.begin(9600);
+  while (!Serial); // wait for Leonardo enumeration, others continue immediately
 
   Gamepad.begin();
 
@@ -188,103 +190,148 @@ void updatePRY(){
 
 void reciveMessage(){
   delay(20);
-  String msg = new char[MAX_MESSAGE_LENGTH];
-  while(Serial.available() && msg.length() != MAX_MESSAGE_LENGTH){
+  while(Serial.available() && messageBuffer.length() != MAX_MESSAGE_LENGTH){
         char inChar = (char)Serial.read();
-        msg += inChar;
+        messageBuffer += inChar;
     }
 
   
-  Serial.print("Arduino got: "); Serial.println(msg);
+  Serial.print("Arduino got: "); Serial.println(messageBuffer);
 
   Serial.print("Arduino got: ");
-  for(int i = 0; i < msg.length(); i++){
-    Serial.print((uint8_t)msg[i], HEX);
+  for(int i = 0; i < messageBuffer.length(); i++){
+    Serial.print((uint8_t)messageBuffer[i], HEX);
   }
   Serial.println();
 
   // Get start and end index for message
   int startIndex = 0;
   int endIndex = 0;
-  for(int i = 0; i < msg.length(); i++){
-    if(msg[i] == '<'){
+  for(int i = 0; i < messageBuffer.length(); i++){
+    if(messageBuffer[i] == '<'){
       startIndex = i;
     }
-    if(msg[i] == '>'){
+    if(messageBuffer[i] == '>'){
       endIndex = i;
     }
   }
   // substring the message
-  msg = msg.substring(startIndex, endIndex + 1);
+  messageBuffer = messageBuffer.substring(startIndex, endIndex + 1);
 
   //return if not correct message type
-  if(msg[0] != '<' || msg[msg.length() - 1] != '>'){
+  if(messageBuffer[0] != '<' || messageBuffer[messageBuffer.length() - 1] != '>'){
       return;
   }
 
 
   //Convert msg to a char array
-  char messageCharArray[msg.length() + 1];
-  msg.toCharArray(messageCharArray, msg.length() + 1);
+  char messageCharArray[messageBuffer.length() + 1];
+  messageBuffer.toCharArray(messageCharArray, messageBuffer.length() + 1);
 
   //<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
-  if(msg[1] == '0'){
+  if(messageBuffer[1] == '0'){
       printInfo();
   }
 
   //<1> //reset view
-  if(msg[1] == '1'){
+  if(messageBuffer[1] == '1'){
       zeroMPU6050();
   }
 
   //<2 sensX sensY sensZ checksum>
-  if(msg[1] == '2'){
+  if(messageBuffer[1] == '2'){
+    getFloatsFromMsg(floatCreationBuffer, messageCharArray, messageBuffer.length() + 1);
+    Serial.print(floatCreationBuffer[0]); Serial.print(" "); Serial.print(floatCreationBuffer[1]); Serial.print(" "); Serial.println(floatCreationBuffer[2]);
 
-    float buf[3];
-    getFloatsFromMsg(buf, messageCharArray, msg.length() + 1);
-    Serial.print(buf[0]); Serial.print(" "); Serial.print(buf[1]); Serial.print(" "); Serial.println(buf[2]);
-
-    if(buf[0] == -1.0f && buf[1] == -1.0f && buf[2] == -1.0f){
+    if(floatCreationBuffer[0] == -1.0f && floatCreationBuffer[1] == -1.0f && floatCreationBuffer[2] == -1.0f){
       Serial.println("ERROR: Checksum does not match!");
       return;
     }
 
-    setSensitivity(buf[0], buf[1], buf[2]);
+    setSensitivity(floatCreationBuffer[0], floatCreationBuffer[1], floatCreationBuffer[2]);
   
   }
     
   
   //<3 expX expY expZ checksum>
-  if(msg[1] == '3'){
+  if(messageBuffer[1] == '3'){
+    getFloatsFromMsg(floatCreationBuffer, messageCharArray, messageBuffer.length() + 1);
+    Serial.print(floatCreationBuffer[0]); Serial.print(" "); Serial.print(floatCreationBuffer[1]); Serial.print(" "); Serial.println(floatCreationBuffer[2]);
 
+    if(floatCreationBuffer[0] == -1.0f && floatCreationBuffer[1] == -1.0f && floatCreationBuffer[2] == -1.0f){
+      Serial.println("ERROR: Checksum does not match!");
+      return;
+    }
+
+    setExponential(floatCreationBuffer[0], floatCreationBuffer[1], floatCreationBuffer[2]);
   }
 
   //<4 offsetX offsetY offsetZ checksum>
-  if(msg[1] == '4'){
+  if(messageBuffer[1] == '4'){
+    getFloatsFromMsg(floatCreationBuffer, messageCharArray, messageBuffer.length() + 1);
+    Serial.print(floatCreationBuffer[0]); Serial.print(" "); Serial.print(floatCreationBuffer[1]); Serial.print(" "); Serial.println(floatCreationBuffer[2]);
 
+    if(floatCreationBuffer[0] == -1.0f && floatCreationBuffer[1] == -1.0f && floatCreationBuffer[2] == -1.0f){
+      Serial.println("ERROR: Checksum does not match!");
+      return;
+    }
+
+    setOffset(floatCreationBuffer[0], floatCreationBuffer[1], floatCreationBuffer[2]);
   }
 
   //<5 limitX limitY limitZ checksum>
-  if(msg[1] == '5'){
-      
+  if(messageBuffer[1] == '5'){
+    getFloatsFromMsg(floatCreationBuffer, messageCharArray, messageBuffer.length() + 1);
+    Serial.print(floatCreationBuffer[0]); Serial.print(" "); Serial.print(floatCreationBuffer[1]); Serial.print(" "); Serial.println(floatCreationBuffer[2]);
+
+    if(floatCreationBuffer[0] == -1.0f && floatCreationBuffer[1] == -1.0f && floatCreationBuffer[2] == -1.0f){
+      Serial.println("ERROR: Checksum does not match!");
+      return;
+    }
+
+    setLimit(floatCreationBuffer[0], floatCreationBuffer[1], floatCreationBuffer[2]);
   }
 
   //<6 bool> //Toggle Smoothness
-  if(msg[1] == '6'){
-
+  if(messageBuffer[1] == '6'){
+    if(messageBuffer[2] == '0'){
+      setSmoothness(false);
+    }else if(messageBuffer[2] == '1'){
+      setSmoothness(true);
+    }else{
+      Serial.println("ERROR: Checksum does not match!");
+    }
   }
 
   //<7> //run calibrateGyro
-  if(msg[1] == '7'){
-
+  if(messageBuffer[1] == '7'){
+    mpu6050.calcGyroOffsets(true);
+    Serial.println("Gyro is Running!");
   }
 
   //<8 bool> //Turn on/off
-  if(msg[1] == '8'){
-
+  if(messageBuffer[1] == '8'){
+    if(messageBuffer[2] == '0'){
+      setIsOn(false);
+    }else if(messageBuffer[2] == '1'){
+      setIsOn(true);
+    }else{
+      Serial.println("ERROR: Checksum does not match!");
+    }
   }
-  
 
+  //<9 bool> //Use Exponential
+  if(messageBuffer[1] == '9'){
+    if(messageBuffer[2] == '0'){
+      setExponentialMode(false);
+    }else if(messageBuffer[2] == '1'){
+      setExponentialMode(true);
+    }else{
+      Serial.println("ERROR: Checksum does not match!");
+    }
+  }
+
+  messageBuffer = "";
 }
 
 void getFloatsFromMsg(float (& result) [3], char message[], int len){
@@ -313,8 +360,6 @@ void getFloatsFromMsg(float (& result) [3], char message[], int len){
 
     if(message[i] == '>'){
       lenOfChecksum = i - (lenOfPitch + lenOfYaw + lenOfRoll + 5);
-      
-      
       break;
     }
   }
