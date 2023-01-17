@@ -26,13 +26,17 @@
 #define MAX_VALUE 32766
 #define MAX_MESSAGE_LENGTH 48
 
+float rawPitch = 0; 
+float rawYaw = 0;
+float rawRoll = 0;
+
 float pitch = 0; 
-float roll = 0;
 float yaw = 0;
+float roll = 0;
 
 float offsetPitch = 0;
-float offsetRoll = 0;
 float offsetYaw = 0;
+float offsetRoll = 0;
 
 //upper and lower limit on the angle of the MPU6050 board range.
 int upperLimit = 8192;
@@ -150,10 +154,17 @@ void loop()
 
 void updatePRY(){
   mpu6050.update();
-  pitch = mpu6050.getAngleX();
-  roll = mpu6050.getAngleY();
-  yaw = mpu6050.getAngleZ();
+  rawPitch = mpu6050.getAngleX();
+  rawRoll = mpu6050.getAngleY();
+  rawYaw = mpu6050.getAngleZ();
 
+  
+  // Apply offsets
+  pitch = rawPitch - offsetPitch;
+  roll = rawRoll - offsetRoll;
+  yaw = rawYaw - offsetYaw;
+
+  
   if (expScaleMode) {
     pitch = (0.001422076 * pitch * pitch * pitchScale) * (pitch / abs(pitch));
     roll = (0.001422076 * roll * roll * rollScale) * (roll / abs(roll));
@@ -166,11 +177,6 @@ void updatePRY(){
     roll = (roll * rollScale);
     yaw = (yaw * yawScale);
   }
-
-  // Apply offsets
-  pitch -= offsetPitch;
-  roll -= offsetRoll;
-  yaw -= offsetYaw;
 
   pitch = map(pitch, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
   yaw = map(yaw, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
@@ -375,7 +381,7 @@ void getFloatsFromMsg(float (& result) [3], char message[], int len){
 
   Serial.print(p); Serial.print(" "); Serial.print(y); Serial.print(" "); Serial.print(r); Serial.print(" "); Serial.println(checksum);
 
-  if(checksum == (int)((p + y + r))){
+  if(checksum == (byte)((p + y + r))){
     result[0] = p;
     result[1] = y;
     result[2] = r;
@@ -407,9 +413,9 @@ void printInfo(){
 
 void zeroMPU6050(){
   //Center the Joystick at current position
-  offsetPitch += pitch;
-  offsetRoll += roll;
-  offsetYaw += yaw;
+  offsetPitch += rawPitch;
+  offsetRoll += rawRoll;
+  offsetYaw += rawYaw;
   
   Serial.println("View reset");
 }
