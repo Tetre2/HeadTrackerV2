@@ -77,6 +77,28 @@ String messageBuffer = new char[MAX_MESSAGE_LENGTH];
 
 void setup() {
 
+  EEPROM.get(EE_VERSION, _version);
+
+  EEPROM.get(EE_PITCH_SENSITIVITY, pitchSensitivity);
+  EEPROM.get(EE_YAW_SENSITIVITY, yawSensitivity);
+  EEPROM.get(EE_ROLL_SENSITIVITY, rollSensitivity);
+
+  EEPROM.get(EE_PITCH_EXPONENTIAL, pitchExponential);
+  EEPROM.get(EE_YAW_EXPONENTIAL, yawExponential);
+  EEPROM.get(EE_ROLL_EXPONENTIAL, rollExponential);
+
+  EEPROM.get(EE_PITCH_OFFSET, gyroPitchOffset);
+  EEPROM.get(EE_YAW_OFFSET, gyroYawOffset);
+  EEPROM.get(EE_ROLL_OFFSET, gyroRollOffset);
+
+  EEPROM.get(EE_PITCH_ANGLE_LIMIT, pitchLimit);
+  EEPROM.get(EE_YAW_ANGLE_LIMIT, yawLimit);
+  EEPROM.get(EE_ROLL_ANGLE_LIMIT, rollLimit);
+
+  EEPROM.get(EE_USE_EXPONENTIAL_MODE, useExponentialMode);
+  EEPROM.get(EE_USE_SMOOTHNESS, useSmoothness);
+  EEPROM.get(EE_IS_ON, isOn);
+
   Serial.begin(9600);
   while (!Serial); // wait for Leonardo enumeration, others continue immediately
 
@@ -85,7 +107,7 @@ void setup() {
   Wire.begin();
   mpu6050.begin();
   //mpu6050.calcGyroOffsets(true); //This is is not a necessary call. works fine without it.
-  //mpu6050.setGyroOffsets(-2.56, 1.28, -0.88);
+  mpu6050.setGyroOffsets(gyroPitchOffset, gyroYawOffset, gyroRollOffset);
 
   
   /*byte b = 1;
@@ -113,27 +135,7 @@ void setup() {
   EEPROM.put(EE_USE_SMOOTHNESS, bo);
   EEPROM.put(EE_IS_ON, bo);*/
   
-  EEPROM.get(EE_VERSION, _version);
 
-  EEPROM.get(EE_PITCH_SENSITIVITY, pitchSensitivity);
-  EEPROM.get(EE_YAW_SENSITIVITY, yawSensitivity);
-  EEPROM.get(EE_ROLL_SENSITIVITY, rollSensitivity);
-
-  EEPROM.get(EE_PITCH_EXPONENTIAL, pitchExponential);
-  EEPROM.get(EE_YAW_EXPONENTIAL, yawExponential);
-  EEPROM.get(EE_ROLL_EXPONENTIAL, rollExponential);
-
-  EEPROM.get(EE_PITCH_OFFSET, gyroPitchOffset);
-  EEPROM.get(EE_YAW_OFFSET, gyroYawOffset);
-  EEPROM.get(EE_ROLL_OFFSET, gyroRollOffset);
-
-  EEPROM.get(EE_PITCH_ANGLE_LIMIT, pitchLimit);
-  EEPROM.get(EE_YAW_ANGLE_LIMIT, yawLimit);
-  EEPROM.get(EE_ROLL_ANGLE_LIMIT, rollLimit);
-
-  EEPROM.get(EE_USE_EXPONENTIAL_MODE, useExponentialMode);
-  EEPROM.get(EE_USE_SMOOTHNESS, useSmoothness);
-  EEPROM.get(EE_IS_ON, isOn);
 
 }
 
@@ -157,7 +159,6 @@ void updatePRY(){
   rawPitch = mpu6050.getAngleX();
   rawRoll = mpu6050.getAngleY();
   rawYaw = mpu6050.getAngleZ();
-
   
   // Apply offsets
   pitch = rawPitch - offsetPitch;
