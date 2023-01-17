@@ -1,3 +1,0 @@
-Agnle limiters
-Exponential
-Sens Adjust
