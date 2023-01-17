@@ -40,7 +40,7 @@
             this.ports = new System.Windows.Forms.ComboBox();
             this.getGyroDataBtn = new System.Windows.Forms.Button();
             this.recenterGyro = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.recalibrateGyro = new System.Windows.Forms.Button();
             this.smoothness = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.scanPorts = new System.Windows.Forms.Button();
@@ -205,16 +205,17 @@
             this.recenterGyro.UseVisualStyleBackColor = true;
             this.recenterGyro.Click += new System.EventHandler(this.recenterGyro_Click);
             // 
-            // button4
+            // recalibrateGyro
             // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(694, 299);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(165, 42);
-            this.button4.TabIndex = 26;
-            this.button4.Text = "RECALIBRATE";
-            this.button4.UseVisualStyleBackColor = true;
+            this.recalibrateGyro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.recalibrateGyro.Location = new System.Drawing.Point(694, 299);
+            this.recalibrateGyro.Margin = new System.Windows.Forms.Padding(4);
+            this.recalibrateGyro.Name = "recalibrateGyro";
+            this.recalibrateGyro.Size = new System.Drawing.Size(165, 42);
+            this.recalibrateGyro.TabIndex = 26;
+            this.recalibrateGyro.Text = "RECALIBRATE";
+            this.recalibrateGyro.UseVisualStyleBackColor = true;
+            this.recalibrateGyro.Click += new System.EventHandler(this.recalibrateGyro_Click);
             // 
             // smoothness
             // 
@@ -578,7 +579,7 @@
             this.Controls.Add(this.scanPorts);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.smoothness);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.recalibrateGyro);
             this.Controls.Add(this.recenterGyro);
             this.Controls.Add(this.getGyroDataBtn);
             this.Controls.Add(this.ports);
@@ -617,7 +618,7 @@
         private ComboBox ports;
         private Button getGyroDataBtn;
         private Button recenterGyro;
-        private Button button4;
+        private Button recalibrateGyro;
         private CheckBox smoothness;
         private ComboBox comboBox2;
         private Button scanPorts;

@@ -273,5 +273,10 @@ namespace HeadTrackerV2
         {
             serial.setEnabled(enableGyro.Checked);
         }
+
+        private void recalibrateGyro_Click(object sender, EventArgs e)
+        {
+            serial.calibrateGyro();
+        }
     }
 }
