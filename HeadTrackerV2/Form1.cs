@@ -22,11 +22,16 @@ namespace HeadTrackerV2
 
             bindData();
 
+            zeroHotkey.Items.Add(new ComboboxItem("F1", Keys.F1));
+            zeroHotkey.SelectedIndex = 0;
+            zeroHotkey.SelectedItem = zeroHotkey.SelectedIndex;
+
         }
 
         public void MyKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1)
+            if (zeroHotkey.SelectedItem == null) return;
+            if (e.KeyCode == ((ComboboxItem) zeroHotkey.SelectedItem).key)
             {
                 serial.resetView();
 
@@ -205,11 +210,6 @@ namespace HeadTrackerV2
             serial.getGyroData();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-            
-        }
 
         private void updateSens_Click(object sender, EventArgs e)
         {
@@ -298,6 +298,21 @@ namespace HeadTrackerV2
         private void recalibrateGyro_Click(object sender, EventArgs e)
         {
             serial.calibrateGyro();
+        }
+    }
+    public class ComboboxItem
+    {
+        public string Text { get; set; }
+        public Keys key { get; set; }
+        public ComboboxItem(string text, Keys key)
+        {
+            this.Text = text;
+            this.key = key;
+        }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

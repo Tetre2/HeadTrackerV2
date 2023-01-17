@@ -42,7 +42,7 @@
             this.recenterGyro = new System.Windows.Forms.Button();
             this.recalibrateGyro = new System.Windows.Forms.Button();
             this.smoothness = new System.Windows.Forms.CheckBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.zeroHotkey = new System.Windows.Forms.ComboBox();
             this.scanPorts = new System.Windows.Forms.Button();
             this.disconnectSerial = new System.Windows.Forms.Button();
             this.pitchSens = new System.Windows.Forms.TextBox();
@@ -60,7 +60,6 @@
             this.pitchOffset = new System.Windows.Forms.TextBox();
             this.commonExp = new System.Windows.Forms.TextBox();
             this.useExp = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.updateSens = new System.Windows.Forms.Button();
             this.updateExp = new System.Windows.Forms.Button();
             this.updateOffset = new System.Windows.Forms.Button();
@@ -231,14 +230,14 @@
             this.smoothness.UseVisualStyleBackColor = true;
             this.smoothness.CheckedChanged += new System.EventHandler(this.smoothness_CheckedChanged);
             // 
-            // comboBox2
+            // zeroHotkey
             // 
-            this.comboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(933, 413);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(165, 25);
-            this.comboBox2.TabIndex = 28;
+            this.zeroHotkey.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.zeroHotkey.FormattingEnabled = true;
+            this.zeroHotkey.Location = new System.Drawing.Point(933, 413);
+            this.zeroHotkey.Name = "zeroHotkey";
+            this.zeroHotkey.Size = new System.Drawing.Size(165, 25);
+            this.zeroHotkey.TabIndex = 28;
             // 
             // scanPorts
             // 
@@ -311,7 +310,7 @@
             // 
             this.commonSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonSens.Location = new System.Drawing.Point(597, 68);
+            this.commonSens.Location = new System.Drawing.Point(597, 49);
             this.commonSens.MaxLength = 6;
             this.commonSens.Name = "commonSens";
             this.commonSens.PlaceholderText = "Sens";
@@ -452,7 +451,7 @@
             // 
             this.commonExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonExp.Location = new System.Drawing.Point(597, 125);
+            this.commonExp.Location = new System.Drawing.Point(597, 109);
             this.commonExp.MaxLength = 6;
             this.commonExp.Name = "commonExp";
             this.commonExp.PlaceholderText = "Exp";
@@ -475,16 +474,6 @@
             this.useExp.Text = "USE EXPONENTIAL";
             this.useExp.UseVisualStyleBackColor = true;
             this.useExp.CheckedChanged += new System.EventHandler(this.useExp_CheckedChanged);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(226, 372);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 62;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // updateSens
             // 
@@ -559,7 +548,6 @@
             this.Controls.Add(this.updateOffset);
             this.Controls.Add(this.updateExp);
             this.Controls.Add(this.updateSens);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.useExp);
             this.Controls.Add(this.commonExp);
             this.Controls.Add(this.pitchOffset);
@@ -577,7 +565,7 @@
             this.Controls.Add(this.pitchSens);
             this.Controls.Add(this.disconnectSerial);
             this.Controls.Add(this.scanPorts);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.zeroHotkey);
             this.Controls.Add(this.smoothness);
             this.Controls.Add(this.recalibrateGyro);
             this.Controls.Add(this.recenterGyro);
@@ -620,7 +608,7 @@
         private Button recenterGyro;
         private Button recalibrateGyro;
         private CheckBox smoothness;
-        private ComboBox comboBox2;
+        private ComboBox zeroHotkey;
         private Button scanPorts;
         private Button disconnectSerial;
         private TextBox pitchSens;
@@ -638,7 +626,6 @@
         private TextBox pitchOffset;
         private TextBox commonExp;
         private CheckBox useExp;
-        private Button button2;
         private Button updateSens;
         private Button updateExp;
         private Button updateOffset;
