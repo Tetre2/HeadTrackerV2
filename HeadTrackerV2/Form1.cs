@@ -1,10 +1,13 @@
 using HeadTrackerV2.Properties;
+using System.Globalization;
+using gma.System.Windows;
 
 namespace HeadTrackerV2
 {
     public partial class Form1 : Form
     {
         SerialCommunicator serial;
+        UserActivityHook actHook;
         public Form1()
         {
             InitializeComponent();
@@ -13,8 +16,21 @@ namespace HeadTrackerV2
         private void Form1_Load(object sender, EventArgs e)
         {
             serial = new SerialCommunicator(printToSerialOutput);
+
+            actHook = new UserActivityHook();
+            actHook.KeyDown += new KeyEventHandler(MyKeyDown);
+
             bindData();
 
+        }
+
+        public void MyKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                serial.resetView();
+
+            }
         }
 
         private void bindData()
@@ -88,13 +104,23 @@ namespace HeadTrackerV2
 
         // ----------------- USER INPUT ----------------- 
 
+        private bool tryParseFloat(string possibleFloat, out float result)
+        {
+            var fmt = new NumberFormatInfo();
+            fmt.NegativeSign = "-";
+            
+            bool isValid = float.TryParse(possibleFloat, NumberStyles.Float, fmt, out float r);
+            result = r;
+            return isValid;
+        }
+
+
         private void validateInput(object sender, EventArgs e)
         {
             if (sender != null && sender is TextBox)
             {
                 TextBox textBox = sender as TextBox;
-                bool isValidFloat = float.TryParse(textBox.Text, out float result);
-                if (!isValidFloat) { textBox.Text = ""; }
+                if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
             }
         }
 
@@ -187,75 +213,70 @@ namespace HeadTrackerV2
 
         private void updateSens_Click(object sender, EventArgs e)
         {
-            bool isValidFloat = float.TryParse(pitchSens.Text, out float result1);
-            isValidFloat = float.TryParse(yawSens.Text, out float result2) && isValidFloat;
-            isValidFloat = float.TryParse(rollSens.Text, out float result3) && isValidFloat;
-            if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
+            
+            
 
             if (individualSens.Checked)
             {
                 Console.WriteLine("aaa");
-                float pitch = float.Parse(pitchSens.Text);
-                float yaw = float.Parse(yawSens.Text);
-                float roll = float.Parse(rollSens.Text);
+                bool isValidFloat = tryParseFloat(pitchSens.Text, out float pitch);
+                isValidFloat = tryParseFloat(yawSens.Text, out float yaw) && isValidFloat;
+                isValidFloat = tryParseFloat(rollSens.Text, out float roll) && isValidFloat;
+                if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
                 serial.setSensitivity(pitch, yaw, roll);
             }
             else
             {
                 Console.WriteLine("bbb");
-                float sens = float.Parse(commonSens.Text);
+                bool isValidFloat = tryParseFloat(commonSens.Text, out float sens);
+                if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
                 serial.setSensitivity(sens, sens, sens);
             }
         }
 
         private void updateExp_Click(object sender, EventArgs e)
         {
-            bool isValidFloat = float.TryParse(pitchExp.Text, out float result1);
-            isValidFloat = float.TryParse(yawExp.Text, out float result2) && isValidFloat;
-            isValidFloat = float.TryParse(rollExp.Text, out float result3) && isValidFloat;
-            if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
+            
 
             if (individualExp.Checked)
             {
                 Console.WriteLine("ccc");
-                float pitch = float.Parse(pitchExp.Text);
-                float yaw = float.Parse(yawExp.Text);
-                float roll = float.Parse(rollExp.Text);
+                bool isValidFloat = tryParseFloat(pitchExp.Text, out float pitch);
+                isValidFloat = tryParseFloat(yawExp.Text, out float yaw) && isValidFloat;
+                isValidFloat = tryParseFloat(rollExp.Text, out float roll) && isValidFloat;
+                if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
                 serial.setExponentialView(pitch, yaw, roll);
             }
             else
             {
                 Console.WriteLine("ddd");
-                float exp = float.Parse(commonExp.Text);
+                bool isValidFloat = tryParseFloat(commonExp.Text, out float exp);
+                if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
                 serial.setSensitivity(exp, exp, exp);
             }
         }
 
         private void updateOffset_Click(object sender, EventArgs e)
         {
-            bool isValidFloat = float.TryParse(pitchOffset.Text, out float result1);
-            isValidFloat = float.TryParse(yawOffset.Text, out float result2) && isValidFloat;
-            isValidFloat = float.TryParse(rollOffset.Text, out float result3) && isValidFloat;
-            if (!isValidFloat) { printToSerialOutput("ERROR: Offset value is not a float!"); return; }
+            
 
-            Console.WriteLine("eee");
-            float pitch = float.Parse(pitchOffset.Text);
-            float yaw = float.Parse(yawOffset.Text);
-            float roll = float.Parse(rollOffset.Text);
+            Console.WriteLine("eee"); 
+            bool isValidFloat = tryParseFloat(pitchOffset.Text, out float pitch);
+            isValidFloat = tryParseFloat(yawOffset.Text, out float yaw) && isValidFloat;
+            isValidFloat = tryParseFloat(rollOffset.Text, out float roll) && isValidFloat;
+            if (!isValidFloat) { printToSerialOutput("ERROR: Offset value is not a float!"); return; }
             serial.setOffset(pitch, yaw, roll);
         }
 
         private void updateLimits_Click(object sender, EventArgs e)
         {
-            bool isValidFloat = float.TryParse(pitchLimit.Text, out float result1);
-            isValidFloat = float.TryParse(yawLimit.Text, out float result2) && isValidFloat;
-            isValidFloat = float.TryParse(rollLimit.Text, out float result3) && isValidFloat;
-            if (!isValidFloat) { printToSerialOutput("ERROR: Limit value is not a float!"); return; }
+            
 
             Console.WriteLine("fff");
-            float pitch = float.Parse(pitchLimit.Text);
-            float yaw = float.Parse(yawLimit.Text);
-            float roll = float.Parse(rollLimit.Text);
+            bool isValidFloat = tryParseFloat(pitchLimit.Text, out float pitch);
+            isValidFloat = tryParseFloat(yawLimit.Text, out float yaw) && isValidFloat;
+            isValidFloat = tryParseFloat(rollLimit.Text, out float roll) && isValidFloat;
+            if (!isValidFloat) { printToSerialOutput("ERROR: Limit value is not a float!"); return; }
             serial.setLimit(pitch, yaw, roll);
         }
 
