@@ -31,7 +31,11 @@ namespace HeadTrackerV2
             commonSens.DataBindings.Add(nameof(commonSens.Text), Properties.Settings.Default, "commonSens", true, ds);
 
             //Bind commonSens to individualSens checkbox
-            commonSens.DataBindings.Add(nameof(commonSens.Visible), individualSens, nameof(individualSens.Checked), true, ds);
+            Binding bindSens = new Binding(nameof(commonSens.Visible), individualSens, nameof(individualSens.Checked));
+            bindSens.Format += SwitchBool;
+            bindSens.Parse += SwitchBool;
+
+            commonSens.DataBindings.Add(bindSens);
 
             //Save the values for exponential
             pitchExp.DataBindings.Add(nameof(pitchExp.Text), Properties.Settings.Default, "pitchExp", true, ds);
@@ -40,7 +44,12 @@ namespace HeadTrackerV2
             commonExp.DataBindings.Add(nameof(commonExp.Text), Properties.Settings.Default, "commonExp", true, ds);
 
             //Bind commonExp to individualExp checkbox
-            commonExp.DataBindings.Add(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked), true, ds);
+            Binding bindExp = new Binding(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked));
+            bindExp.Format += SwitchBool;
+            bindExp.Parse += SwitchBool;
+
+            commonExp.DataBindings.Add(bindExp);
+            //commonExp.DataBindings.Add(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked), true, ds);
 
             //Save the values for offsets
             pitchOffset.DataBindings.Add(nameof(pitchOffset.Text), Properties.Settings.Default, "pitchOffset", true, ds);
@@ -57,6 +66,11 @@ namespace HeadTrackerV2
 
             //Save the values for the useExponential checkbox
             useExp.DataBindings.Add(nameof(useExp.Checked), Properties.Settings.Default, "useExp", true, ds);
+        }
+
+        private void SwitchBool(object sender, ConvertEventArgs e)
+        {
+            e.Value = !((bool)e.Value);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -160,16 +174,6 @@ namespace HeadTrackerV2
             serial.resetView();
         }
 
-        private void individualSens_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void individualExp_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void getGyroDataBtn_Click(object sender, EventArgs e)
         {
             serial.getGyroData();
@@ -178,6 +182,11 @@ namespace HeadTrackerV2
         private void button2_Click(object sender, EventArgs e)
         {
 
+            
+        }
+
+        private void updateSens_Click(object sender, EventArgs e)
+        {
             bool isValidFloat = float.TryParse(pitchSens.Text, out float result1);
             isValidFloat = float.TryParse(yawSens.Text, out float result2) && isValidFloat;
             isValidFloat = float.TryParse(rollSens.Text, out float result3) && isValidFloat;
@@ -185,7 +194,7 @@ namespace HeadTrackerV2
 
             if (individualSens.Checked)
             {
-                Console.WriteLine("dddd");
+                Console.WriteLine("aaa");
                 float pitch = float.Parse(pitchSens.Text);
                 float yaw = float.Parse(yawSens.Text);
                 float roll = float.Parse(rollSens.Text);
@@ -193,10 +202,76 @@ namespace HeadTrackerV2
             }
             else
             {
-                Console.WriteLine("aaaa");
+                Console.WriteLine("bbb");
                 float sens = float.Parse(commonSens.Text);
                 serial.setSensitivity(sens, sens, sens);
             }
+        }
+
+        private void updateExp_Click(object sender, EventArgs e)
+        {
+            bool isValidFloat = float.TryParse(pitchExp.Text, out float result1);
+            isValidFloat = float.TryParse(yawExp.Text, out float result2) && isValidFloat;
+            isValidFloat = float.TryParse(rollExp.Text, out float result3) && isValidFloat;
+            if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
+
+            if (individualExp.Checked)
+            {
+                Console.WriteLine("ccc");
+                float pitch = float.Parse(pitchExp.Text);
+                float yaw = float.Parse(yawExp.Text);
+                float roll = float.Parse(rollExp.Text);
+                serial.setExponentialView(pitch, yaw, roll);
+            }
+            else
+            {
+                Console.WriteLine("ddd");
+                float exp = float.Parse(commonExp.Text);
+                serial.setSensitivity(exp, exp, exp);
+            }
+        }
+
+        private void updateOffset_Click(object sender, EventArgs e)
+        {
+            bool isValidFloat = float.TryParse(pitchOffset.Text, out float result1);
+            isValidFloat = float.TryParse(yawOffset.Text, out float result2) && isValidFloat;
+            isValidFloat = float.TryParse(rollOffset.Text, out float result3) && isValidFloat;
+            if (!isValidFloat) { printToSerialOutput("ERROR: Offset value is not a float!"); return; }
+
+            Console.WriteLine("eee");
+            float pitch = float.Parse(pitchOffset.Text);
+            float yaw = float.Parse(yawOffset.Text);
+            float roll = float.Parse(rollOffset.Text);
+            serial.setOffset(pitch, yaw, roll);
+        }
+
+        private void updateLimits_Click(object sender, EventArgs e)
+        {
+            bool isValidFloat = float.TryParse(pitchLimit.Text, out float result1);
+            isValidFloat = float.TryParse(yawLimit.Text, out float result2) && isValidFloat;
+            isValidFloat = float.TryParse(rollLimit.Text, out float result3) && isValidFloat;
+            if (!isValidFloat) { printToSerialOutput("ERROR: Limit value is not a float!"); return; }
+
+            Console.WriteLine("fff");
+            float pitch = float.Parse(pitchLimit.Text);
+            float yaw = float.Parse(yawLimit.Text);
+            float roll = float.Parse(rollLimit.Text);
+            serial.setLimit(pitch, yaw, roll);
+        }
+
+        private void useExp_CheckedChanged(object sender, EventArgs e)
+        {
+            serial.setExponentialMode(useExp.Checked);
+        }
+
+        private void smoothness_CheckedChanged(object sender, EventArgs e)
+        {
+            serial.setSmoothness(useExp.Checked);
+        }
+
+        private void enableGyro_CheckedChanged(object sender, EventArgs e)
+        {
+            serial.setEnabled(enableGyro.Checked);
         }
     }
 }

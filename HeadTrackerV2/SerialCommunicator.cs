@@ -39,6 +39,7 @@ namespace HeadTrackerV2
             //<6 bool> //Toggle Smoothness
             //<7> //run calibrateGyro
             //<8 bool> //Turn on/off
+            //<9 bool> //Use Exponential
 
         }
 
@@ -141,57 +142,75 @@ namespace HeadTrackerV2
             }
         }
 
+        //<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
         public void getGyroData()
         {
             writeToSerial("<0>");
         }
-
+        
+        //<1> //reset view
         public void resetView()
         {
             writeToSerial("<1>");
         }
 
-        public void calibrateGyro()
-        {
-            writeToSerial("<7>");
-        }
-
+        //<2 sensX sensY sensZ checksum>
         public void setSensitivity(float pitch, float yaw, float roll)
         {
             byte checksum = (byte)(pitch + yaw + roll);
             String s = "<2" + pitch.ToString().Replace(',','.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
             writeToSerial(s);
-
-            /*byte[] pitchArr = BitConverter.GetBytes(pitch);
-            byte[] yawArr = BitConverter.GetBytes(yaw);
-            byte[] rollArr = BitConverter.GetBytes(roll);
-            byte[] checksum = BitConverter.GetBytes(pitch + yaw + roll);
-
-            byte[] msg = { (byte) '<', (byte) '2',
-                pitchArr[0], (byte) ';', pitchArr[1], (byte) ';', pitchArr[2], (byte) ';', pitchArr[3], (byte) ';',
-                yawArr[0], (byte) ';', yawArr[1], (byte) ';', yawArr[2], (byte) ';', yawArr[3], (byte) ';',
-                rollArr[0], (byte) ';', rollArr[1], (byte) ';', rollArr[2], (byte) ';', rollArr[3], (byte) ';',
-                checksum[0], (byte) ';', checksum[1], (byte) ';', checksum[2], (byte) ';', checksum[3],
-                (byte) '>' };
-
-            string hexString = Convert.ToHexString(msg);
-
-            Console.WriteLine($"   Hex value: \"{hexString}\"");*/
         }
-
+        
+        //<3 expX expY expZ checksum>
         public void setExponentialView(float pitch, float yaw, float roll)
         {
-
+            byte checksum = (byte)(pitch + yaw + roll);
+            String s = "<3" + pitch.ToString().Replace(',', '.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
+            writeToSerial(s);
         }
-
-        public void setClampView(bool enable)
+        
+        //<4 offsetX offsetY offsetZ checksum>
+        public void setOffset(float pitch, float yaw, float roll)
         {
-
+            byte checksum = (byte)(pitch + yaw + roll);
+            String s = "<4" + pitch.ToString().Replace(',', '.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
+            writeToSerial(s);
+        }
+        
+        //<5 limitX limitY limitZ checksum>
+        public void setLimit(float pitch, float yaw, float roll)
+        {
+            byte checksum = (byte)(pitch + yaw + roll);
+            String s = "<5" + pitch.ToString().Replace(',', '.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
+            writeToSerial(s);
         }
 
+        //<6 bool> //Toggle Smoothness
+        public void setSmoothness(bool enable)
+        {
+            String s = "<6" + enable.ToString() + ">";
+            writeToSerial(s);
+        }
+
+        //<7> //run calibrateGyro
+        public void calibrateGyro()
+        {
+            writeToSerial("<7>");
+        }
+
+        //<8 bool> //Turn on/off
         public void setEnabled(bool enable)
         {
+            String s = "<8" + enable.ToString() + ">";
+            writeToSerial(s);
+        }
 
+        //<9 bool> //Use Exponential
+        public void setExponentialMode (bool enable)
+        {
+            String s = "<9" + enable.ToString() + ">";
+            writeToSerial(s);
         }
 
         public void setDebug(bool enable)

@@ -187,6 +187,7 @@ void updatePRY(){
 //<6 bool> //Toggle Smoothness
 //<7> //run calibrateGyro
 //<8 bool> //Turn on/off
+//<9 bool> //Use Exponential
 
 void reciveMessage(){
   delay(20);
