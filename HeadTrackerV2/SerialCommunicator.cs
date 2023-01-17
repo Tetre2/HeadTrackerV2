@@ -189,7 +189,7 @@ namespace HeadTrackerV2
         //<6 bool> //Toggle Smoothness
         public void setSmoothness(bool enable)
         {
-            String s = "<6" + enable.ToString() + ">";
+            String s = "<6" + (enable ? '1' : '0') + ">";
             writeToSerial(s);
         }
 
@@ -202,14 +202,14 @@ namespace HeadTrackerV2
         //<8 bool> //Turn on/off
         public void setEnabled(bool enable)
         {
-            String s = "<8" + enable.ToString() + ">";
+            String s = "<8" + (enable ? '1' : '0') + ">";
             writeToSerial(s);
         }
 
         //<9 bool> //Use Exponential
         public void setExponentialMode (bool enable)
         {
-            String s = "<9" + enable.ToString() + ">";
+            String s = "<9" + (enable ? '1' : '0') + ">";
             writeToSerial(s);
         }
 
