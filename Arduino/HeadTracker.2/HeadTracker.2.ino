@@ -38,18 +38,9 @@ float offsetPitch = 0;
 float offsetYaw = 0;
 float offsetRoll = 0;
 
-//upper and lower limit on the angle of the MPU6050 board range.
-int upperLimit = 8192;
-int lowerLimit = -8192;
-
-bool expScaleMode = false;
-
-float pitchScale = 37.0;
-float yawScale = 37.0;
-float rollScale = 1.0;
-
 MPU6050 mpu6050(Wire);
 
+//variables that will be loaded form EEPROM
 byte _version = 0;
 
 float pitchSensitivity = 0;
@@ -72,8 +63,12 @@ bool useExponentialMode = false;
 bool useSmoothness = false;
 bool isOn = false;
 
+//Buffers for receiving messages
 float floatCreationBuffer[3];
 String messageBuffer = new char[MAX_MESSAGE_LENGTH];
+
+
+long timer = 0;
 
 void setup() {
 
@@ -144,13 +139,15 @@ void loop()
   if(Serial.available()){
       reciveMessage();
   }
-  
-  updatePRY();
-  
-  Gamepad.yAxis(pitch);
-  Gamepad.xAxis(yaw);
-  Gamepad.zAxis(roll);
-  Gamepad.write();
+
+  if(isOn){
+    updatePRY();
+    
+    Gamepad.yAxis(pitch);
+    Gamepad.xAxis(yaw);
+    Gamepad.zAxis(roll);
+    Gamepad.write();
+  }
 
 }
 
@@ -161,27 +158,59 @@ void updatePRY(){
   rawYaw = mpu6050.getAngleZ();
   
   // Apply offsets
-  pitch = rawPitch - offsetPitch;
-  roll = rawRoll - offsetRoll;
-  yaw = rawYaw - offsetYaw;
-
+  rawPitch -= offsetPitch;
+  rawRoll -= offsetRoll;
+  rawYaw -= offsetYaw;
   
-  if (expScaleMode) {
-    pitch = (0.001422076 * pitch * pitch * pitchScale) * (pitch / abs(pitch));
-    roll = (0.001422076 * roll * roll * rollScale) * (roll / abs(roll));
-    yaw = (0.001422076 * yaw * yaw * yawScale) * (yaw / abs(yaw));
+  pitch = rawPitch;
+  roll = rawRoll;
+  yaw = rawYaw;
+
+  /*if(millis() - timer > 1000){
+    Serial.println("---");
+    Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
+  }*/
+  
+  // Apply angel limits
+  if(pitch > pitchLimit){
+    pitch = pitchLimit;
+  }else if(pitch < -pitchLimit){
+    pitch = -pitchLimit;
+  }
+  if(yaw > yawLimit){
+    yaw = yawLimit;
+  }else if(yaw < -yawLimit){
+    yaw = -yawLimit;
+  }
+  if(roll > rollLimit){
+    roll = rollLimit;
+  }else if(roll < -rollLimit){
+    roll = -rollLimit;
+  }
+  
+  if (useExponentialMode) {
+    pitch = (0.001422076 * pitch * pitch * pitchSensitivity) * (pitch / abs(pitch));
+    roll = (0.001422076 * roll * roll * rollSensitivity) * (roll / abs(roll));
+    yaw = (0.001422076 * yaw * yaw * yawSensitivity) * (yaw / abs(yaw));
   }
   else
   {
-    // and scale to out target range plus a 'sensitivity' factor;
-    pitch = (pitch * pitchScale);
-    roll = (roll * rollScale);
-    yaw = (yaw * yawScale);
+    pitch = (pitch * pitchSensitivity);
+    roll = (roll * rollSensitivity);
+    yaw = (yaw * yawSensitivity);
   }
 
-  pitch = map(pitch, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
-  yaw = map(yaw, lowerLimit, upperLimit, -MAX_VALUE, MAX_VALUE);
+  /*if(millis() - timer > 1000){
+    Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
+  }*/
+  
+  pitch = map(pitch, -8192, 8192, -MAX_VALUE, MAX_VALUE);
+  yaw = map(yaw, -8192, 8192, -MAX_VALUE, MAX_VALUE);
   roll = map(roll, -100, 100, -127, 127);
+  
+  /*if(millis() - timer > 1000){
+    Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
+  }*/
 }
 
 // ----- Protocol -----
@@ -419,6 +448,9 @@ void zeroMPU6050(){
   offsetYaw += rawYaw;
   
   Serial.println("View reset");
+  Serial.print("Pitch: "); Serial.print(rawPitch); Serial.print("\tYaw: "); Serial.print(rawYaw); Serial.print("\tRoll: "); Serial.println(rawRoll); 
+  Serial.print("Pitch: "); Serial.print(pitch); Serial.print("\tYaw: "); Serial.print(yaw); Serial.print("\tRoll: "); Serial.println(roll); 
+  Serial.print("Offset: "); Serial.print(offsetPitch); Serial.print("\tOffset: "); Serial.print(offsetYaw); Serial.print("\tOffset: "); Serial.println(offsetRoll); 
 }
 
 void setSensitivity(float pitch, float yaw, float roll){
