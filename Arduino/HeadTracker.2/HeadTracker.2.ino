@@ -23,7 +23,7 @@
 #define EE_USE_SMOOTHNESS 50
 #define EE_IS_ON 51
 
-#define MAX_VALUE 32766
+#define MAX_VALUE 32000
 #define MAX_MESSAGE_LENGTH 48
 
 float rawPitch = 0; 
@@ -37,6 +37,10 @@ float roll = 0;
 float offsetPitch = 0;
 float offsetYaw = 0;
 float offsetRoll = 0;
+
+int gamepadPitch = 0;
+int gamepadYaw = 0;
+int gamepadRoll = 0;
 
 MPU6050 mpu6050(Wire);
 
@@ -143,9 +147,9 @@ void loop()
   if(isOn){
     updatePRY();
     
-    Gamepad.yAxis(pitch);
-    Gamepad.xAxis(yaw);
-    Gamepad.zAxis(roll);
+    Gamepad.yAxis(gamepadPitch);
+    Gamepad.xAxis(gamepadYaw);
+    Gamepad.zAxis(gamepadRoll);
     Gamepad.write();
   }
 
@@ -172,21 +176,9 @@ void updatePRY(){
   }*/
   
   // Apply angel limits
-  if(pitch > pitchLimit){
-    pitch = pitchLimit;
-  }else if(pitch < -pitchLimit){
-    pitch = -pitchLimit;
-  }
-  if(yaw > yawLimit){
-    yaw = yawLimit;
-  }else if(yaw < -yawLimit){
-    yaw = -yawLimit;
-  }
-  if(roll > rollLimit){
-    roll = rollLimit;
-  }else if(roll < -rollLimit){
-    roll = -rollLimit;
-  }
+  pitch = constrain(pitch, -pitchLimit, pitchLimit);
+  yaw = constrain(yaw, -yawLimit, yawLimit);
+  roll = constrain(roll, -rollLimit, rollLimit);
   
   if (useExponentialMode) {
     pitch = (0.001422076 * pitch * pitch * pitchSensitivity) * (pitch / abs(pitch));
@@ -203,13 +195,13 @@ void updatePRY(){
   /*if(millis() - timer > 1000){
     Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
   }*/
-  
-  pitch = map(pitch, -8192, 8192, -MAX_VALUE, MAX_VALUE);
-  yaw = map(yaw, -8192, 8192, -MAX_VALUE, MAX_VALUE);
-  roll = map(roll, -100, 100, -127, 127);
+
+  gamepadPitch = constrain(pitch, -MAX_VALUE, MAX_VALUE);
+  gamepadYaw = constrain(yaw, -MAX_VALUE, MAX_VALUE);
+  gamepadRoll = constrain(roll, -127, 127);
   
   /*if(millis() - timer > 1000){
-    Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
+    Serial.print(gamepadPitch); Serial.print(" "); Serial.print(gamepadYaw); Serial.print(" "); Serial.println(gamepadRoll);
   }*/
 }
 
