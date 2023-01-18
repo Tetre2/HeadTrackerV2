@@ -30,6 +30,7 @@ namespace HeadTrackerV2
             mySerialPort.DataReceived += new SerialDataReceivedEventHandler(dataRecived);
 
             // ----- Protocol -----
+            //NOTE: checksum = args[0] + args[1] + ... + args[n] + 1 // to offset serial.parse of bad character is 0
             //<0> //Arduino Dump data, i.e. Request Arduino print it all to serial
             //<1> //reset view
             //<2 sensX sensY sensZ checksum>
@@ -157,7 +158,7 @@ namespace HeadTrackerV2
         //<2 sensX sensY sensZ checksum>
         public void setSensitivity(float pitch, float yaw, float roll)
         {
-            byte checksum = (byte)(pitch + yaw + roll);
+            byte checksum = (byte)(pitch + yaw + roll + 1);
             String s = "<2" + pitch.ToString().Replace(',','.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
             writeToSerial(s);
         }
@@ -165,7 +166,7 @@ namespace HeadTrackerV2
         //<3 expX expY expZ checksum>
         public void setExponentialView(float pitch, float yaw, float roll)
         {
-            byte checksum = (byte)(pitch + yaw + roll);
+            byte checksum = (byte)(pitch + yaw + roll + 1);
             String s = "<3" + pitch.ToString().Replace(',', '.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
             writeToSerial(s);
         }
@@ -173,7 +174,7 @@ namespace HeadTrackerV2
         //<4 offsetX offsetY offsetZ checksum>
         public void setOffset(float pitch, float yaw, float roll)
         {
-            byte checksum = (byte)(pitch + yaw + roll);
+            byte checksum = (byte)(pitch + yaw + roll + 1);
             String s = "<4" + pitch.ToString().Replace(',', '.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
             writeToSerial(s);
         }
@@ -181,7 +182,7 @@ namespace HeadTrackerV2
         //<5 limitX limitY limitZ checksum>
         public void setLimit(float pitch, float yaw, float roll)
         {
-            byte checksum = (byte)(pitch + yaw + roll);
+            byte checksum = (byte)(pitch + yaw + roll + 1);
             String s = "<5" + pitch.ToString().Replace(',', '.') + ";" + yaw.ToString().Replace(',', '.') + ";" + roll.ToString().Replace(',', '.') + ";" + checksum.ToString() + ">";
             writeToSerial(s);
         }
