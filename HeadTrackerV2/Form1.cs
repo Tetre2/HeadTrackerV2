@@ -287,7 +287,7 @@ namespace HeadTrackerV2
 
         private void smoothness_CheckedChanged(object sender, EventArgs e)
         {
-            serial.setSmoothness(useExp.Checked);
+            serial.setSmoothness(smoothness.Checked);
         }
 
         private void enableGyro_CheckedChanged(object sender, EventArgs e)
