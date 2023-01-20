@@ -25,6 +25,7 @@
 
 #define MAX_VALUE 32000
 #define MAX_MESSAGE_LENGTH 48
+#define AVERAGE_BUFFER_SIZE 40 
 
 float rawPitch = 0; 
 float rawYaw = 0;
@@ -67,8 +68,12 @@ bool useExponentialMode = false;
 bool useSmoothness = false;
 bool isOn = false;
 
-
 long timer = 0;
+
+byte averageBufferIndex = 0;
+float averageBufferPitch[AVERAGE_BUFFER_SIZE];
+float averageBufferYaw[AVERAGE_BUFFER_SIZE];
+float averageBufferRoll[AVERAGE_BUFFER_SIZE];
 
 void setup() {
 
@@ -108,34 +113,6 @@ void setup() {
   //mpu6050.calcGyroOffsets(true); //This is is not a necessary call. works fine without it.
   mpu6050.setGyroOffsets(gyroPitchOffset, gyroYawOffset, gyroRollOffset);
 
-  
-  /*byte b = 1;
-  EEPROM.put(EE_VERSION, b);
-
-  float f = 123.00f;
-  EEPROM.put(EE_PITCH_SENSITIVITY, f);
-  EEPROM.put(EE_YAW_SENSITIVITY, f);
-  EEPROM.put(EE_ROLL_SENSITIVITY, f);
-
-  EEPROM.put(EE_PITCH_EXPONENTIAL, f);
-  EEPROM.put(EE_YAW_EXPONENTIAL, f);
-  EEPROM.put(EE_ROLL_EXPONENTIAL, f);
-  
-  EEPROM.put(EE_PITCH_OFFSET, f);
-  EEPROM.put(EE_YAW_OFFSET, f);
-  EEPROM.put(EE_ROLL_OFFSET, f);
-  
-  EEPROM.put(EE_PITCH_ANGLE_LIMIT, f);
-  EEPROM.put(EE_YAW_ANGLE_LIMIT, f);
-  EEPROM.put(EE_ROLL_ANGLE_LIMIT, f);
-
-  bool bo = true;
-  EEPROM.put(EE_USE_EXPONENTIAL_MODE, bo);
-  EEPROM.put(EE_USE_SMOOTHNESS, bo);
-  EEPROM.put(EE_IS_ON, bo);*/
-  
-
-
 }
 
 void loop() 
@@ -147,11 +124,12 @@ void loop()
 
   if(isOn){
     updatePRY();
-    
+
     Gamepad.yAxis(gamepadPitch);
     Gamepad.xAxis(gamepadYaw);
     Gamepad.zAxis(gamepadRoll);
     Gamepad.write();
+
   }
 
 }
@@ -180,11 +158,12 @@ void updatePRY(){
   pitch = constrain(pitch, -pitchLimit, pitchLimit);
   yaw = constrain(yaw, -yawLimit, yawLimit);
   roll = constrain(roll, -rollLimit, rollLimit);
+
   
-  if (useExponentialMode) {
-    pitch = (0.001422076 * pitch * pitch * pitchSensitivity) * (pitch / abs(pitch));
-    roll = (0.001422076 * roll * roll * rollSensitivity) * (roll / abs(roll));
-    yaw = (0.001422076 * yaw * yaw * yawSensitivity) * (yaw / abs(yaw));
+  if (useExponentialMode) {//somewhere around 0.001422076 is good
+    pitch = (pitchExponential / 10000 * pitch * pitch * pitchSensitivity) * (pitch / abs(pitch));
+    roll = (rollExponential / 10000 * roll * roll * rollSensitivity) * (roll / abs(roll));
+    yaw = (yawExponential / 10000 * yaw * yaw * yawSensitivity) * (yaw / abs(yaw));
   }
   else
   {
@@ -194,16 +173,42 @@ void updatePRY(){
   }
 
   /*if(millis() - timer > 1000){
-    Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
+    Serial.print("\t\t\t"); Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
   }*/
 
-  gamepadPitch = constrain(pitch, -MAX_VALUE, MAX_VALUE);
-  gamepadYaw = constrain(yaw, -MAX_VALUE, MAX_VALUE);
-  gamepadRoll = constrain(roll, -127, 127);
+  pitch = constrain(pitch, -MAX_VALUE, MAX_VALUE);
+  yaw = constrain(yaw, -MAX_VALUE, MAX_VALUE);
+  roll = constrain(roll, -127, 127);
+
+
+  if(useSmoothness){
+
+    //rotates thought the buffer and updates the oldes value
+    averageBufferPitch[averageBufferIndex] = pitch;
+    averageBufferYaw[averageBufferIndex] = yaw;
+    averageBufferRoll[averageBufferIndex] = roll;
+    
+    averageBufferIndex = (averageBufferIndex + 1) % AVERAGE_BUFFER_SIZE;
+
+    gamepadPitch = getAverage(averageBufferPitch);
+    gamepadYaw = getAverage(averageBufferYaw);
+    gamepadRoll = getAverage(averageBufferRoll);
+
+    /*if(millis() - timer > 1000){
+      Serial.print("\t\t\t\t\t\t\t\t"); Serial.print(pitch); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.println(roll);
+    }*/
+    
+  }else{
+    gamepadPitch = pitch;
+    gamepadYaw = yaw;
+    gamepadRoll = roll;
+
+    /*if(millis() - timer > 1000){
+      Serial.print("\t\t\t\t\t\t\t\t\t\t\t"); Serial.print(gamepadPitch); Serial.print(" "); Serial.print(gamepadYaw); Serial.print(" "); Serial.println(gamepadRoll);
+    }*/
+  }
   
-  /*if(millis() - timer > 1000){
-    Serial.print(gamepadPitch); Serial.print(" "); Serial.print(gamepadYaw); Serial.print(" "); Serial.println(gamepadRoll);
-  }*/
+
 }
 
 // ----- Protocol -----
@@ -315,6 +320,17 @@ void reciveMessage(){
       }
     }
   }
+}
+
+
+//Calculates the average of the given array
+float getAverage(float (&averageBuffer) [AVERAGE_BUFFER_SIZE]){
+  float average = 0;
+  for(int i = 0; i < AVERAGE_BUFFER_SIZE; i++){
+    average += averageBuffer[i];
+  }
+  
+  return average / AVERAGE_BUFFER_SIZE;
 }
 
 
@@ -432,6 +448,7 @@ void setOffset(float pitch, float yaw, float roll){
   gyroRollOffset = roll;
   EEPROM.put(EE_ROLL_OFFSET, roll);
 
+  mpu6050.setGyroOffsets(gyroPitchOffset, gyroYawOffset, gyroRollOffset);
   Serial.println("Uppdated offset values");
 }
 
@@ -459,7 +476,7 @@ void setSmoothness(bool enable){
   useSmoothness = enable;
   EEPROM.put(EE_USE_SMOOTHNESS, enable);
 
-  Serial.println("Uppdated smoothness");
+  Serial.print("Uppdated smoothness to: "); Serial.println(enable);
 }
 
 void setIsOn(bool enable){
