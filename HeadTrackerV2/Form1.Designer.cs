@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.serialOutput = new System.Windows.Forms.RichTextBox();
             this.connectToSerial = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,11 +66,16 @@
             this.updateOffset = new System.Windows.Forms.Button();
             this.updateLimits = new System.Windows.Forms.Button();
             this.enableGyro = new System.Windows.Forms.CheckBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialOutput
             // 
-            this.serialOutput.Location = new System.Drawing.Point(13, 13);
+            this.serialOutput.Location = new System.Drawing.Point(13, 27);
             this.serialOutput.Margin = new System.Windows.Forms.Padding(4);
             this.serialOutput.Name = "serialOutput";
             this.serialOutput.Size = new System.Drawing.Size(390, 218);
@@ -79,7 +85,7 @@
             // 
             // connectToSerial
             // 
-            this.connectToSerial.Location = new System.Drawing.Point(289, 239);
+            this.connectToSerial.Location = new System.Drawing.Point(289, 253);
             this.connectToSerial.Margin = new System.Windows.Forms.Padding(4);
             this.connectToSerial.Name = "connectToSerial";
             this.connectToSerial.Size = new System.Drawing.Size(114, 35);
@@ -91,7 +97,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(597, 13);
+            this.label1.Location = new System.Drawing.Point(597, 27);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 31);
@@ -102,7 +108,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(723, 13);
+            this.label2.Location = new System.Drawing.Point(723, 27);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 31);
@@ -113,7 +119,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(847, 13);
+            this.label3.Location = new System.Drawing.Point(847, 27);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 31);
@@ -126,7 +132,7 @@
             this.individualSens.AutoSize = true;
             this.individualSens.Cursor = System.Windows.Forms.Cursors.Hand;
             this.individualSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.individualSens.Location = new System.Drawing.Point(425, 53);
+            this.individualSens.Location = new System.Drawing.Point(425, 67);
             this.individualSens.Margin = new System.Windows.Forms.Padding(4);
             this.individualSens.Name = "individualSens";
             this.individualSens.Size = new System.Drawing.Size(160, 31);
@@ -139,7 +145,7 @@
             this.individualExp.AutoSize = true;
             this.individualExp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.individualExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.individualExp.Location = new System.Drawing.Point(425, 114);
+            this.individualExp.Location = new System.Drawing.Point(425, 128);
             this.individualExp.Margin = new System.Windows.Forms.Padding(4);
             this.individualExp.Name = "individualExp";
             this.individualExp.Size = new System.Drawing.Size(160, 31);
@@ -150,7 +156,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(425, 180);
+            this.label4.Location = new System.Drawing.Point(425, 194);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(160, 31);
@@ -161,7 +167,7 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(425, 243);
+            this.label5.Location = new System.Drawing.Point(425, 257);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(160, 31);
@@ -173,7 +179,7 @@
             // 
             this.ports.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ports.FormattingEnabled = true;
-            this.ports.Location = new System.Drawing.Point(13, 245);
+            this.ports.Location = new System.Drawing.Point(13, 259);
             this.ports.Name = "ports";
             this.ports.Size = new System.Drawing.Size(150, 25);
             this.ports.TabIndex = 23;
@@ -183,7 +189,7 @@
             // getGyroDataBtn
             // 
             this.getGyroDataBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.getGyroDataBtn.Location = new System.Drawing.Point(425, 299);
+            this.getGyroDataBtn.Location = new System.Drawing.Point(425, 313);
             this.getGyroDataBtn.Margin = new System.Windows.Forms.Padding(4);
             this.getGyroDataBtn.Name = "getGyroDataBtn";
             this.getGyroDataBtn.Size = new System.Drawing.Size(165, 42);
@@ -195,7 +201,7 @@
             // recenterGyro
             // 
             this.recenterGyro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.recenterGyro.Location = new System.Drawing.Point(933, 299);
+            this.recenterGyro.Location = new System.Drawing.Point(933, 313);
             this.recenterGyro.Margin = new System.Windows.Forms.Padding(4);
             this.recenterGyro.Name = "recenterGyro";
             this.recenterGyro.Size = new System.Drawing.Size(165, 42);
@@ -207,7 +213,7 @@
             // recalibrateGyro
             // 
             this.recalibrateGyro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.recalibrateGyro.Location = new System.Drawing.Point(694, 299);
+            this.recalibrateGyro.Location = new System.Drawing.Point(694, 313);
             this.recalibrateGyro.Margin = new System.Windows.Forms.Padding(4);
             this.recalibrateGyro.Name = "recalibrateGyro";
             this.recalibrateGyro.Size = new System.Drawing.Size(165, 42);
@@ -221,7 +227,7 @@
             this.smoothness.AutoSize = true;
             this.smoothness.Cursor = System.Windows.Forms.Cursors.Hand;
             this.smoothness.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.smoothness.Location = new System.Drawing.Point(898, 364);
+            this.smoothness.Location = new System.Drawing.Point(898, 378);
             this.smoothness.Margin = new System.Windows.Forms.Padding(4);
             this.smoothness.Name = "smoothness";
             this.smoothness.Size = new System.Drawing.Size(200, 31);
@@ -234,7 +240,7 @@
             // 
             this.zeroHotkey.Cursor = System.Windows.Forms.Cursors.Hand;
             this.zeroHotkey.FormattingEnabled = true;
-            this.zeroHotkey.Location = new System.Drawing.Point(933, 413);
+            this.zeroHotkey.Location = new System.Drawing.Point(933, 427);
             this.zeroHotkey.Name = "zeroHotkey";
             this.zeroHotkey.Size = new System.Drawing.Size(165, 25);
             this.zeroHotkey.TabIndex = 28;
@@ -242,7 +248,7 @@
             // scanPorts
             // 
             this.scanPorts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.scanPorts.Location = new System.Drawing.Point(170, 239);
+            this.scanPorts.Location = new System.Drawing.Point(170, 253);
             this.scanPorts.Margin = new System.Windows.Forms.Padding(4);
             this.scanPorts.Name = "scanPorts";
             this.scanPorts.Size = new System.Drawing.Size(111, 35);
@@ -254,7 +260,7 @@
             // disconnectSerial
             // 
             this.disconnectSerial.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.disconnectSerial.Location = new System.Drawing.Point(289, 239);
+            this.disconnectSerial.Location = new System.Drawing.Point(289, 253);
             this.disconnectSerial.Margin = new System.Windows.Forms.Padding(4);
             this.disconnectSerial.Name = "disconnectSerial";
             this.disconnectSerial.Size = new System.Drawing.Size(114, 35);
@@ -268,7 +274,7 @@
             // 
             this.pitchSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.pitchSens.Location = new System.Drawing.Point(597, 48);
+            this.pitchSens.Location = new System.Drawing.Point(597, 62);
             this.pitchSens.MaxLength = 6;
             this.pitchSens.Name = "pitchSens";
             this.pitchSens.PlaceholderText = "Sens";
@@ -282,7 +288,7 @@
             // 
             this.yawSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.yawSens.Location = new System.Drawing.Point(723, 48);
+            this.yawSens.Location = new System.Drawing.Point(723, 62);
             this.yawSens.MaxLength = 6;
             this.yawSens.Name = "yawSens";
             this.yawSens.PlaceholderText = "Sens";
@@ -296,7 +302,7 @@
             // 
             this.rollSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rollSens.Location = new System.Drawing.Point(847, 48);
+            this.rollSens.Location = new System.Drawing.Point(847, 62);
             this.rollSens.MaxLength = 6;
             this.rollSens.Name = "rollSens";
             this.rollSens.PlaceholderText = "Sens";
@@ -310,7 +316,7 @@
             // 
             this.commonSens.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonSens.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonSens.Location = new System.Drawing.Point(597, 49);
+            this.commonSens.Location = new System.Drawing.Point(597, 63);
             this.commonSens.MaxLength = 6;
             this.commonSens.Name = "commonSens";
             this.commonSens.PlaceholderText = "Sens";
@@ -324,7 +330,7 @@
             // 
             this.pitchExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.pitchExp.Location = new System.Drawing.Point(597, 109);
+            this.pitchExp.Location = new System.Drawing.Point(597, 123);
             this.pitchExp.MaxLength = 6;
             this.pitchExp.Name = "pitchExp";
             this.pitchExp.PlaceholderText = "Exp";
@@ -338,7 +344,7 @@
             // 
             this.yawOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.yawOffset.Location = new System.Drawing.Point(723, 176);
+            this.yawOffset.Location = new System.Drawing.Point(723, 190);
             this.yawOffset.MaxLength = 6;
             this.yawOffset.Name = "yawOffset";
             this.yawOffset.PlaceholderText = "Offset";
@@ -352,7 +358,7 @@
             // 
             this.rollOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rollOffset.Location = new System.Drawing.Point(847, 176);
+            this.rollOffset.Location = new System.Drawing.Point(847, 190);
             this.rollOffset.MaxLength = 6;
             this.rollOffset.Name = "rollOffset";
             this.rollOffset.PlaceholderText = "Offset";
@@ -367,7 +373,7 @@
             this.pitchLimit.AcceptsReturn = true;
             this.pitchLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.pitchLimit.Location = new System.Drawing.Point(597, 239);
+            this.pitchLimit.Location = new System.Drawing.Point(597, 253);
             this.pitchLimit.MaxLength = 6;
             this.pitchLimit.Name = "pitchLimit";
             this.pitchLimit.PlaceholderText = "Limit";
@@ -381,7 +387,7 @@
             // 
             this.yawLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.yawLimit.Location = new System.Drawing.Point(723, 239);
+            this.yawLimit.Location = new System.Drawing.Point(723, 253);
             this.yawLimit.MaxLength = 6;
             this.yawLimit.Name = "yawLimit";
             this.yawLimit.PlaceholderText = "Limit";
@@ -395,7 +401,7 @@
             // 
             this.rollLimit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollLimit.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rollLimit.Location = new System.Drawing.Point(847, 239);
+            this.rollLimit.Location = new System.Drawing.Point(847, 253);
             this.rollLimit.MaxLength = 6;
             this.rollLimit.Name = "rollLimit";
             this.rollLimit.PlaceholderText = "Limit";
@@ -409,7 +415,7 @@
             // 
             this.yawExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.yawExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.yawExp.Location = new System.Drawing.Point(723, 109);
+            this.yawExp.Location = new System.Drawing.Point(723, 123);
             this.yawExp.MaxLength = 6;
             this.yawExp.Name = "yawExp";
             this.yawExp.PlaceholderText = "Exp";
@@ -423,7 +429,7 @@
             // 
             this.rollExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.rollExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rollExp.Location = new System.Drawing.Point(847, 109);
+            this.rollExp.Location = new System.Drawing.Point(847, 123);
             this.rollExp.MaxLength = 6;
             this.rollExp.Name = "rollExp";
             this.rollExp.PlaceholderText = "Exp";
@@ -437,7 +443,7 @@
             // 
             this.pitchOffset.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.pitchOffset.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.pitchOffset.Location = new System.Drawing.Point(597, 176);
+            this.pitchOffset.Location = new System.Drawing.Point(597, 190);
             this.pitchOffset.MaxLength = 6;
             this.pitchOffset.Name = "pitchOffset";
             this.pitchOffset.PlaceholderText = "Offset";
@@ -451,7 +457,7 @@
             // 
             this.commonExp.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonExp.Location = new System.Drawing.Point(597, 109);
+            this.commonExp.Location = new System.Drawing.Point(597, 123);
             this.commonExp.MaxLength = 6;
             this.commonExp.Name = "commonExp";
             this.commonExp.PlaceholderText = "Exp";
@@ -466,7 +472,7 @@
             this.useExp.AutoSize = true;
             this.useExp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.useExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.useExp.Location = new System.Drawing.Point(630, 364);
+            this.useExp.Location = new System.Drawing.Point(630, 378);
             this.useExp.Margin = new System.Windows.Forms.Padding(4);
             this.useExp.Name = "useExp";
             this.useExp.Size = new System.Drawing.Size(251, 31);
@@ -478,7 +484,7 @@
             // updateSens
             // 
             this.updateSens.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateSens.Location = new System.Drawing.Point(977, 48);
+            this.updateSens.Location = new System.Drawing.Point(977, 62);
             this.updateSens.Margin = new System.Windows.Forms.Padding(4);
             this.updateSens.Name = "updateSens";
             this.updateSens.Size = new System.Drawing.Size(121, 42);
@@ -490,7 +496,7 @@
             // updateExp
             // 
             this.updateExp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateExp.Location = new System.Drawing.Point(977, 109);
+            this.updateExp.Location = new System.Drawing.Point(977, 123);
             this.updateExp.Margin = new System.Windows.Forms.Padding(4);
             this.updateExp.Name = "updateExp";
             this.updateExp.Size = new System.Drawing.Size(121, 42);
@@ -502,7 +508,7 @@
             // updateOffset
             // 
             this.updateOffset.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateOffset.Location = new System.Drawing.Point(977, 176);
+            this.updateOffset.Location = new System.Drawing.Point(977, 190);
             this.updateOffset.Margin = new System.Windows.Forms.Padding(4);
             this.updateOffset.Name = "updateOffset";
             this.updateOffset.Size = new System.Drawing.Size(121, 42);
@@ -514,7 +520,7 @@
             // updateLimits
             // 
             this.updateLimits.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateLimits.Location = new System.Drawing.Point(977, 239);
+            this.updateLimits.Location = new System.Drawing.Point(977, 253);
             this.updateLimits.Margin = new System.Windows.Forms.Padding(4);
             this.updateLimits.Name = "updateLimits";
             this.updateLimits.Size = new System.Drawing.Size(121, 42);
@@ -528,7 +534,7 @@
             this.enableGyro.AutoSize = true;
             this.enableGyro.Cursor = System.Windows.Forms.Cursors.Hand;
             this.enableGyro.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.enableGyro.Location = new System.Drawing.Point(425, 364);
+            this.enableGyro.Location = new System.Drawing.Point(425, 378);
             this.enableGyro.Margin = new System.Windows.Forms.Padding(4);
             this.enableGyro.Name = "enableGyro";
             this.enableGyro.Size = new System.Drawing.Size(202, 31);
@@ -537,12 +543,48 @@
             this.enableGyro.UseVisualStyleBackColor = true;
             this.enableGyro.CheckedChanged += new System.EventHandler(this.enableGyro_CheckedChanged);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1104, 25);
+            this.toolStrip1.TabIndex = 68;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.profilesToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 22);
+            this.toolStripDropDownButton1.Text = "File";
+            // 
+            // profilesToolStripMenuItem
+            // 
+            this.profilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultToolStripMenuItem});
+            this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
+            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.profilesToolStripMenuItem.Text = "Profiles";
+            // 
+            // defaultToolStripMenuItem
+            // 
+            this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.defaultToolStripMenuItem.Text = "Default";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1104, 461);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.enableGyro);
             this.Controls.Add(this.updateLimits);
             this.Controls.Add(this.updateOffset);
@@ -587,6 +629,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.Form1_Click);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -631,5 +675,9 @@
         private Button updateOffset;
         private Button updateLimits;
         private CheckBox enableGyro;
+        private ToolStrip toolStrip1;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ToolStripMenuItem profilesToolStripMenuItem;
+        private ToolStripMenuItem defaultToolStripMenuItem;
     }
 }

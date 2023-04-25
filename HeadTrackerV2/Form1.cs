@@ -8,6 +8,7 @@ namespace HeadTrackerV2
     {
         SerialCommunicator serial;
         UserActivityHook actHook;
+        UserPersistence userPersistence;
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +20,8 @@ namespace HeadTrackerV2
 
             actHook = new UserActivityHook();
             actHook.KeyDown += new KeyEventHandler(MyKeyDown);
+
+            userPersistence = new UserPersistence();
 
             bindData();
 
