@@ -4,7 +4,8 @@ using System.Text.Json;
 public class UserPersistence
 {
     private String appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HeadTracker");
-    //private String profileFilePath = Path.Combine(appDataPath, "Profiles.json");
+    private String profileFile = "Profiles.json";
+    public static float PROFILE_VERSION = 0.01f;
     public List<Profile> Profiles { get; set; }
     public class Profile
     {
@@ -41,40 +42,48 @@ public class UserPersistence
     private class JsonObj
     {
         public float version { get; set; }
-        //public List<Profile> { get; set; }
-}
+        public List<Profile> profiles { get; set; }
+    }
 
     public UserPersistence()
 	{
 
-        loadProfiles();
+        Profiles = loadProfiles();
         
 
     }
 
+    //returns the profiles in the json file
     private List<Profile> loadProfiles()
     {
         Directory.CreateDirectory(appDataPath);
 
         if (Directory.GetFiles(appDataPath).Length > 0)
         {
-            return null;
+
+            string jsonString = File.ReadAllText(Path.Combine(appDataPath, profileFile));
+            JsonObj? jsonProfiles = JsonSerializer.Deserialize<JsonObj>(jsonString);
+            if (jsonProfiles != null && jsonProfiles.version == PROFILE_VERSION)
+            {
+                return jsonProfiles.profiles;
+            }
         }
-        else
-        {
-            writeDefaultProfileToFile();
-            return new List<Profile> { getDefaultProfile() };
-        }
+
+        //Overwrite the current file if deserialization faild or is wrong version or if there does not exist a file from the begining
+        writeDefaultProfileToFile();
+        return new List<Profile> { getDefaultProfile() };
 
     }
 
+    
     private async Task writeDefaultProfileToFile()
     {
-        using FileStream createStream = File.Create(Path.Combine(appDataPath, "Profiles.json"));
+        using FileStream createStream = File.Create(Path.Combine(appDataPath, profileFile));
         var options = new JsonSerializerOptions { WriteIndented = true };
-        await JsonSerializer.SerializeAsync(createStream, new List<Profile> { getDefaultProfile() }, options);
+        await JsonSerializer.SerializeAsync(createStream, new JsonObj{version = 0.01f, profiles = (new List<Profile> { getDefaultProfile() }) }, options);
         await createStream.DisposeAsync();
     }
+
 
     private Profile getDefaultProfile()
     {

@@ -23,6 +23,8 @@ namespace HeadTrackerV2
 
             userPersistence = new UserPersistence();
 
+            Console.WriteLine(userPersistence.Profiles.Count);
+
             bindData();
 
             zeroHotkey.Items.Add(new ComboboxItem("F1", Keys.F1));
