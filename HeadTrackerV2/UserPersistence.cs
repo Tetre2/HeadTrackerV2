@@ -6,6 +6,7 @@ public class UserPersistence
     private String appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HeadTracker");
     private String profileFile = "Profiles.json";
     public static float PROFILE_VERSION = 0.01f;
+    private bool profilesChanged = false; //used to not have to write the profiles if nothing has changed since last load
     public List<Profile> Profiles { get; set; }
     public class Profile
     {
@@ -49,8 +50,27 @@ public class UserPersistence
 	{
 
         Profiles = loadProfiles();
-        
 
+    }
+
+    public void createNewProfile()
+    {
+        profilesChanged = true;
+
+        //TODO
+    }
+
+    public void Close()
+    {
+        writeProfiles();
+    }
+
+    private void writeProfiles()
+    {
+        if (profilesChanged)
+        {
+            new JsonObj { version = 0.01f, profiles = Profiles };
+        }
     }
 
     //returns the profiles in the json file
@@ -67,8 +87,9 @@ public class UserPersistence
             {
                 return jsonProfiles.profiles;
             }
-        }
 
+        }
+        MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //Overwrite the current file if deserialization faild or is wrong version or if there does not exist a file from the begining
         writeDefaultProfileToFile();
         return new List<Profile> { getDefaultProfile() };
@@ -82,6 +103,14 @@ public class UserPersistence
         var options = new JsonSerializerOptions { WriteIndented = true };
         await JsonSerializer.SerializeAsync(createStream, new JsonObj{version = 0.01f, profiles = (new List<Profile> { getDefaultProfile() }) }, options);
         await createStream.DisposeAsync();
+    }
+
+    private void writeProfilesToFile(JsonObj obj)
+    {
+        using FileStream createStream = File.Create(Path.Combine(appDataPath, profileFile));
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        JsonSerializer.Serialize(createStream, obj, options);
+        createStream.Close();
     }
 
 
