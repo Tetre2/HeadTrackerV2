@@ -74,6 +74,7 @@
             this.newProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.limitInputField = new HeadTrackerV2.InputField();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -576,7 +577,7 @@
             this.updateProfileToolStripMenuItem,
             this.removeProfileToolStripMenuItem});
             this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
-            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.profilesToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.profilesToolStripMenuItem.Text = "Profiles";
             // 
             // defaultToolStripMenuItem
@@ -584,32 +585,44 @@
             this.defaultToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.defaultToolStripMenuItem1});
             this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
-            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.defaultToolStripMenuItem.Text = "Select Profile";
             // 
             // defaultToolStripMenuItem1
             // 
             this.defaultToolStripMenuItem1.Name = "defaultToolStripMenuItem1";
-            this.defaultToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.defaultToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.defaultToolStripMenuItem1.Text = "Default";
             // 
             // newProfileToolStripMenuItem
             // 
             this.newProfileToolStripMenuItem.Name = "newProfileToolStripMenuItem";
-            this.newProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.newProfileToolStripMenuItem.Text = "New Profile";
             // 
             // updateProfileToolStripMenuItem
             // 
             this.updateProfileToolStripMenuItem.Name = "updateProfileToolStripMenuItem";
-            this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.updateProfileToolStripMenuItem.Text = "Update Profile";
             // 
             // removeProfileToolStripMenuItem
             // 
             this.removeProfileToolStripMenuItem.Name = "removeProfileToolStripMenuItem";
-            this.removeProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.removeProfileToolStripMenuItem.Text = "Remove Profile";
+            // 
+            // limitInputField
+            // 
+            this.limitInputField.InputFieldPitch = 0F;
+            this.limitInputField.InputFieldRoll = 0F;
+            this.limitInputField.InputFieldYaw = 0F;
+            this.limitInputField.Location = new System.Drawing.Point(18, 378);
+            this.limitInputField.Margin = new System.Windows.Forms.Padding(0);
+            this.limitInputField.Name = "limitInputField";
+            this.limitInputField.Size = new System.Drawing.Size(385, 45);
+            this.limitInputField.TabIndex = 69;
+            this.limitInputField.InputFieldTextChanged += new System.EventHandler(this.limitInputField_InputFieldTextChanged);
             // 
             // Form1
             // 
@@ -617,6 +630,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1104, 461);
+            this.Controls.Add(this.limitInputField);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.enableGyro);
             this.Controls.Add(this.updateLimits);
@@ -716,5 +730,6 @@
         private ToolStripMenuItem newProfileToolStripMenuItem;
         private ToolStripMenuItem updateProfileToolStripMenuItem;
         private ToolStripMenuItem removeProfileToolStripMenuItem;
+        private InputField limitInputField;
     }
 }

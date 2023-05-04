@@ -31,6 +31,13 @@ namespace HeadTrackerV2
             zeroHotkey.SelectedIndex = 0;
             zeroHotkey.SelectedItem = zeroHotkey.SelectedIndex;
 
+
+
+            //TEMP MOVE SOMEWHERE LATER!!!
+
+            limitInputField.SetPlaceholderText("Limit");
+            
+
         }
 
         public void MyKeyDown(object sender, KeyEventArgs e)
@@ -132,6 +139,7 @@ namespace HeadTrackerV2
                 TextBox textBox = sender as TextBox;
                 if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
             }
+            
         }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
@@ -303,6 +311,11 @@ namespace HeadTrackerV2
         private void recalibrateGyro_Click(object sender, EventArgs e)
         {
             serial.calibrateGyro();
+        }
+
+        private void limitInputField_InputFieldTextChanged(object sender, EventArgs e)
+        {
+
         }
     }
     public class ComboboxItem
