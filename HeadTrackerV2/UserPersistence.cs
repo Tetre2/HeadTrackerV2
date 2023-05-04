@@ -40,6 +40,37 @@ public class UserPersistence
         public String? COMPort { get; set; }
     }
 
+    private static Profile defaultprofile = new Profile
+    {
+        name = "default Profile",
+        sensitivityPitch = 1,
+        sensitivityYaw = 1,
+        sensitivityRoll = 1,
+        commonSensitivity = 1,
+        useIndividualSensitivity = false,
+
+        exponentialPitch = 1,
+        exponentialYaw = 1,
+        exponentialRoll = 1,
+        commonExponential = 1,
+        useIndividualExponential = false,
+
+        offsetPitch = 1,
+        offsetYaw = 1,
+        offsetRoll = 1,
+
+        viewLimitPitch = 1,
+        viewLimitYaw = 1,
+        viewLimitRoll = 1,
+
+        enableGyro = true,
+        useExponential = false,
+        useSmoothness = true,
+
+        hotkey = null,
+        COMPort = null
+    };
+
     private class JsonObj
     {
         public float version { get; set; }
@@ -47,7 +78,7 @@ public class UserPersistence
     }
 
     public UserPersistence()
-	{
+    {
 
         Profiles = loadProfiles();
 
@@ -89,19 +120,20 @@ public class UserPersistence
             }
 
         }
-        MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles",
+            MessageBoxButtons.OK, MessageBoxIcon.Error);
         //Overwrite the current file if deserialization faild or is wrong version or if there does not exist a file from the begining
-        writeDefaultProfileToFile();
-        return new List<Profile> { getDefaultProfile() };
+        writeProfilesToFile(new JsonObj { version = 0.01f, profiles = (new List<Profile> { defaultprofile }) });
+        return new List<Profile> { defaultprofile };
 
     }
 
-    
+
     private async Task writeDefaultProfileToFile()
     {
         using FileStream createStream = File.Create(Path.Combine(appDataPath, profileFile));
         var options = new JsonSerializerOptions { WriteIndented = true };
-        await JsonSerializer.SerializeAsync(createStream, new JsonObj{version = 0.01f, profiles = (new List<Profile> { getDefaultProfile() }) }, options);
+        await JsonSerializer.SerializeAsync(createStream, new JsonObj { version = 0.01f, profiles = (new List<Profile> { defaultprofile }) }, options);
         await createStream.DisposeAsync();
     }
 
@@ -113,39 +145,4 @@ public class UserPersistence
         createStream.Close();
     }
 
-
-    private Profile getDefaultProfile()
-    {
-        Profile defaultprofile = new Profile
-        {
-            name = "default Profile",
-            sensitivityPitch = 1,
-            sensitivityYaw = 1,
-            sensitivityRoll = 1,
-            commonSensitivity = 1,
-            useIndividualSensitivity = false,
-
-            exponentialPitch = 1,
-            exponentialYaw = 1,
-            exponentialRoll = 1,
-            commonExponential = 1,
-            useIndividualExponential = false,
-
-            offsetPitch = 1,
-            offsetYaw = 1,
-            offsetRoll = 1,
-
-            viewLimitPitch = 1,
-            viewLimitYaw = 1,
-            viewLimitRoll = 1,
-
-            enableGyro = true,
-            useExponential = false,
-            useSmoothness = true,
-
-            hotkey = null,
-            COMPort = null
-        };
-        return defaultprofile;
-    }
 }
