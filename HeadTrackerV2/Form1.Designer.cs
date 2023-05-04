@@ -70,6 +70,10 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.profilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.newProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -567,16 +571,45 @@
             // profilesToolStripMenuItem
             // 
             this.profilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.defaultToolStripMenuItem});
+            this.defaultToolStripMenuItem,
+            this.newProfileToolStripMenuItem,
+            this.updateProfileToolStripMenuItem,
+            this.removeProfileToolStripMenuItem});
             this.profilesToolStripMenuItem.Name = "profilesToolStripMenuItem";
             this.profilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profilesToolStripMenuItem.Text = "Profiles";
             // 
             // defaultToolStripMenuItem
             // 
+            this.defaultToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultToolStripMenuItem1});
             this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
             this.defaultToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.defaultToolStripMenuItem.Text = "Default";
+            this.defaultToolStripMenuItem.Text = "Select Profile";
+            // 
+            // defaultToolStripMenuItem1
+            // 
+            this.defaultToolStripMenuItem1.Name = "defaultToolStripMenuItem1";
+            this.defaultToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.defaultToolStripMenuItem1.Text = "Default";
+            // 
+            // newProfileToolStripMenuItem
+            // 
+            this.newProfileToolStripMenuItem.Name = "newProfileToolStripMenuItem";
+            this.newProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newProfileToolStripMenuItem.Text = "New Profile";
+            // 
+            // updateProfileToolStripMenuItem
+            // 
+            this.updateProfileToolStripMenuItem.Name = "updateProfileToolStripMenuItem";
+            this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateProfileToolStripMenuItem.Text = "Update Profile";
+            // 
+            // removeProfileToolStripMenuItem
+            // 
+            this.removeProfileToolStripMenuItem.Name = "removeProfileToolStripMenuItem";
+            this.removeProfileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeProfileToolStripMenuItem.Text = "Remove Profile";
             // 
             // Form1
             // 
@@ -679,5 +712,9 @@
         private ToolStripDropDownButton toolStripDropDownButton1;
         private ToolStripMenuItem profilesToolStripMenuItem;
         private ToolStripMenuItem defaultToolStripMenuItem;
+        private ToolStripMenuItem defaultToolStripMenuItem1;
+        private ToolStripMenuItem newProfileToolStripMenuItem;
+        private ToolStripMenuItem updateProfileToolStripMenuItem;
+        private ToolStripMenuItem removeProfileToolStripMenuItem;
     }
 }

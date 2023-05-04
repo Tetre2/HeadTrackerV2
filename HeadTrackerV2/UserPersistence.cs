@@ -91,6 +91,20 @@ public class UserPersistence
         //TODO
     }
 
+    public void ModifyProfile()
+    {
+        profilesChanged = true;
+
+        //TODO
+    }
+
+    public void RemoveProfile()
+    {
+        profilesChanged = true;
+
+        //TODO
+    }
+
     public void Close()
     {
         writeProfiles();
@@ -100,7 +114,7 @@ public class UserPersistence
     {
         if (profilesChanged)
         {
-            new JsonObj { version = 0.01f, profiles = Profiles };
+            writeProfilesToFile(new JsonObj { version = 0.01f, profiles = Profiles });
         }
     }
 
@@ -122,19 +136,11 @@ public class UserPersistence
         }
         MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles",
             MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         //Overwrite the current file if deserialization faild or is wrong version or if there does not exist a file from the begining
         writeProfilesToFile(new JsonObj { version = 0.01f, profiles = (new List<Profile> { defaultprofile }) });
         return new List<Profile> { defaultprofile };
 
-    }
-
-
-    private async Task writeDefaultProfileToFile()
-    {
-        using FileStream createStream = File.Create(Path.Combine(appDataPath, profileFile));
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        await JsonSerializer.SerializeAsync(createStream, new JsonObj { version = 0.01f, profiles = (new List<Profile> { defaultprofile }) }, options);
-        await createStream.DisposeAsync();
     }
 
     private void writeProfilesToFile(JsonObj obj)
