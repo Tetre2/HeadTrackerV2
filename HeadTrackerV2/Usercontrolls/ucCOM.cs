@@ -8,14 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HeadTrackerV2
+namespace HeadTrackerV2.Usercontrolls
 {
-    public partial class InputFieldWithToggle : UserControl
+    public partial class ucCOM : UserControl
     {
-        public InputFieldWithToggle()
+        public ucCOM()
         {
             InitializeComponent();
         }
-
     }
 }

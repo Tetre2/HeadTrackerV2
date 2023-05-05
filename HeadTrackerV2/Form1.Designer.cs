@@ -74,8 +74,19 @@
             this.newProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.limitInputField = new HeadTrackerV2.InputField();
+            this.ucpyr1 = new HeadTrackerV2.Usercontrolls.ucPYR();
+            this.mainSC = new System.Windows.Forms.SplitContainer();
+            this.uccom1 = new HeadTrackerV2.Usercontrolls.ucCOM();
+            this.rightSC = new System.Windows.Forms.SplitContainer();
+            this.ucbtns1 = new HeadTrackerV2.Usercontrolls.ucBTNS();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainSC)).BeginInit();
+            this.mainSC.Panel1.SuspendLayout();
+            this.mainSC.Panel2.SuspendLayout();
+            this.mainSC.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rightSC)).BeginInit();
+            this.rightSC.Panel2.SuspendLayout();
+            this.rightSC.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialOutput
@@ -612,25 +623,74 @@
             this.removeProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.removeProfileToolStripMenuItem.Text = "Remove Profile";
             // 
-            // limitInputField
+            // ucpyr1
             // 
-            this.limitInputField.InputFieldPitch = 0F;
-            this.limitInputField.InputFieldRoll = 0F;
-            this.limitInputField.InputFieldYaw = 0F;
-            this.limitInputField.Location = new System.Drawing.Point(18, 378);
-            this.limitInputField.Margin = new System.Windows.Forms.Padding(0);
-            this.limitInputField.Name = "limitInputField";
-            this.limitInputField.Size = new System.Drawing.Size(385, 45);
-            this.limitInputField.TabIndex = 69;
-            this.limitInputField.InputFieldTextChanged += new System.EventHandler(this.limitInputField_InputFieldTextChanged);
+            this.ucpyr1.Location = new System.Drawing.Point(13, 252);
+            this.ucpyr1.Name = "ucpyr1";
+            this.ucpyr1.Size = new System.Drawing.Size(580, 290);
+            this.ucpyr1.TabIndex = 69;
+            // 
+            // mainSC
+            // 
+            this.mainSC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainSC.IsSplitterFixed = true;
+            this.mainSC.Location = new System.Drawing.Point(0, 450);
+            this.mainSC.Name = "mainSC";
+            // 
+            // mainSC.Panel1
+            // 
+            this.mainSC.Panel1.Controls.Add(this.uccom1);
+            this.mainSC.Panel1.Padding = new System.Windows.Forms.Padding(15);
+            // 
+            // mainSC.Panel2
+            // 
+            this.mainSC.Panel2.Controls.Add(this.rightSC);
+            this.mainSC.Size = new System.Drawing.Size(1100, 500);
+            this.mainSC.SplitterDistance = 445;
+            this.mainSC.SplitterWidth = 1;
+            this.mainSC.TabIndex = 70;
+            // 
+            // uccom1
+            // 
+            this.uccom1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.uccom1.Location = new System.Drawing.Point(18, 18);
+            this.uccom1.Name = "uccom1";
+            this.uccom1.Size = new System.Drawing.Size(400, 500);
+            this.uccom1.TabIndex = 71;
+            // 
+            // rightSC
+            // 
+            this.rightSC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rightSC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rightSC.IsSplitterFixed = true;
+            this.rightSC.Location = new System.Drawing.Point(0, 0);
+            this.rightSC.Name = "rightSC";
+            this.rightSC.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // rightSC.Panel2
+            // 
+            this.rightSC.Panel2.Controls.Add(this.ucbtns1);
+            this.rightSC.Size = new System.Drawing.Size(654, 500);
+            this.rightSC.SplitterDistance = 330;
+            this.rightSC.SplitterWidth = 1;
+            this.rightSC.TabIndex = 0;
+            // 
+            // ucbtns1
+            // 
+            this.ucbtns1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ucbtns1.Location = new System.Drawing.Point(3, 3);
+            this.ucbtns1.Name = "ucbtns1";
+            this.ucbtns1.Size = new System.Drawing.Size(479, 151);
+            this.ucbtns1.TabIndex = 71;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1104, 461);
-            this.Controls.Add(this.limitInputField);
+            this.ClientSize = new System.Drawing.Size(1104, 1024);
+            this.Controls.Add(this.ucpyr1);
+            this.Controls.Add(this.mainSC);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.enableGyro);
             this.Controls.Add(this.updateLimits);
@@ -678,6 +738,13 @@
             this.Click += new System.EventHandler(this.Form1_Click);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.mainSC.Panel1.ResumeLayout(false);
+            this.mainSC.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainSC)).EndInit();
+            this.mainSC.ResumeLayout(false);
+            this.rightSC.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.rightSC)).EndInit();
+            this.rightSC.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -730,6 +797,10 @@
         private ToolStripMenuItem newProfileToolStripMenuItem;
         private ToolStripMenuItem updateProfileToolStripMenuItem;
         private ToolStripMenuItem removeProfileToolStripMenuItem;
-        private InputField limitInputField;
+        private Usercontrolls.ucPYR ucpyr1;
+        private SplitContainer mainSC;
+        private SplitContainer rightSC;
+        private Usercontrolls.ucCOM uccom1;
+        private Usercontrolls.ucBTNS ucbtns1;
     }
 }

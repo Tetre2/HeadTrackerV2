@@ -22,24 +22,29 @@ namespace HeadTrackerV2
             InputFieldTextChanged?.Invoke(this, e);
         }
 
-        public float InputFieldPitch { get; set; }
-        public float InputFieldYaw { get; set; }
-        public float InputFieldRoll { get; set; }
+
+        public Utils.UpdatableProperty<float> InputFieldPitch = new Utils.UpdatableProperty<float>();
+        public Utils.UpdatableProperty<float> InputFieldYaw = new Utils.UpdatableProperty<float>();
+        public Utils.UpdatableProperty<float> InputFieldRoll = new Utils.UpdatableProperty<float>();
 
         public InputField()
         {
             InitializeComponent();
-            
+
+            pitchTextBox.DataBindings.Add(nameof(pitchTextBox.Text), InputFieldPitch, "Value", true);
+            yawTextBox.DataBindings.Add(nameof(yawTextBox.Text), InputFieldYaw, "Value", true);
+            rollTextBox.DataBindings.Add(nameof(rollTextBox.Text), InputFieldRoll, "Value", true);
+
         }
 
-        public void SetPlaceholderText(string text)
+        public virtual void SetPlaceholderText(string text)
         {
             pitchTextBox.PlaceholderText = text;
             yawTextBox.PlaceholderText = text;
             rollTextBox.PlaceholderText = text;
         }
 
-        private bool tryParseFloat(string possibleFloat, out float result)
+        protected virtual bool tryParseFloat(string possibleFloat, out float result)
         {
             var fmt = new NumberFormatInfo();
             fmt.NegativeSign = "-";
@@ -57,6 +62,20 @@ namespace HeadTrackerV2
                 TextBox textBox = sender as TextBox;
                 if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(pitchTextBox.Text);
+            Console.WriteLine(InputFieldPitch.Value);
+            Console.WriteLine();
+            
+                
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            InputFieldPitch.Value = 1;
         }
     }
 }

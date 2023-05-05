@@ -46,6 +46,7 @@
             this.commonTextBox.Size = new System.Drawing.Size(355, 35);
             this.commonTextBox.TabIndex = 5;
             this.commonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.commonTextBox.Leave += new System.EventHandler(this.validateInput);
             // 
             // rollTextBox
             // 
@@ -104,7 +105,11 @@
             this.Controls.Add(this.toggleCommon);
             this.Controls.Add(this.commonTextBox);
             this.Name = "InputFieldWithToggle";
-            this.Size = new System.Drawing.Size(385, 45);
+            this.Controls.SetChildIndex(this.commonTextBox, 0);
+            this.Controls.SetChildIndex(this.toggleCommon, 0);
+            this.Controls.SetChildIndex(this.pitchTextBox, 0);
+            this.Controls.SetChildIndex(this.yawTextBox, 0);
+            this.Controls.SetChildIndex(this.rollTextBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

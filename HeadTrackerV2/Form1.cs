@@ -35,7 +35,6 @@ namespace HeadTrackerV2
 
             //TEMP MOVE SOMEWHERE LATER!!!
 
-            limitInputField.SetPlaceholderText("Limit");
             
 
         }
