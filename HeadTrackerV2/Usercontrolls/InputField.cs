@@ -63,19 +63,5 @@ namespace HeadTrackerV2
                 if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine(pitchTextBox.Text);
-            Console.WriteLine(InputFieldPitch.Value);
-            Console.WriteLine();
-            
-                
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            InputFieldPitch.Value = 1;
-        }
     }
 }
