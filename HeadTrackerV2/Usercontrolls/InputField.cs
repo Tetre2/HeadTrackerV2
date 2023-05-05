@@ -30,11 +30,9 @@ namespace HeadTrackerV2
         public InputField()
         {
             InitializeComponent();
-
             pitchTextBox.DataBindings.Add(nameof(pitchTextBox.Text), InputFieldPitch, "Value", true);
             yawTextBox.DataBindings.Add(nameof(yawTextBox.Text), InputFieldYaw, "Value", true);
             rollTextBox.DataBindings.Add(nameof(rollTextBox.Text), InputFieldRoll, "Value", true);
-
         }
 
         public virtual void SetPlaceholderText(string text)

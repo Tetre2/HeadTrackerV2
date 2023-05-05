@@ -18,6 +18,14 @@ namespace HeadTrackerV2
         {
             InitializeComponent();
 
+            //Needs to be called even though the same calls are made in the base class
+            pitchTextBox.DataBindings.Add(nameof(pitchTextBox.Text), InputFieldPitch, "Value", true);
+            yawTextBox.DataBindings.Add(nameof(yawTextBox.Text), InputFieldYaw, "Value", true);
+            rollTextBox.DataBindings.Add(nameof(rollTextBox.Text), InputFieldRoll, "Value", true);
+
+
+
+
             commonTextBox.DataBindings.Add(nameof(commonTextBox.Text), InputFieldCommon, "Value", true);
             commonTextBox.DataBindings.Add(nameof(commonTextBox.Visible), toggleCommon, "Checked", true);
 

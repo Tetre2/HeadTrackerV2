@@ -74,17 +74,18 @@
             this.newProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ucpyr1 = new HeadTrackerV2.Usercontrolls.ucPYR();
             this.mainSC = new System.Windows.Forms.SplitContainer();
             this.uccom1 = new HeadTrackerV2.Usercontrolls.ucCOM();
             this.rightSC = new System.Windows.Forms.SplitContainer();
             this.ucbtns1 = new HeadTrackerV2.Usercontrolls.ucBTNS();
+            this.ucpyr1 = new HeadTrackerV2.Usercontrolls.ucPYR();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSC)).BeginInit();
             this.mainSC.Panel1.SuspendLayout();
             this.mainSC.Panel2.SuspendLayout();
             this.mainSC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rightSC)).BeginInit();
+            this.rightSC.Panel1.SuspendLayout();
             this.rightSC.Panel2.SuspendLayout();
             this.rightSC.SuspendLayout();
             this.SuspendLayout();
@@ -623,13 +624,6 @@
             this.removeProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.removeProfileToolStripMenuItem.Text = "Remove Profile";
             // 
-            // ucpyr1
-            // 
-            this.ucpyr1.Location = new System.Drawing.Point(13, 252);
-            this.ucpyr1.Name = "ucpyr1";
-            this.ucpyr1.Size = new System.Drawing.Size(580, 290);
-            this.ucpyr1.TabIndex = 69;
-            // 
             // mainSC
             // 
             this.mainSC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -667,6 +661,10 @@
             this.rightSC.Name = "rightSC";
             this.rightSC.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
+            // rightSC.Panel1
+            // 
+            this.rightSC.Panel1.Controls.Add(this.ucpyr1);
+            // 
             // rightSC.Panel2
             // 
             this.rightSC.Panel2.Controls.Add(this.ucbtns1);
@@ -683,13 +681,19 @@
             this.ucbtns1.Size = new System.Drawing.Size(479, 151);
             this.ucbtns1.TabIndex = 71;
             // 
+            // ucpyr1
+            // 
+            this.ucpyr1.Location = new System.Drawing.Point(3, 2);
+            this.ucpyr1.Name = "ucpyr1";
+            this.ucpyr1.Size = new System.Drawing.Size(580, 290);
+            this.ucpyr1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1104, 1024);
-            this.Controls.Add(this.ucpyr1);
             this.Controls.Add(this.mainSC);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.enableGyro);
@@ -742,6 +746,7 @@
             this.mainSC.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSC)).EndInit();
             this.mainSC.ResumeLayout(false);
+            this.rightSC.Panel1.ResumeLayout(false);
             this.rightSC.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rightSC)).EndInit();
             this.rightSC.ResumeLayout(false);
@@ -797,10 +802,10 @@
         private ToolStripMenuItem newProfileToolStripMenuItem;
         private ToolStripMenuItem updateProfileToolStripMenuItem;
         private ToolStripMenuItem removeProfileToolStripMenuItem;
-        private Usercontrolls.ucPYR ucpyr1;
         private SplitContainer mainSC;
         private SplitContainer rightSC;
         private Usercontrolls.ucCOM uccom1;
         private Usercontrolls.ucBTNS ucbtns1;
+        private Usercontrolls.ucPYR ucpyr1;
     }
 }
