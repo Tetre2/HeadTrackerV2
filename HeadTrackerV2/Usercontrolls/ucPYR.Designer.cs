@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.updateLimits = new System.Windows.Forms.Button();
             this.ifAng = new HeadTrackerV2.InputField();
             this.ifOff = new HeadTrackerV2.InputField();
             this.ifExp = new HeadTrackerV2.InputFieldWithToggle();
@@ -40,19 +39,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.useExp = new System.Windows.Forms.CheckBox();
+            this.smoothness = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // updateLimits
-            // 
-            this.updateLimits.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.updateLimits.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.updateLimits.Location = new System.Drawing.Point(221, 243);
-            this.updateLimits.Margin = new System.Windows.Forms.Padding(4);
-            this.updateLimits.Name = "updateLimits";
-            this.updateLimits.Size = new System.Drawing.Size(356, 42);
-            this.updateLimits.TabIndex = 8;
-            this.updateLimits.Text = "UPDATE";
-            this.updateLimits.UseVisualStyleBackColor = true;
             // 
             // ifAng
             // 
@@ -169,10 +158,37 @@
             this.label5.Text = "SENSITIVITY";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // useExp
+            // 
+            this.useExp.AutoSize = true;
+            this.useExp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.useExp.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.useExp.Location = new System.Drawing.Point(322, 244);
+            this.useExp.Margin = new System.Windows.Forms.Padding(4);
+            this.useExp.Name = "useExp";
+            this.useExp.Size = new System.Drawing.Size(251, 31);
+            this.useExp.TabIndex = 75;
+            this.useExp.Text = "USE EXPONENTIAL";
+            this.useExp.UseVisualStyleBackColor = true;
+            // 
+            // smoothness
+            // 
+            this.smoothness.AutoSize = true;
+            this.smoothness.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.smoothness.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.smoothness.Location = new System.Drawing.Point(114, 244);
+            this.smoothness.Margin = new System.Windows.Forms.Padding(4);
+            this.smoothness.Name = "smoothness";
+            this.smoothness.Size = new System.Drawing.Size(200, 31);
+            this.smoothness.TabIndex = 74;
+            this.smoothness.Text = "SMOOTHNESS";
+            this.smoothness.UseVisualStyleBackColor = true;
+            // 
             // ucPYR
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.Controls.Add(this.updateLimits);
+            this.Controls.Add(this.useExp);
+            this.Controls.Add(this.smoothness);
             this.Controls.Add(this.ifAng);
             this.Controls.Add(this.ifOff);
             this.Controls.Add(this.ifExp);
@@ -192,8 +208,6 @@
         }
 
         #endregion
-
-        private Button updateLimits;
         private InputField inputField2;
         private InputField inputField1;
         private InputFieldWithToggle ifExp;
@@ -207,5 +221,7 @@
         private Label label5;
         private InputField ifAng;
         private InputField ifOff;
+        private CheckBox useExp;
+        private CheckBox smoothness;
     }
 }

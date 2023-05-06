@@ -33,7 +33,6 @@
             this.ports = new System.Windows.Forms.ComboBox();
             this.connectToSerial = new System.Windows.Forms.Button();
             this.serialOutput = new System.Windows.Forms.RichTextBox();
-            this.getGyroDataBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // disconnectSerial
@@ -93,22 +92,9 @@
             this.serialOutput.Text = "";
             this.serialOutput.TextChanged += new System.EventHandler(this.serialOutput_TextChanged);
             // 
-            // getGyroDataBtn
-            // 
-            this.getGyroDataBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.getGyroDataBtn.Location = new System.Drawing.Point(229, 273);
-            this.getGyroDataBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.getGyroDataBtn.Name = "getGyroDataBtn";
-            this.getGyroDataBtn.Size = new System.Drawing.Size(165, 42);
-            this.getGyroDataBtn.TabIndex = 4;
-            this.getGyroDataBtn.Text = "GET GYRO DATA";
-            this.getGyroDataBtn.UseVisualStyleBackColor = true;
-            this.getGyroDataBtn.Click += new System.EventHandler(this.getGyroDataBtn_Click);
-            // 
             // ucCOM
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.Controls.Add(this.getGyroDataBtn);
             this.Controls.Add(this.disconnectSerial);
             this.Controls.Add(this.scanPorts);
             this.Controls.Add(this.ports);
@@ -128,6 +114,5 @@
         private ComboBox ports;
         private Button connectToSerial;
         private RichTextBox serialOutput;
-        private Button getGyroDataBtn;
     }
 }
