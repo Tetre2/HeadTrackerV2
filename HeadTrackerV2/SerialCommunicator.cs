@@ -13,12 +13,16 @@ namespace HeadTrackerV2
 {
     internal class SerialCommunicator
     {
-        SerialPort mySerialPort;
-        Action<String> printToTextbox;
+        private SerialPort mySerialPort;
+        private Action<String> printToTextbox;
 
-        public SerialCommunicator(Action<String> printToTextbox)
+        private static readonly Lazy<SerialCommunicator> lazy =
+        new Lazy<SerialCommunicator>(() => new SerialCommunicator());
+
+        public static SerialCommunicator Instance { get { return lazy.Value; } }
+
+        private SerialCommunicator()
         {
-            this.printToTextbox = printToTextbox;
 
             mySerialPort = new SerialPort();
             mySerialPort.BaudRate = 9600;
@@ -42,6 +46,11 @@ namespace HeadTrackerV2
             //<8 bool> //Turn on/off
             //<9 bool> //Use Exponential
 
+        }
+
+        public void setOutputConsole(Action<String> action)
+        {
+            printToTextbox = action;
         }
 
         public void close()

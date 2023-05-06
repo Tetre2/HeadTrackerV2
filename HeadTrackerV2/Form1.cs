@@ -6,7 +6,6 @@ namespace HeadTrackerV2
 {
     public partial class Form1 : Form
     {
-        SerialCommunicator serial;
         UserActivityHook actHook;
         UserPersistence userPersistence;
         public Form1()
@@ -16,7 +15,7 @@ namespace HeadTrackerV2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            serial = new SerialCommunicator(printToSerialOutput);
+            SerialCommunicator.Instance.setOutputConsole(printToSerialOutput);
 
             actHook = new UserActivityHook();
             actHook.KeyDown += new KeyEventHandler(MyKeyDown);
@@ -44,7 +43,7 @@ namespace HeadTrackerV2
             if (zeroHotkey.SelectedItem == null) return;
             if (e.KeyCode == ((ComboboxItem) zeroHotkey.SelectedItem).key)
             {
-                serial.resetView();
+                SerialCommunicator.Instance.resetView();
 
             }
         }
@@ -107,7 +106,7 @@ namespace HeadTrackerV2
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            serial.close();
+            SerialCommunicator.Instance.close();
             Settings.Default.Save();
             Application.Exit();
         }
@@ -175,7 +174,7 @@ namespace HeadTrackerV2
 
         private void scanPorts_Click(object sender, EventArgs e)
         {
-            string[] comPorts = serial.getOpenPorts(); 
+            string[] comPorts = SerialCommunicator.Instance.getOpenPorts(); 
             ports.Items.Clear();
             foreach (string comPort in comPorts)
             {
@@ -185,7 +184,7 @@ namespace HeadTrackerV2
 
         private void connectToSerial_Click(object sender, EventArgs e)
         {
-            if (serial.open())
+            if (SerialCommunicator.Instance.open())
             {
                 connectToSerial.Visible = false;
                 disconnectSerial.Visible = true;
@@ -194,14 +193,14 @@ namespace HeadTrackerV2
 
         private void disconnectSerial_Click(object sender, EventArgs e)
         {
-            serial.close();
+            SerialCommunicator.Instance.close();
             connectToSerial.Visible = true;
             disconnectSerial.Visible = false;
         }
 
         private void ports_SelectedValueChanged(object sender, EventArgs e)
         {
-            serial.setCOMPort(ports.Text);
+            SerialCommunicator.Instance.setCOMPort(ports.Text);
         }
 
         private void serialOutput_TextChanged(object sender, EventArgs e)
@@ -214,12 +213,12 @@ namespace HeadTrackerV2
         // ----------------- GYRO ----------------- 
         private void recenterGyro_Click(object sender, EventArgs e)
         {
-            serial.resetView();
+            SerialCommunicator.Instance.resetView();
         }
 
         private void getGyroDataBtn_Click(object sender, EventArgs e)
         {
-            serial.getGyroData();
+            SerialCommunicator.Instance.getGyroData();
         }
 
 
@@ -235,14 +234,14 @@ namespace HeadTrackerV2
                 isValidFloat = tryParseFloat(yawSens.Text, out float yaw) && isValidFloat;
                 isValidFloat = tryParseFloat(rollSens.Text, out float roll) && isValidFloat;
                 if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
-                serial.setSensitivity(pitch, yaw, roll);
+                SerialCommunicator.Instance.setSensitivity(pitch, yaw, roll);
             }
             else
             {
                 Console.WriteLine("bbb");
                 bool isValidFloat = tryParseFloat(commonSens.Text, out float sens);
                 if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
-                serial.setSensitivity(sens, sens, sens);
+                SerialCommunicator.Instance.setSensitivity(sens, sens, sens);
             }
         }
 
@@ -257,14 +256,14 @@ namespace HeadTrackerV2
                 isValidFloat = tryParseFloat(yawExp.Text, out float yaw) && isValidFloat;
                 isValidFloat = tryParseFloat(rollExp.Text, out float roll) && isValidFloat;
                 if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
-                serial.setExponentialView(pitch, yaw, roll);
+                SerialCommunicator.Instance.setExponentialView(pitch, yaw, roll);
             }
             else
             {
                 Console.WriteLine("ddd");
                 bool isValidFloat = tryParseFloat(commonExp.Text, out float exp);
                 if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
-                serial.setSensitivity(exp, exp, exp);
+                SerialCommunicator.Instance.setSensitivity(exp, exp, exp);
             }
         }
 
@@ -277,7 +276,7 @@ namespace HeadTrackerV2
             isValidFloat = tryParseFloat(yawOffset.Text, out float yaw) && isValidFloat;
             isValidFloat = tryParseFloat(rollOffset.Text, out float roll) && isValidFloat;
             if (!isValidFloat) { printToSerialOutput("ERROR: Offset value is not a float!"); return; }
-            serial.setOffset(pitch, yaw, roll);
+            SerialCommunicator.Instance.setOffset(pitch, yaw, roll);
         }
 
         private void updateLimits_Click(object sender, EventArgs e)
@@ -289,27 +288,27 @@ namespace HeadTrackerV2
             isValidFloat = tryParseFloat(yawLimit.Text, out float yaw) && isValidFloat;
             isValidFloat = tryParseFloat(rollLimit.Text, out float roll) && isValidFloat;
             if (!isValidFloat) { printToSerialOutput("ERROR: Limit value is not a float!"); return; }
-            serial.setLimit(pitch, yaw, roll);
+            SerialCommunicator.Instance.setLimit(pitch, yaw, roll);
         }
 
         private void useExp_CheckedChanged(object sender, EventArgs e)
         {
-            serial.setExponentialMode(useExp.Checked);
+            SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
         }
 
         private void smoothness_CheckedChanged(object sender, EventArgs e)
         {
-            serial.setSmoothness(smoothness.Checked);
+            SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
         }
 
         private void enableGyro_CheckedChanged(object sender, EventArgs e)
         {
-            serial.setEnabled(enableGyro.Checked);
+            SerialCommunicator.Instance.setEnabled(enableGyro.Checked);
         }
 
         private void recalibrateGyro_Click(object sender, EventArgs e)
         {
-            serial.calibrateGyro();
+            SerialCommunicator.Instance.calibrateGyro();
         }
 
         private void limitInputField_InputFieldTextChanged(object sender, EventArgs e)
