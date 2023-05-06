@@ -24,27 +24,23 @@ namespace HeadTrackerV2
             Console.WriteLine(userPersistence.Profiles.Count);
 
             bindData();
-
-            zeroHotkey.Items.Add(new ComboboxItem("F1", Keys.F1));
-            zeroHotkey.SelectedIndex = 0;
-            zeroHotkey.SelectedItem = zeroHotkey.SelectedIndex;
-
-
-
-            //TEMP MOVE SOMEWHERE LATER!!!
-
             
 
         }
 
         public void MyKeyDown(object sender, KeyEventArgs e)
         {
-            if (zeroHotkey.SelectedItem == null) return;
-            if (e.KeyCode == ((ComboboxItem) zeroHotkey.SelectedItem).key)
+            if (e.KeyCode == Keys.F1)
             {
                 SerialCommunicator.Instance.resetView();
-
             }
+            //if (zeroHotkey.SelectedItem == null) return;
+            //if (e.KeyCode == ((ComboboxItem) zeroHotkey.SelectedItem).key)
+            //{
+            //    SerialCommunicator.Instance.resetView();
+
+            //}
+
         }
 
         private void bindData()
@@ -315,19 +311,5 @@ namespace HeadTrackerV2
 
         }
     }
-    public class ComboboxItem
-    {
-        public string Text { get; set; }
-        public Keys key { get; set; }
-        public ComboboxItem(string text, Keys key)
-        {
-            this.Text = text;
-            this.key = key;
-        }
-
-        public override string ToString()
-        {
-            return Text;
-        }
-    }
+    
 }
