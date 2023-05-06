@@ -15,6 +15,24 @@ namespace HeadTrackerV2.Usercontrolls
         public ucCOM()
         {
             InitializeComponent();
+            SerialCommunicator.Instance.SerialCommunicatorOutput += Instance_SampleEvent; ;
+        }
+
+        private void Instance_SampleEvent(object sender, SerialCommunicator.SerialCommunicatorOutputEventArgs e)
+        {
+            Console.WriteLine(e.Text);
+            printToSerialOutput(e.Text);
+        }
+
+        private void ucCOM_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void printToSerialOutput(String s)
+        {
+            Console.WriteLine(s);
+            serialOutput.Text += s + '\n';
         }
     }
 }

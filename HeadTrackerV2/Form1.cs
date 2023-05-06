@@ -15,7 +15,6 @@ namespace HeadTrackerV2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SerialCommunicator.Instance.setOutputConsole(printToSerialOutput);
 
             actHook = new UserActivityHook();
             actHook.KeyDown += new KeyEventHandler(MyKeyDown);

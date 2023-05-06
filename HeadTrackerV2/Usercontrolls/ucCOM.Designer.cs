@@ -43,7 +43,7 @@
             this.disconnectSerial.Margin = new System.Windows.Forms.Padding(4);
             this.disconnectSerial.Name = "disconnectSerial";
             this.disconnectSerial.Size = new System.Drawing.Size(114, 35);
-            this.disconnectSerial.TabIndex = 35;
+            this.disconnectSerial.TabIndex = 3;
             this.disconnectSerial.Text = "DISCONNECT";
             this.disconnectSerial.UseVisualStyleBackColor = true;
             this.disconnectSerial.Visible = false;
@@ -55,7 +55,7 @@
             this.scanPorts.Margin = new System.Windows.Forms.Padding(4);
             this.scanPorts.Name = "scanPorts";
             this.scanPorts.Size = new System.Drawing.Size(111, 35);
-            this.scanPorts.TabIndex = 34;
+            this.scanPorts.TabIndex = 2;
             this.scanPorts.Text = "SCAN";
             this.scanPorts.UseVisualStyleBackColor = true;
             // 
@@ -66,7 +66,7 @@
             this.ports.Location = new System.Drawing.Point(4, 236);
             this.ports.Name = "ports";
             this.ports.Size = new System.Drawing.Size(150, 25);
-            this.ports.TabIndex = 33;
+            this.ports.TabIndex = 1;
             this.ports.Text = "Choose COM Port";
             // 
             // connectToSerial
@@ -95,7 +95,7 @@
             this.getGyroDataBtn.Margin = new System.Windows.Forms.Padding(4);
             this.getGyroDataBtn.Name = "getGyroDataBtn";
             this.getGyroDataBtn.Size = new System.Drawing.Size(165, 42);
-            this.getGyroDataBtn.TabIndex = 36;
+            this.getGyroDataBtn.TabIndex = 4;
             this.getGyroDataBtn.Text = "GET GYRO DATA";
             this.getGyroDataBtn.UseVisualStyleBackColor = true;
             // 
@@ -111,6 +111,7 @@
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "ucCOM";
             this.Size = new System.Drawing.Size(400, 500);
+            this.Load += new System.EventHandler(this.ucCOM_Load);
             this.ResumeLayout(false);
 
         }

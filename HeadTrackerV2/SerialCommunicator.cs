@@ -14,12 +14,21 @@ namespace HeadTrackerV2
     internal class SerialCommunicator
     {
         private SerialPort mySerialPort;
-        private Action<String> printToTextbox;
 
-        private static readonly Lazy<SerialCommunicator> lazy =
-        new Lazy<SerialCommunicator>(() => new SerialCommunicator());
-
+        private static readonly Lazy<SerialCommunicator> lazy = new Lazy<SerialCommunicator>(() => new SerialCommunicator());
         public static SerialCommunicator Instance { get { return lazy.Value; } }
+
+        public class SerialCommunicatorOutputEventArgs
+        {
+            public SerialCommunicatorOutputEventArgs(string text) { Text = text; }
+            public string Text { get; } 
+        }
+        public delegate void SerialCommunicatorOutputEventHandler(object sender, SerialCommunicatorOutputEventArgs e);
+        public event SerialCommunicatorOutputEventHandler SerialCommunicatorOutput;
+        private void RaiseSerialCommunicatorOutputEvent(string text)
+        {
+            SerialCommunicatorOutput?.Invoke(this, new SerialCommunicatorOutputEventArgs(text));
+        }
 
         private SerialCommunicator()
         {
@@ -47,10 +56,9 @@ namespace HeadTrackerV2
             //<9 bool> //Use Exponential
 
         }
-
-        public void setOutputConsole(Action<String> action)
+        private void outputString(string text)
         {
-            printToTextbox = action;
+            RaiseSerialCommunicatorOutputEvent(text);
         }
 
         public void close()
@@ -85,12 +93,12 @@ namespace HeadTrackerV2
             try
             {
                 mySerialPort.Open();
-                printToTextbox("Connected to device!");
+                outputString("Connected to device!");
             }
             catch (Exception)
             {
 
-                printToTextbox("ERROR: Can not open selected port!");
+                outputString("ERROR: Can not open selected port!");
                 return false;
             }
             return true;
@@ -106,7 +114,7 @@ namespace HeadTrackerV2
             catch (Exception)
             {
 
-                printToTextbox("ERROR: No valid COM port with that name!");
+                outputString("ERROR: No valid COM port with that name!");
                 return false;
             }
             return true;
@@ -114,18 +122,18 @@ namespace HeadTrackerV2
 
         public String[] getOpenPorts()
         {
-            return SerialPort.GetPortNames(); ;
+            return SerialPort.GetPortNames();
+
         }
 
         private void dataRecived(object sender, SerialDataReceivedEventArgs e)
         {
+
             String data = mySerialPort.ReadExisting();
             if (data != null)
             {
-                printToTextbox(data);
+                outputString(data);
             }
-
-
         }
 
         private void writeToSerial(String message)
@@ -136,7 +144,7 @@ namespace HeadTrackerV2
             }
             else
             {
-                printToTextbox("ERROR: Not connected to a device!");
+                outputString("ERROR: Not connected to a device!");
             }
         }
 
@@ -148,7 +156,7 @@ namespace HeadTrackerV2
             }
             else
             {
-                printToTextbox("ERROR: Not connected to a device!");
+                outputString("ERROR: Not connected to a device!");
             }
         }
 
