@@ -74,10 +74,5 @@ namespace HeadTrackerV2.Usercontrolls
             serialOutput.SelectionStart = serialOutput.Text.Length;
             serialOutput.ScrollToCaret();
         }
-
-        private void getGyroDataBtn_Click(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.getGyroData();
-        }
     }
 }
