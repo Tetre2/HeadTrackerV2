@@ -40,8 +40,6 @@ namespace HeadTrackerV2
             pitchTextBox.PlaceholderText = text;
             yawTextBox.PlaceholderText = text;
             rollTextBox.PlaceholderText = text;
-
-            Console.WriteLine("h {0}", text);
         }
 
         protected virtual bool tryParseFloat(string possibleFloat, out float result)

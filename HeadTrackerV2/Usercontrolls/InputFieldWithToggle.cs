@@ -37,8 +37,6 @@ namespace HeadTrackerV2
         {
             commonTextBox.PlaceholderText = text;
             base.SetPlaceholderText(text);
-
-            Console.WriteLine("j {0}", text);
         }
 
         private void validateInput(object sender, EventArgs e)
