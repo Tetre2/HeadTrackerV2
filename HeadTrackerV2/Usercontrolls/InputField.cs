@@ -72,7 +72,7 @@ namespace HeadTrackerV2
             isValidFloat = tryParseFloat(rollTextBox.Text, out float roll) && isValidFloat;
             if (isValidFloat){
                 OnInputFieldIsValid(e);
-                Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValidFloat, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
+                //Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValidFloat, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
             }
             else
             {
