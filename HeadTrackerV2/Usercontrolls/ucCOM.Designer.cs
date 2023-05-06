@@ -47,6 +47,7 @@
             this.disconnectSerial.Text = "DISCONNECT";
             this.disconnectSerial.UseVisualStyleBackColor = true;
             this.disconnectSerial.Visible = false;
+            this.disconnectSerial.Click += new System.EventHandler(this.disconnectSerial_Click);
             // 
             // scanPorts
             // 
@@ -58,6 +59,7 @@
             this.scanPorts.TabIndex = 2;
             this.scanPorts.Text = "SCAN";
             this.scanPorts.UseVisualStyleBackColor = true;
+            this.scanPorts.Click += new System.EventHandler(this.scanPorts_Click);
             // 
             // ports
             // 
@@ -68,6 +70,7 @@
             this.ports.Size = new System.Drawing.Size(150, 25);
             this.ports.TabIndex = 1;
             this.ports.Text = "Choose COM Port";
+            this.ports.SelectedValueChanged += new System.EventHandler(this.ports_SelectedValueChanged);
             // 
             // connectToSerial
             // 
@@ -78,6 +81,7 @@
             this.connectToSerial.TabIndex = 32;
             this.connectToSerial.Text = "CONNECT";
             this.connectToSerial.UseVisualStyleBackColor = true;
+            this.connectToSerial.Click += new System.EventHandler(this.connectToSerial_Click);
             // 
             // serialOutput
             // 
@@ -87,6 +91,7 @@
             this.serialOutput.Size = new System.Drawing.Size(390, 218);
             this.serialOutput.TabIndex = 31;
             this.serialOutput.Text = "";
+            this.serialOutput.TextChanged += new System.EventHandler(this.serialOutput_TextChanged);
             // 
             // getGyroDataBtn
             // 
@@ -98,6 +103,7 @@
             this.getGyroDataBtn.TabIndex = 4;
             this.getGyroDataBtn.Text = "GET GYRO DATA";
             this.getGyroDataBtn.UseVisualStyleBackColor = true;
+            this.getGyroDataBtn.Click += new System.EventHandler(this.getGyroDataBtn_Click);
             // 
             // ucCOM
             // 
@@ -111,7 +117,6 @@
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "ucCOM";
             this.Size = new System.Drawing.Size(400, 500);
-            this.Load += new System.EventHandler(this.ucCOM_Load);
             this.ResumeLayout(false);
 
         }

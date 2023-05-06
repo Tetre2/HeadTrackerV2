@@ -20,19 +20,55 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void Instance_SampleEvent(object sender, SerialCommunicator.SerialCommunicatorOutputEventArgs e)
         {
-            Console.WriteLine(e.Text);
             printToSerialOutput(e.Text);
-        }
-
-        private void ucCOM_Load(object sender, EventArgs e)
-        {
-
         }
 
         public void printToSerialOutput(String s)
         {
-            Console.WriteLine(s);
+            Console.WriteLine("ucCOM: {0}",s);
             serialOutput.Text += s + '\n';
+        }
+
+        private void scanPorts_Click(object sender, EventArgs e)
+        {
+            string[] comPorts = SerialCommunicator.Instance.getOpenPorts();
+            ports.Items.Clear();
+            foreach (string comPort in comPorts)
+            {
+                ports.Items.Add(comPort);
+            }
+        }
+
+        private void connectToSerial_Click(object sender, EventArgs e)
+        {
+            if (SerialCommunicator.Instance.open())
+            {
+                connectToSerial.Visible = false;
+                disconnectSerial.Visible = true;
+            }
+        }
+
+        private void disconnectSerial_Click(object sender, EventArgs e)
+        {
+            SerialCommunicator.Instance.close();
+            connectToSerial.Visible = true;
+            disconnectSerial.Visible = false;
+        }
+
+        private void ports_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SerialCommunicator.Instance.setCOMPort(ports.Text);
+        }
+
+        private void serialOutput_TextChanged(object sender, EventArgs e)
+        {
+            serialOutput.SelectionStart = serialOutput.Text.Length;
+            serialOutput.ScrollToCaret();
+        }
+
+        private void getGyroDataBtn_Click(object sender, EventArgs e)
+        {
+            SerialCommunicator.Instance.getGyroData();
         }
     }
 }

@@ -39,7 +39,7 @@
             // 
             this.commonTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.commonTextBox.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.commonTextBox.Location = new System.Drawing.Point(24, 7);
+            this.commonTextBox.Location = new System.Drawing.Point(24, 24);
             this.commonTextBox.MaxLength = 6;
             this.commonTextBox.Name = "commonTextBox";
             this.commonTextBox.PlaceholderText = "TMP";
@@ -47,6 +47,7 @@
             this.commonTextBox.TabIndex = 5;
             this.commonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.commonTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.commonTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // rollTextBox
             // 
@@ -59,6 +60,8 @@
             this.rollTextBox.Size = new System.Drawing.Size(105, 35);
             this.rollTextBox.TabIndex = 4;
             this.rollTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rollTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.rollTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // yawTextBox
             // 
@@ -71,6 +74,8 @@
             this.yawTextBox.Size = new System.Drawing.Size(105, 35);
             this.yawTextBox.TabIndex = 3;
             this.yawTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yawTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.yawTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // pitchTextBox
             // 
@@ -83,6 +88,8 @@
             this.pitchTextBox.Size = new System.Drawing.Size(105, 35);
             this.pitchTextBox.TabIndex = 2;
             this.pitchTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pitchTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.pitchTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // toggleCommon
             // 
@@ -99,17 +106,17 @@
             // InputFieldWithToggle
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Controls.Add(this.commonTextBox);
             this.Controls.Add(this.rollTextBox);
             this.Controls.Add(this.yawTextBox);
             this.Controls.Add(this.pitchTextBox);
             this.Controls.Add(this.toggleCommon);
-            this.Controls.Add(this.commonTextBox);
             this.Name = "InputFieldWithToggle";
-            this.Controls.SetChildIndex(this.commonTextBox, 0);
             this.Controls.SetChildIndex(this.toggleCommon, 0);
             this.Controls.SetChildIndex(this.pitchTextBox, 0);
             this.Controls.SetChildIndex(this.yawTextBox, 0);
             this.Controls.SetChildIndex(this.rollTextBox, 0);
+            this.Controls.SetChildIndex(this.commonTextBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

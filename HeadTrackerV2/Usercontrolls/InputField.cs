@@ -15,11 +15,11 @@ namespace HeadTrackerV2
     public partial class InputField : UserControl
     {
 
-        public event EventHandler InputFieldTextChanged;
+        public event EventHandler InputFieldIsValid;
 
-        protected virtual void OnInputFieldTextChaned(EventArgs e)
+        protected virtual void OnInputFieldIsValid(EventArgs e)
         {
-            InputFieldTextChanged?.Invoke(this, e);
+            InputFieldIsValid?.Invoke(this, e);
         }
 
 
@@ -61,6 +61,22 @@ namespace HeadTrackerV2
             {
                 TextBox textBox = sender as TextBox;
                 if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
+            }
+        }
+
+
+        private void validating(object sender, CancelEventArgs e)
+        {
+            bool isValidFloat = tryParseFloat(pitchTextBox.Text, out float pitch);
+            isValidFloat = tryParseFloat(yawTextBox.Text, out float yaw) && isValidFloat;
+            isValidFloat = tryParseFloat(rollTextBox.Text, out float roll) && isValidFloat;
+            if (isValidFloat){
+                OnInputFieldIsValid(e);
+                Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValidFloat, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
+            }
+            else
+            {
+                SerialCommunicator.Instance.outputString("ERROR: value is not a float!");
             }
         }
     }

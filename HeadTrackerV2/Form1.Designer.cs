@@ -77,8 +77,8 @@
             this.mainSC = new System.Windows.Forms.SplitContainer();
             this.uccom1 = new HeadTrackerV2.Usercontrolls.ucCOM();
             this.rightSC = new System.Windows.Forms.SplitContainer();
-            this.ucbtns1 = new HeadTrackerV2.Usercontrolls.ucBTNS();
             this.ucpyr1 = new HeadTrackerV2.Usercontrolls.ucPYR();
+            this.ucbtns1 = new HeadTrackerV2.Usercontrolls.ucBTNS();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSC)).BeginInit();
             this.mainSC.Panel1.SuspendLayout();
@@ -673,6 +673,13 @@
             this.rightSC.SplitterWidth = 1;
             this.rightSC.TabIndex = 0;
             // 
+            // ucpyr1
+            // 
+            this.ucpyr1.Location = new System.Drawing.Point(3, 2);
+            this.ucpyr1.Name = "ucpyr1";
+            this.ucpyr1.Size = new System.Drawing.Size(580, 290);
+            this.ucpyr1.TabIndex = 0;
+            // 
             // ucbtns1
             // 
             this.ucbtns1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -680,13 +687,6 @@
             this.ucbtns1.Name = "ucbtns1";
             this.ucbtns1.Size = new System.Drawing.Size(479, 151);
             this.ucbtns1.TabIndex = 71;
-            // 
-            // ucpyr1
-            // 
-            this.ucpyr1.Location = new System.Drawing.Point(3, 2);
-            this.ucpyr1.Name = "ucpyr1";
-            this.ucpyr1.Size = new System.Drawing.Size(580, 290);
-            this.ucpyr1.TabIndex = 0;
             // 
             // Form1
             // 

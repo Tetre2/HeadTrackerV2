@@ -45,6 +45,7 @@
             this.rollTextBox.TabIndex = 3;
             this.rollTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.rollTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.rollTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // yawTextBox
             // 
@@ -58,6 +59,7 @@
             this.yawTextBox.TabIndex = 2;
             this.yawTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.yawTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.yawTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // pitchTextBox
             // 
@@ -71,6 +73,7 @@
             this.pitchTextBox.TabIndex = 1;
             this.pitchTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.pitchTextBox.Leave += new System.EventHandler(this.validateInput);
+            this.pitchTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
             // 
             // InputField
             // 

@@ -56,7 +56,7 @@ namespace HeadTrackerV2
             //<9 bool> //Use Exponential
 
         }
-        private void outputString(string text)
+        public void outputString(string text)
         {
             RaiseSerialCommunicatorOutputEvent(text);
         }
