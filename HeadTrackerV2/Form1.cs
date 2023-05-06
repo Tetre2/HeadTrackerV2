@@ -45,53 +45,53 @@ namespace HeadTrackerV2
 
         private void bindData()
         {
-            DataSourceUpdateMode ds = DataSourceUpdateMode.OnValidation;
-            //Save the values for checkboxes
-            individualSens.DataBindings.Add(nameof(individualSens.Checked), Properties.Settings.Default, "individualSens", true, ds);
-            individualExp.DataBindings.Add(nameof(individualExp.Checked), Properties.Settings.Default, "individualExp", true, ds);
+            //DataSourceUpdateMode ds = DataSourceUpdateMode.OnValidation;
+            ////Save the values for checkboxes
+            //individualSens.DataBindings.Add(nameof(individualSens.Checked), Properties.Settings.Default, "individualSens", true, ds);
+            //individualExp.DataBindings.Add(nameof(individualExp.Checked), Properties.Settings.Default, "individualExp", true, ds);
 
-            //Save the values for sensitivity
-            pitchSens.DataBindings.Add(nameof(pitchSens.Text), Properties.Settings.Default, "pitchSens", true, ds);
-            yawSens.DataBindings.Add(nameof(yawSens.Text), Properties.Settings.Default, "yawSens", true, ds);
-            rollSens.DataBindings.Add(nameof(rollSens.Text), Properties.Settings.Default, "rollSens", true, ds);
-            commonSens.DataBindings.Add(nameof(commonSens.Text), Properties.Settings.Default, "commonSens", true, ds);
+            ////Save the values for sensitivity
+            //pitchSens.DataBindings.Add(nameof(pitchSens.Text), Properties.Settings.Default, "pitchSens", true, ds);
+            //yawSens.DataBindings.Add(nameof(yawSens.Text), Properties.Settings.Default, "yawSens", true, ds);
+            //rollSens.DataBindings.Add(nameof(rollSens.Text), Properties.Settings.Default, "rollSens", true, ds);
+            //commonSens.DataBindings.Add(nameof(commonSens.Text), Properties.Settings.Default, "commonSens", true, ds);
 
-            //Bind commonSens to individualSens checkbox
-            Binding bindSens = new Binding(nameof(commonSens.Visible), individualSens, nameof(individualSens.Checked));
-            bindSens.Format += SwitchBool;
-            bindSens.Parse += SwitchBool;
+            ////Bind commonSens to individualSens checkbox
+            //Binding bindSens = new Binding(nameof(commonSens.Visible), individualSens, nameof(individualSens.Checked));
+            //bindSens.Format += SwitchBool;
+            //bindSens.Parse += SwitchBool;
 
-            commonSens.DataBindings.Add(bindSens);
+            //commonSens.DataBindings.Add(bindSens);
 
-            //Save the values for exponential
-            pitchExp.DataBindings.Add(nameof(pitchExp.Text), Properties.Settings.Default, "pitchExp", true, ds);
-            yawExp.DataBindings.Add(nameof(yawExp.Text), Properties.Settings.Default, "yawExp", true, ds);
-            rollExp.DataBindings.Add(nameof(rollExp.Text), Properties.Settings.Default, "rollExp", true, ds);
-            commonExp.DataBindings.Add(nameof(commonExp.Text), Properties.Settings.Default, "commonExp", true, ds);
+            ////Save the values for exponential
+            //pitchExp.DataBindings.Add(nameof(pitchExp.Text), Properties.Settings.Default, "pitchExp", true, ds);
+            //yawExp.DataBindings.Add(nameof(yawExp.Text), Properties.Settings.Default, "yawExp", true, ds);
+            //rollExp.DataBindings.Add(nameof(rollExp.Text), Properties.Settings.Default, "rollExp", true, ds);
+            //commonExp.DataBindings.Add(nameof(commonExp.Text), Properties.Settings.Default, "commonExp", true, ds);
 
-            //Bind commonExp to individualExp checkbox
-            Binding bindExp = new Binding(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked));
-            bindExp.Format += SwitchBool;
-            bindExp.Parse += SwitchBool;
+            ////Bind commonExp to individualExp checkbox
+            //Binding bindExp = new Binding(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked));
+            //bindExp.Format += SwitchBool;
+            //bindExp.Parse += SwitchBool;
 
-            commonExp.DataBindings.Add(bindExp);
-            //commonExp.DataBindings.Add(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked), true, ds);
+            //commonExp.DataBindings.Add(bindExp);
+            ////commonExp.DataBindings.Add(nameof(commonExp.Visible), individualExp, nameof(individualExp.Checked), true, ds);
 
-            //Save the values for offsets
-            pitchOffset.DataBindings.Add(nameof(pitchOffset.Text), Properties.Settings.Default, "pitchOffset", true, ds);
-            yawOffset.DataBindings.Add(nameof(yawOffset.Text), Properties.Settings.Default, "yawOffset", true, ds);
-            rollOffset.DataBindings.Add(nameof(rollOffset.Text), Properties.Settings.Default, "rollOffset", true, ds);
+            ////Save the values for offsets
+            //pitchOffset.DataBindings.Add(nameof(pitchOffset.Text), Properties.Settings.Default, "pitchOffset", true, ds);
+            //yawOffset.DataBindings.Add(nameof(yawOffset.Text), Properties.Settings.Default, "yawOffset", true, ds);
+            //rollOffset.DataBindings.Add(nameof(rollOffset.Text), Properties.Settings.Default, "rollOffset", true, ds);
 
-            //Save the values for angel litits
-            pitchLimit.DataBindings.Add(nameof(pitchLimit.Text), Properties.Settings.Default, "pitchLimit", true, ds);
-            yawLimit.DataBindings.Add(nameof(yawLimit.Text), Properties.Settings.Default, "yawLimit", true, ds);
-            rollLimit.DataBindings.Add(nameof(rollLimit.Text), Properties.Settings.Default, "rollLimit", true, ds);
+            ////Save the values for angel litits
+            //pitchLimit.DataBindings.Add(nameof(pitchLimit.Text), Properties.Settings.Default, "pitchLimit", true, ds);
+            //yawLimit.DataBindings.Add(nameof(yawLimit.Text), Properties.Settings.Default, "yawLimit", true, ds);
+            //rollLimit.DataBindings.Add(nameof(rollLimit.Text), Properties.Settings.Default, "rollLimit", true, ds);
 
-            //Save the values for the Smoothness checkbox
-            smoothness.DataBindings.Add(nameof(smoothness.Checked), Properties.Settings.Default, "smoothness", true, ds);
+            ////Save the values for the Smoothness checkbox
+            //smoothness.DataBindings.Add(nameof(smoothness.Checked), Properties.Settings.Default, "smoothness", true, ds);
 
-            //Save the values for the useExponential checkbox
-            useExp.DataBindings.Add(nameof(useExp.Checked), Properties.Settings.Default, "useExp", true, ds);
+            ////Save the values for the useExponential checkbox
+            //useExp.DataBindings.Add(nameof(useExp.Checked), Properties.Settings.Default, "useExp", true, ds);
         }
 
         private void SwitchBool(object sender, ConvertEventArgs e)
@@ -109,31 +109,31 @@ namespace HeadTrackerV2
         private void Form1_Click(object sender, EventArgs e)
         {
             //remove focus
-            ActiveControl = label1;
+            //ActiveControl = label1;
         }
 
         // ----------------- USER INPUT ----------------- 
 
-        private bool tryParseFloat(string possibleFloat, out float result)
-        {
-            var fmt = new NumberFormatInfo();
-            fmt.NegativeSign = "-";
+        //private bool tryParseFloat(string possibleFloat, out float result)
+        //{
+        //    var fmt = new NumberFormatInfo();
+        //    fmt.NegativeSign = "-";
             
-            bool isValid = float.TryParse(possibleFloat, NumberStyles.Float, fmt, out float r);
-            result = r;
-            return isValid;
-        }
+        //    bool isValid = float.TryParse(possibleFloat, NumberStyles.Float, fmt, out float r);
+        //    result = r;
+        //    return isValid;
+        //}
 
 
-        private void validateInput(object sender, EventArgs e)
-        {
-            if (sender != null && sender is TextBox)
-            {
-                TextBox textBox = sender as TextBox;
-                if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
-            }
+        //private void validateInput(object sender, EventArgs e)
+        //{
+        //    if (sender != null && sender is TextBox)
+        //    {
+        //        TextBox textBox = sender as TextBox;
+        //        if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
+        //    }
             
-        }
+        //}
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
@@ -141,7 +141,7 @@ namespace HeadTrackerV2
             if (e.KeyCode == Keys.Enter)
             {
                 //remove focus
-                ActiveControl = label1;
+                //ActiveControl = label1;
 
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -151,165 +151,160 @@ namespace HeadTrackerV2
 
 
         // ----------------- SERIAL ----------------- 
-        public void printToSerialOutput(String s)
-        {
+        //public void printToSerialOutput(String s)
+        //{
 
-            Console.WriteLine(s);
-            if (InvokeRequired)
-            { 
-                this.Invoke(new MethodInvoker(delegate {
-                    serialOutput.Text += s + '\n';
-                }));
-            }
-            else
-            {
-                serialOutput.Text += s + '\n';
-            }
-        }
+        //    Console.WriteLine(s);
+        //    if (InvokeRequired)
+        //    { 
+        //        this.Invoke(new MethodInvoker(delegate {
+        //            serialOutput.Text += s + '\n';
+        //        }));
+        //    }
+        //    else
+        //    {
+        //        serialOutput.Text += s + '\n';
+        //    }
+        //}
 
-        private void scanPorts_Click(object sender, EventArgs e)
-        {
-            string[] comPorts = SerialCommunicator.Instance.getOpenPorts(); 
-            ports.Items.Clear();
-            foreach (string comPort in comPorts)
-            {
-                ports.Items.Add(comPort);
-            }
-        }
+        //private void scanPorts_Click(object sender, EventArgs e)
+        //{
+        //    string[] comPorts = SerialCommunicator.Instance.getOpenPorts(); 
+        //    ports.Items.Clear();
+        //    foreach (string comPort in comPorts)
+        //    {
+        //        ports.Items.Add(comPort);
+        //    }
+        //}
 
-        private void connectToSerial_Click(object sender, EventArgs e)
-        {
-            if (SerialCommunicator.Instance.open())
-            {
-                connectToSerial.Visible = false;
-                disconnectSerial.Visible = true;
-            }
-        }
+        //private void connectToSerial_Click(object sender, EventArgs e)
+        //{
+        //    if (SerialCommunicator.Instance.open())
+        //    {
+        //        connectToSerial.Visible = false;
+        //        disconnectSerial.Visible = true;
+        //    }
+        //}
 
-        private void disconnectSerial_Click(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.close();
-            connectToSerial.Visible = true;
-            disconnectSerial.Visible = false;
-        }
+        //private void disconnectSerial_Click(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.close();
+        //    connectToSerial.Visible = true;
+        //    disconnectSerial.Visible = false;
+        //}
 
-        private void ports_SelectedValueChanged(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.setCOMPort(ports.Text);
-        }
+        //private void ports_SelectedValueChanged(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.setCOMPort(ports.Text);
+        //}
 
-        private void serialOutput_TextChanged(object sender, EventArgs e)
-        {
-            serialOutput.SelectionStart = serialOutput.Text.Length;
-            serialOutput.ScrollToCaret();
-        }
+        //private void serialOutput_TextChanged(object sender, EventArgs e)
+        //{
+        //    serialOutput.SelectionStart = serialOutput.Text.Length;
+        //    serialOutput.ScrollToCaret();
+        //}
 
 
         // ----------------- GYRO ----------------- 
-        private void recenterGyro_Click(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.resetView();
-        }
+        //private void recenterGyro_Click(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.resetView();
+        //}
 
-        private void getGyroDataBtn_Click(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.getGyroData();
-        }
+        //private void getGyroDataBtn_Click(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.getGyroData();
+        //}
 
 
-        private void updateSens_Click(object sender, EventArgs e)
-        {
+        //private void updateSens_Click(object sender, EventArgs e)
+        //{
             
             
 
-            if (individualSens.Checked)
-            {
-                Console.WriteLine("aaa");
-                bool isValidFloat = tryParseFloat(pitchSens.Text, out float pitch);
-                isValidFloat = tryParseFloat(yawSens.Text, out float yaw) && isValidFloat;
-                isValidFloat = tryParseFloat(rollSens.Text, out float roll) && isValidFloat;
-                if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
-                SerialCommunicator.Instance.setSensitivity(pitch, yaw, roll);
-            }
-            else
-            {
-                Console.WriteLine("bbb");
-                bool isValidFloat = tryParseFloat(commonSens.Text, out float sens);
-                if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
-                SerialCommunicator.Instance.setSensitivity(sens, sens, sens);
-            }
-        }
+        //    if (individualSens.Checked)
+        //    {
+        //        Console.WriteLine("aaa");
+        //        bool isValidFloat = tryParseFloat(pitchSens.Text, out float pitch);
+        //        isValidFloat = tryParseFloat(yawSens.Text, out float yaw) && isValidFloat;
+        //        isValidFloat = tryParseFloat(rollSens.Text, out float roll) && isValidFloat;
+        //        if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
+        //        SerialCommunicator.Instance.setSensitivity(pitch, yaw, roll);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("bbb");
+        //        bool isValidFloat = tryParseFloat(commonSens.Text, out float sens);
+        //        if (!isValidFloat) { printToSerialOutput("ERROR: Sensitivity value is not a float!"); return; }
+        //        SerialCommunicator.Instance.setSensitivity(sens, sens, sens);
+        //    }
+        //}
 
-        private void updateExp_Click(object sender, EventArgs e)
-        {
+        //private void updateExp_Click(object sender, EventArgs e)
+        //{
             
 
-            if (individualExp.Checked)
-            {
-                Console.WriteLine("ccc");
-                bool isValidFloat = tryParseFloat(pitchExp.Text, out float pitch);
-                isValidFloat = tryParseFloat(yawExp.Text, out float yaw) && isValidFloat;
-                isValidFloat = tryParseFloat(rollExp.Text, out float roll) && isValidFloat;
-                if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
-                SerialCommunicator.Instance.setExponentialView(pitch, yaw, roll);
-            }
-            else
-            {
-                Console.WriteLine("ddd");
-                bool isValidFloat = tryParseFloat(commonExp.Text, out float exp);
-                if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
-                SerialCommunicator.Instance.setSensitivity(exp, exp, exp);
-            }
-        }
+        //    if (individualExp.Checked)
+        //    {
+        //        Console.WriteLine("ccc");
+        //        bool isValidFloat = tryParseFloat(pitchExp.Text, out float pitch);
+        //        isValidFloat = tryParseFloat(yawExp.Text, out float yaw) && isValidFloat;
+        //        isValidFloat = tryParseFloat(rollExp.Text, out float roll) && isValidFloat;
+        //        if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
+        //        SerialCommunicator.Instance.setExponentialView(pitch, yaw, roll);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("ddd");
+        //        bool isValidFloat = tryParseFloat(commonExp.Text, out float exp);
+        //        if (!isValidFloat) { printToSerialOutput("ERROR: Exponential value is not a float!"); return; }
+        //        SerialCommunicator.Instance.setSensitivity(exp, exp, exp);
+        //    }
+        //}
 
-        private void updateOffset_Click(object sender, EventArgs e)
-        {
+        //private void updateOffset_Click(object sender, EventArgs e)
+        //{
             
 
-            Console.WriteLine("eee"); 
-            bool isValidFloat = tryParseFloat(pitchOffset.Text, out float pitch);
-            isValidFloat = tryParseFloat(yawOffset.Text, out float yaw) && isValidFloat;
-            isValidFloat = tryParseFloat(rollOffset.Text, out float roll) && isValidFloat;
-            if (!isValidFloat) { printToSerialOutput("ERROR: Offset value is not a float!"); return; }
-            SerialCommunicator.Instance.setOffset(pitch, yaw, roll);
-        }
+        //    Console.WriteLine("eee"); 
+        //    bool isValidFloat = tryParseFloat(pitchOffset.Text, out float pitch);
+        //    isValidFloat = tryParseFloat(yawOffset.Text, out float yaw) && isValidFloat;
+        //    isValidFloat = tryParseFloat(rollOffset.Text, out float roll) && isValidFloat;
+        //    if (!isValidFloat) { printToSerialOutput("ERROR: Offset value is not a float!"); return; }
+        //    SerialCommunicator.Instance.setOffset(pitch, yaw, roll);
+        //}
 
-        private void updateLimits_Click(object sender, EventArgs e)
-        {
+        //private void updateLimits_Click(object sender, EventArgs e)
+        //{
             
 
-            Console.WriteLine("fff");
-            bool isValidFloat = tryParseFloat(pitchLimit.Text, out float pitch);
-            isValidFloat = tryParseFloat(yawLimit.Text, out float yaw) && isValidFloat;
-            isValidFloat = tryParseFloat(rollLimit.Text, out float roll) && isValidFloat;
-            if (!isValidFloat) { printToSerialOutput("ERROR: Limit value is not a float!"); return; }
-            SerialCommunicator.Instance.setLimit(pitch, yaw, roll);
-        }
+        //    Console.WriteLine("fff");
+        //    bool isValidFloat = tryParseFloat(pitchLimit.Text, out float pitch);
+        //    isValidFloat = tryParseFloat(yawLimit.Text, out float yaw) && isValidFloat;
+        //    isValidFloat = tryParseFloat(rollLimit.Text, out float roll) && isValidFloat;
+        //    if (!isValidFloat) { printToSerialOutput("ERROR: Limit value is not a float!"); return; }
+        //    SerialCommunicator.Instance.setLimit(pitch, yaw, roll);
+        //}
 
-        private void useExp_CheckedChanged(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
-        }
+        //private void useExp_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
+        //}
 
-        private void smoothness_CheckedChanged(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
-        }
+        //private void smoothness_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
+        //}
 
-        private void enableGyro_CheckedChanged(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.setEnabled(enableGyro.Checked);
-        }
+        //private void enableGyro_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.setEnabled(enableGyro.Checked);
+        //}
 
-        private void recalibrateGyro_Click(object sender, EventArgs e)
-        {
-            SerialCommunicator.Instance.calibrateGyro();
-        }
-
-        private void limitInputField_InputFieldTextChanged(object sender, EventArgs e)
-        {
-
-        }
+        //private void recalibrateGyro_Click(object sender, EventArgs e)
+        //{
+        //    SerialCommunicator.Instance.calibrateGyro();
+        //}
     }
     
 }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 using System.Windows.Forms;
+using gma.System.Windows;
+using System.Globalization;
 
 
 namespace HeadTrackerV2
@@ -128,7 +130,6 @@ namespace HeadTrackerV2
 
         private void dataRecived(object sender, SerialDataReceivedEventArgs e)
         {
-
             String data = mySerialPort.ReadExisting();
             if (data != null)
             {

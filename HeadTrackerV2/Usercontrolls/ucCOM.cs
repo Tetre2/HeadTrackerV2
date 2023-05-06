@@ -26,7 +26,16 @@ namespace HeadTrackerV2.Usercontrolls
         public void printToSerialOutput(String s)
         {
             Console.WriteLine("ucCOM: {0}",s);
-            serialOutput.Text += s + '\n';
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate {
+                    serialOutput.Text += s + '\n';
+                }));
+            }
+            else
+            {
+                serialOutput.Text += s + '\n';
+            }
         }
 
         private void scanPorts_Click(object sender, EventArgs e)

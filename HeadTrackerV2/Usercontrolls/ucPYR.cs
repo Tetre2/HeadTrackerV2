@@ -34,17 +34,20 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfExp_InputFieldIsValid(object? sender, EventArgs e)
         {
+            //TODO chagen from sens
             SerialCommunicator.Instance.setSensitivity(ifExp.InputFieldPitch.Value, ifExp.InputFieldYaw.Value, ifExp.InputFieldRoll.Value);
         }
 
         private void IfOff_InputFieldIsValid(object? sender, EventArgs e)
         {
             //Console.WriteLine("ucPYR: {0}", "event recived");
+            //TODO chagen from sens
             SerialCommunicator.Instance.setSensitivity(ifOff.InputFieldPitch.Value, ifOff.InputFieldYaw.Value, ifOff.InputFieldRoll.Value);
         }
 
         private void IfAng_InputFieldIsValid(object? sender, EventArgs e)
         {
+            //TODO chagen from sens
             SerialCommunicator.Instance.setSensitivity(ifAng.InputFieldPitch.Value, ifAng.InputFieldYaw.Value, ifAng.InputFieldRoll.Value);
         }
 
