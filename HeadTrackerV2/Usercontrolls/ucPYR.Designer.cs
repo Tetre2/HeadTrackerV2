@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.updateLimits = new System.Windows.Forms.Button();
-            this.inputField2 = new HeadTrackerV2.InputField();
-            this.inputField1 = new HeadTrackerV2.InputField();
-            this.inputFieldWithToggle2 = new HeadTrackerV2.InputFieldWithToggle();
-            this.inputFieldWithToggle1 = new HeadTrackerV2.InputFieldWithToggle();
+            this.ifAng = new HeadTrackerV2.InputField();
+            this.ifOff = new HeadTrackerV2.InputField();
+            this.ifExp = new HeadTrackerV2.InputFieldWithToggle();
+            this.ifSens = new HeadTrackerV2.InputFieldWithToggle();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pitch = new System.Windows.Forms.CheckBox();
@@ -54,35 +54,37 @@
             this.updateLimits.Text = "UPDATE";
             this.updateLimits.UseVisualStyleBackColor = true;
             // 
-            // inputField2
+            // ifAng
             // 
-            this.inputField2.Location = new System.Drawing.Point(197, 195);
-            this.inputField2.Margin = new System.Windows.Forms.Padding(0);
-            this.inputField2.Name = "inputField2";
-            this.inputField2.Size = new System.Drawing.Size(385, 45);
-            this.inputField2.TabIndex = 7;
+            this.ifAng.Location = new System.Drawing.Point(197, 195);
+            this.ifAng.Margin = new System.Windows.Forms.Padding(0);
+            this.ifAng.Name = "ifAng";
+            this.ifAng.Size = new System.Drawing.Size(385, 45);
+            this.ifAng.TabIndex = 7;
             // 
-            // inputField1
+            // ifOff
             // 
-            this.inputField1.Location = new System.Drawing.Point(197, 140);
-            this.inputField1.Margin = new System.Windows.Forms.Padding(0);
-            this.inputField1.Name = "inputField1";
-            this.inputField1.Size = new System.Drawing.Size(385, 45);
-            this.inputField1.TabIndex = 6;
+            this.ifOff.Location = new System.Drawing.Point(197, 140);
+            this.ifOff.Margin = new System.Windows.Forms.Padding(0);
+            this.ifOff.Name = "ifOff";
+            this.ifOff.Size = new System.Drawing.Size(385, 45);
+            this.ifOff.TabIndex = 6;
             // 
-            // inputFieldWithToggle2
+            // ifExp
             // 
-            this.inputFieldWithToggle2.Location = new System.Drawing.Point(197, 85);
-            this.inputFieldWithToggle2.Name = "inputFieldWithToggle2";
-            this.inputFieldWithToggle2.Size = new System.Drawing.Size(385, 45);
-            this.inputFieldWithToggle2.TabIndex = 5;
+            this.ifExp.Location = new System.Drawing.Point(197, 85);
+            this.ifExp.Margin = new System.Windows.Forms.Padding(0);
+            this.ifExp.Name = "ifExp";
+            this.ifExp.Size = new System.Drawing.Size(385, 45);
+            this.ifExp.TabIndex = 5;
             // 
-            // inputFieldWithToggle1
+            // ifSens
             // 
-            this.inputFieldWithToggle1.Location = new System.Drawing.Point(197, 30);
-            this.inputFieldWithToggle1.Name = "inputFieldWithToggle1";
-            this.inputFieldWithToggle1.Size = new System.Drawing.Size(385, 45);
-            this.inputFieldWithToggle1.TabIndex = 4;
+            this.ifSens.Location = new System.Drawing.Point(197, 30);
+            this.ifSens.Margin = new System.Windows.Forms.Padding(0);
+            this.ifSens.Name = "ifSens";
+            this.ifSens.Size = new System.Drawing.Size(385, 45);
+            this.ifSens.TabIndex = 4;
             // 
             // checkBox2
             // 
@@ -171,10 +173,10 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.updateLimits);
-            this.Controls.Add(this.inputField2);
-            this.Controls.Add(this.inputField1);
-            this.Controls.Add(this.inputFieldWithToggle2);
-            this.Controls.Add(this.inputFieldWithToggle1);
+            this.Controls.Add(this.ifAng);
+            this.Controls.Add(this.ifOff);
+            this.Controls.Add(this.ifExp);
+            this.Controls.Add(this.ifSens);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.pitch);
@@ -194,8 +196,8 @@
         private Button updateLimits;
         private InputField inputField2;
         private InputField inputField1;
-        private InputFieldWithToggle inputFieldWithToggle2;
-        private InputFieldWithToggle inputFieldWithToggle1;
+        private InputFieldWithToggle ifExp;
+        private InputFieldWithToggle ifSens;
         private CheckBox checkBox2;
         private CheckBox checkBox1;
         private CheckBox pitch;
@@ -203,5 +205,7 @@
         private Label label3;
         private Label label2;
         private Label label5;
+        private InputField ifAng;
+        private InputField ifOff;
     }
 }

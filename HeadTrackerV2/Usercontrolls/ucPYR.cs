@@ -15,6 +15,10 @@ namespace HeadTrackerV2.Usercontrolls
         public ucPYR()
         {
             InitializeComponent();
+            ifSens.SetPlaceholderText("Sens");
+            ifExp.SetPlaceholderText("Eep");
+            ifOff.SetPlaceholderText("Offset");
+            ifAng.SetPlaceholderText("Limit");
         }
     }
 }
