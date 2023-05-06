@@ -634,20 +634,19 @@
             // mainSC.Panel1
             // 
             this.mainSC.Panel1.Controls.Add(this.uccom1);
-            this.mainSC.Panel1.Padding = new System.Windows.Forms.Padding(15);
             // 
             // mainSC.Panel2
             // 
             this.mainSC.Panel2.Controls.Add(this.rightSC);
-            this.mainSC.Size = new System.Drawing.Size(1100, 500);
-            this.mainSC.SplitterDistance = 445;
+            this.mainSC.Size = new System.Drawing.Size(1000, 500);
+            this.mainSC.SplitterDistance = 404;
             this.mainSC.SplitterWidth = 1;
             this.mainSC.TabIndex = 70;
             // 
             // uccom1
             // 
             this.uccom1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.uccom1.Location = new System.Drawing.Point(18, 18);
+            this.uccom1.Location = new System.Drawing.Point(2, 3);
             this.uccom1.Name = "uccom1";
             this.uccom1.Size = new System.Drawing.Size(400, 500);
             this.uccom1.TabIndex = 71;
@@ -668,8 +667,8 @@
             // rightSC.Panel2
             // 
             this.rightSC.Panel2.Controls.Add(this.ucbtns1);
-            this.rightSC.Size = new System.Drawing.Size(654, 500);
-            this.rightSC.SplitterDistance = 330;
+            this.rightSC.Size = new System.Drawing.Size(595, 500);
+            this.rightSC.SplitterDistance = 280;
             this.rightSC.SplitterWidth = 1;
             this.rightSC.TabIndex = 0;
             // 
@@ -677,7 +676,7 @@
             // 
             this.ucpyr1.Location = new System.Drawing.Point(3, 2);
             this.ucpyr1.Name = "ucpyr1";
-            this.ucpyr1.Size = new System.Drawing.Size(580, 290);
+            this.ucpyr1.Size = new System.Drawing.Size(570, 270);
             this.ucpyr1.TabIndex = 0;
             // 
             // ucbtns1
@@ -685,7 +684,7 @@
             this.ucbtns1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ucbtns1.Location = new System.Drawing.Point(3, 3);
             this.ucbtns1.Name = "ucbtns1";
-            this.ucbtns1.Size = new System.Drawing.Size(479, 151);
+            this.ucbtns1.Size = new System.Drawing.Size(570, 210);
             this.ucbtns1.TabIndex = 71;
             // 
             // Form1

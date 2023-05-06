@@ -39,9 +39,9 @@
             // 
             this.zeroHotkey.Cursor = System.Windows.Forms.Cursors.Hand;
             this.zeroHotkey.FormattingEnabled = true;
-            this.zeroHotkey.Location = new System.Drawing.Point(199, 121);
+            this.zeroHotkey.Location = new System.Drawing.Point(296, 114);
             this.zeroHotkey.Name = "zeroHotkey";
-            this.zeroHotkey.Size = new System.Drawing.Size(165, 25);
+            this.zeroHotkey.Size = new System.Drawing.Size(270, 25);
             this.zeroHotkey.TabIndex = 72;
             // 
             // recalibrateGyro
@@ -50,7 +50,7 @@
             this.recalibrateGyro.Location = new System.Drawing.Point(4, 54);
             this.recalibrateGyro.Margin = new System.Windows.Forms.Padding(4);
             this.recalibrateGyro.Name = "recalibrateGyro";
-            this.recalibrateGyro.Size = new System.Drawing.Size(165, 42);
+            this.recalibrateGyro.Size = new System.Drawing.Size(270, 42);
             this.recalibrateGyro.TabIndex = 70;
             this.recalibrateGyro.Text = "RECALIBRATE";
             this.recalibrateGyro.UseVisualStyleBackColor = true;
@@ -61,7 +61,7 @@
             this.recenterGyro.Location = new System.Drawing.Point(4, 4);
             this.recenterGyro.Margin = new System.Windows.Forms.Padding(4);
             this.recenterGyro.Name = "recenterGyro";
-            this.recenterGyro.Size = new System.Drawing.Size(165, 42);
+            this.recenterGyro.Size = new System.Drawing.Size(270, 42);
             this.recenterGyro.TabIndex = 69;
             this.recenterGyro.Text = "RE-CENTER";
             this.recenterGyro.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             this.button1.Location = new System.Drawing.Point(4, 104);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(165, 42);
+            this.button1.Size = new System.Drawing.Size(270, 42);
             this.button1.TabIndex = 75;
             this.button1.Text = "TURN OFF";
             this.button1.UseVisualStyleBackColor = true;
@@ -80,10 +80,10 @@
             // getGyroDataBtn
             // 
             this.getGyroDataBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.getGyroDataBtn.Location = new System.Drawing.Point(199, 4);
+            this.getGyroDataBtn.Location = new System.Drawing.Point(296, 4);
             this.getGyroDataBtn.Margin = new System.Windows.Forms.Padding(4);
             this.getGyroDataBtn.Name = "getGyroDataBtn";
-            this.getGyroDataBtn.Size = new System.Drawing.Size(165, 42);
+            this.getGyroDataBtn.Size = new System.Drawing.Size(270, 42);
             this.getGyroDataBtn.TabIndex = 76;
             this.getGyroDataBtn.Text = "GET GYRO DATA";
             this.getGyroDataBtn.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             this.Controls.Add(this.recenterGyro);
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "ucBTNS";
-            this.Size = new System.Drawing.Size(371, 151);
+            this.Size = new System.Drawing.Size(570, 210);
             this.ResumeLayout(false);
 
         }

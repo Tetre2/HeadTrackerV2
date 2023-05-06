@@ -48,5 +48,14 @@ namespace HeadTrackerV2.Usercontrolls
             SerialCommunicator.Instance.setSensitivity(ifAng.InputFieldPitch.Value, ifAng.InputFieldYaw.Value, ifAng.InputFieldRoll.Value);
         }
 
+        private void useExp_CheckedChanged(object sender, EventArgs e)
+        {
+            SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
+        }
+
+        private void smoothness_CheckedChanged(object sender, EventArgs e)
+        {
+            SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
+        }
     }
 }
