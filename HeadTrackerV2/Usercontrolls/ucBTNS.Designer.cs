@@ -34,6 +34,7 @@
             this.turnOffGyro = new System.Windows.Forms.Button();
             this.getGyroDataBtn = new System.Windows.Forms.Button();
             this.turnOnGyro = new System.Windows.Forms.Button();
+            this.profiles = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // zeroHotkey
@@ -105,9 +106,22 @@
             this.turnOnGyro.UseVisualStyleBackColor = true;
             this.turnOnGyro.Click += new System.EventHandler(this.turnOnGyro_Click);
             // 
+            // profiles
+            // 
+            this.profiles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.profiles.Location = new System.Drawing.Point(296, 54);
+            this.profiles.Margin = new System.Windows.Forms.Padding(4);
+            this.profiles.Name = "profiles";
+            this.profiles.Size = new System.Drawing.Size(270, 42);
+            this.profiles.TabIndex = 7;
+            this.profiles.Text = "PROFILES";
+            this.profiles.UseVisualStyleBackColor = true;
+            this.profiles.Click += new System.EventHandler(this.profiles_Click);
+            // 
             // ucBTNS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Controls.Add(this.profiles);
             this.Controls.Add(this.turnOnGyro);
             this.Controls.Add(this.getGyroDataBtn);
             this.Controls.Add(this.turnOffGyro);
@@ -128,5 +142,6 @@
         private Button turnOffGyro;
         private Button getGyroDataBtn;
         private Button turnOnGyro;
+        private Button profiles;
     }
 }

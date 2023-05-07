@@ -67,5 +67,11 @@ namespace HeadTrackerV2.Usercontrolls
             turnOffGyro.Visible = false;
             turnOnGyro.Focus();
         }
+
+        private void profiles_Click(object sender, EventArgs e)
+        {
+            Form f = new ProfilesPopup();
+            f.ShowDialog();
+        }
     }
 }

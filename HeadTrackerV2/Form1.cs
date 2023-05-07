@@ -11,6 +11,7 @@ namespace HeadTrackerV2
         public Form1()
         {
             InitializeComponent();
+            ucpyr1.useAutoUpdate = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -57,6 +58,12 @@ namespace HeadTrackerV2
                 e.SuppressKeyPress = true;
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            //f.Show(this);
         }
     }
     
