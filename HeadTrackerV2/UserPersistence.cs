@@ -5,12 +5,14 @@ public class UserPersistence
 {
     private String appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HeadTracker");
     private String profileFile = "Profiles.json";
-    public static float PROFILE_VERSION = 0.01f;
+    public static float PROFILE_VERSION = 0.02f;
     private bool profilesChanged = false; //used to not have to write the profiles if nothing has changed since last load
     public List<Profile> Profiles { get; set; }
     public class Profile
     {
         public string name { get; set; }
+
+        public string id { get; set; }
 
         public float sensitivityPitch { get; set; }
         public float sensitivityYaw { get; set; }
@@ -43,6 +45,7 @@ public class UserPersistence
     private static Profile defaultprofile = new Profile
     {
         name = "default Profile",
+        id = Guid.NewGuid().ToString(),
         sensitivityPitch = 1,
         sensitivityYaw = 1,
         sensitivityRoll = 1,
