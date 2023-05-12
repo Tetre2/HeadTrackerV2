@@ -46,32 +46,32 @@ public class UserPersistence
     {
         name = "default Profile",
         id = Guid.NewGuid().ToString(),
-        sensitivityPitch = 1,
-        sensitivityYaw = 1,
-        sensitivityRoll = 1,
+        sensitivityPitch = 7000,
+        sensitivityYaw = 5000,
+        sensitivityRoll = 10,
         commonSensitivity = 1,
         useIndividualSensitivity = false,
 
-        exponentialPitch = 1,
-        exponentialYaw = 1,
-        exponentialRoll = 1,
+        exponentialPitch = 30,
+        exponentialYaw = 30,
+        exponentialRoll = 10,
         commonExponential = 1,
         useIndividualExponential = false,
 
-        offsetPitch = 1,
-        offsetYaw = 1,
-        offsetRoll = 1,
+        offsetPitch = -2.6f,
+        offsetYaw = 1.49f,
+        offsetRoll = -0.82f,
 
-        viewLimitPitch = 1,
-        viewLimitYaw = 1,
-        viewLimitRoll = 1,
+        viewLimitPitch = 80,
+        viewLimitYaw = 80,
+        viewLimitRoll = 80,
 
         enableGyro = true,
-        useExponential = false,
+        useExponential = true,
         useSmoothness = true,
 
-        hotkey = null,
-        COMPort = null
+        hotkey = Keys.F1,
+        COMPort = "COM5"
     };
 
     private class JsonObj
