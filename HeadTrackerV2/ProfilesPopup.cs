@@ -15,13 +15,11 @@ namespace HeadTrackerV2
         public ProfilesPopup()
         {
             InitializeComponent();
-            
         }
 
         private void ProfilesPopup_Load(object sender, EventArgs e)
         {
-            List<UserPersistence.Profile> profiles = UserPersistence.Instance.Profiles;
-            foreach (UserPersistence.Profile profile in profiles)
+            foreach (UserPersistence.Profile profile in UserPersistence.Instance.Profiles)
             {
                 profileList.Items.Add(profile);
             }
@@ -38,15 +36,47 @@ namespace HeadTrackerV2
                 }
             }else if (e.Button == MouseButtons.Left)
             {
-                ucpyr1.setProfile((UserPersistence.Profile)profileList.SelectedItem);
+                if (profileList.SelectedIndex != -1)
+                {
+                    ucpyr1.Profile = ((UserPersistence.Profile)profileList.SelectedItem);
+
+                }
             }
         }
 
         private void gfdfgToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(((UserPersistence.Profile) profileList.SelectedItem).id);
+            if (profileList.SelectedIndex != -1)
+            {
+                Console.WriteLine(((UserPersistence.Profile)profileList.SelectedItem).id);
+
+            }
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (profileList.SelectedIndex != -1)
+            {
+                UserPersistence.Instance.Profiles.Add(((UserPersistence.Profile)profileList.SelectedItem));
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            UserPersistence.Profile newProfile = UserPersistence.Instance.EmptyProfile;
+            ucpyr1.Profile = newProfile;
+            UserPersistence.Instance.Profiles.Add(newProfile);
+        }
+
+        private void ProfilesPopup_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(UserPersistence.Instance.Profiles.Count);
+        }
     }
 }

@@ -14,7 +14,30 @@ namespace HeadTrackerV2.Usercontrolls
     {
 
         public bool actOnEvents = false;
-        public UserPersistence.Profile Profile { get; set; }
+
+        private UserPersistence.Profile profile;
+
+        public UserPersistence.Profile Profile
+        {
+            get { return profile; }
+            set { 
+                profile = value;
+                if (profile != null)
+                {
+                    Console.WriteLine("ucPYR: updated Profile");
+                    ifSens.SetValues(profile.sensitivityPitch, profile.sensitivityYaw, profile.sensitivityRoll, profile.commonSensitivity, false);
+                    ifSens.SetToggleCommon(profile.useIndividualSensitivity, false);
+                    ifExp.SetValues(profile.exponentialPitch, profile.exponentialYaw, profile.exponentialRoll, profile.commonExponential, false);
+                    ifExp.SetToggleCommon(profile.useIndividualExponential, false);
+                    ifOff.SetValues(profile.offsetPitch, profile.offsetYaw, profile.offsetRoll, false);
+                    ifAng.SetValues(profile.viewLimitPitch, profile.viewLimitYaw, profile.viewLimitRoll, false);
+                    useExp.Checked = profile.useExponential;
+                    smoothness.Checked = profile.useSmoothness;
+                }
+            }
+        }
+
+
         public ucPYR()
         {
             InitializeComponent();
@@ -36,29 +59,20 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfSens_InputFieldToggled(object? sender, EventArgs e)
         {
-            
+            Profile.useIndividualSensitivity = ifSens.ToggleCommon.Value;
         }
 
         private void IfExp_InputFieldToggled(object? sender, EventArgs e)
         {
-            
-        }
-
-        public void setProfile(UserPersistence.Profile profile)
-        {
-            ifSens.SetValues(profile.sensitivityPitch, profile.sensitivityYaw, profile.sensitivityRoll, profile.commonSensitivity, false);
-            ifSens.ToggleCommon.Value = profile.useIndividualSensitivity;
-            ifExp.SetValues(profile.exponentialPitch, profile.exponentialYaw, profile.exponentialRoll, profile.commonExponential, false);
-            ifExp.ToggleCommon.Value = profile.useIndividualExponential;
-            ifOff.SetValues(profile.offsetPitch, profile.offsetYaw, profile.offsetRoll, false);
-            ifAng.SetValues(profile.viewLimitPitch, profile.viewLimitYaw, profile.viewLimitRoll, false);
-            useExp.Checked = profile.useExponential;
-            smoothness.Checked = profile.useSmoothness;
+            Profile.useIndividualExponential = ifExp.ToggleCommon.Value;
         }
 
 
         private void IfSens_InputFieldIsValid(object? sender, EventArgs e)
         {
+            Profile.sensitivityPitch = ifSens.InputFieldPitch.Value;
+            Profile.sensitivityYaw = ifSens.InputFieldYaw.Value;
+            Profile.sensitivityRoll = ifSens.InputFieldRoll.Value;
             if (actOnEvents)
             {
                 SerialCommunicator.Instance.setSensitivity(ifSens.InputFieldPitch.Value, ifSens.InputFieldYaw.Value, ifSens.InputFieldRoll.Value);
@@ -67,6 +81,9 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfExp_InputFieldIsValid(object? sender, EventArgs e)
         {
+            Profile.exponentialPitch = ifExp.InputFieldPitch.Value;
+            Profile.exponentialYaw = ifExp.InputFieldYaw.Value;
+            Profile.exponentialRoll = ifExp.InputFieldRoll.Value;
             if (actOnEvents)
             {
                 SerialCommunicator.Instance.setExponentialView(ifExp.InputFieldPitch.Value, ifExp.InputFieldYaw.Value, ifExp.InputFieldRoll.Value);
@@ -75,6 +92,10 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfOff_InputFieldIsValid(object? sender, EventArgs e)
         {
+            Profile.offsetPitch = ifOff.InputFieldPitch.Value;
+            Profile.offsetYaw = ifOff.InputFieldYaw.Value;
+            Profile.offsetRoll = ifOff.InputFieldRoll.Value;
+            Console.WriteLine("ucPYR: offset {0}, {1}, {2}", ifOff.InputFieldPitch.Value, ifOff.InputFieldYaw.Value, ifOff.InputFieldRoll.Value);
             if (actOnEvents)
             {
                 //Console.WriteLine("ucPYR: {0}", "event recived");
@@ -84,6 +105,9 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfAng_InputFieldIsValid(object? sender, EventArgs e)
         {
+            Profile.viewLimitPitch = ifAng.InputFieldPitch.Value;
+            Profile.viewLimitYaw = ifAng.InputFieldYaw.Value;
+            Profile.viewLimitRoll = ifAng.InputFieldRoll.Value;
             if (actOnEvents)
             {
                 SerialCommunicator.Instance.setLimit(ifAng.InputFieldPitch.Value, ifAng.InputFieldYaw.Value, ifAng.InputFieldRoll.Value);
@@ -92,6 +116,7 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void useExp_CheckedChanged(object sender, EventArgs e)
         {
+            Profile.useExponential = useExp.Checked;
             if (actOnEvents)
             {
                 SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
@@ -100,6 +125,7 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void smoothness_CheckedChanged(object sender, EventArgs e)
         {
+            Profile.useSmoothness = smoothness.Checked;
             if (actOnEvents)
             {
                 SerialCommunicator.Instance.setSmoothness(smoothness.Checked);

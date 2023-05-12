@@ -66,34 +66,33 @@ namespace HeadTrackerV2
         }
 
 
-        private void validateInput(object sender, EventArgs e)
-        {
-            if (AreTextBoxesValid())
-            {
-                OnInputFieldIsValid(e);
-                //Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValid, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
-            }
-        }
-
-
         protected virtual bool AreTextBoxesValid()
         {
             bool isValid = true;
-            if (!tryParseFloat(pitchTextBox.Text, out float pitch))
+            if (tryParseFloat(pitchTextBox.Text, out float pitch))
+            {
+                InputFieldPitch.Value = pitch;
+            }else
             {
                 isValid = false;
                 pitchTextBox.Text = "";
                 SerialCommunicator.Instance.outputString("ERROR: Pitch value is not a float!");
             }
 
-            if (!tryParseFloat(yawTextBox.Text, out float yaw))
+            if (tryParseFloat(yawTextBox.Text, out float yaw))
+            {
+                InputFieldYaw.Value = yaw;
+            }else
             {
                 isValid = false;
                 yawTextBox.Text = "";
                 SerialCommunicator.Instance.outputString("ERROR: Yaw value is not a float!");
             }
 
-            if (!tryParseFloat(rollTextBox.Text, out float roll))
+            if (tryParseFloat(rollTextBox.Text, out float roll))
+            {
+                InputFieldRoll.Value = roll;
+            }else
             {
                 isValid = false;
                 rollTextBox.Text = "";
@@ -102,6 +101,7 @@ namespace HeadTrackerV2
             return isValid;
 
         }
+
 
         private void validateInput(object sender, CancelEventArgs e)
         {

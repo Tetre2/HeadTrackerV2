@@ -39,6 +39,14 @@ namespace HeadTrackerV2
 
         }
 
+        public void SetToggleCommon(bool val, bool fireEvent)
+        {
+            ToggleCommon.Value = val;
+            if (fireEvent)
+            {
+                OnInputFieldToggled(new EventArgs());
+            }
+        }
 
         public void SetValues(float pitch, float yaw, float roll, float common, bool fireEvent)
         {
@@ -60,7 +68,10 @@ namespace HeadTrackerV2
             bool isValid = true;
             if (ToggleCommon.Value)
             {
-                if (!tryParseFloat(commonTextBox.Text, out float common))
+                if (tryParseFloat(commonTextBox.Text, out float common))
+                {
+                    InputFieldCommon.Value = common;
+                }else
                 {
                     isValid = false;
                     commonTextBox.Text = "";
@@ -84,9 +95,10 @@ namespace HeadTrackerV2
             }
         }
 
-        private void toggleCommon_CheckedChanged(object sender, EventArgs e)
+
+        private void toggleCommon_MouseClick(object sender, MouseEventArgs e)
         {
-            OnInputFieldToggled(e);
+            OnInputFieldToggled(e); 
         }
     }
 }

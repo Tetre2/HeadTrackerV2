@@ -9,7 +9,6 @@ public class UserPersistence
     private String appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HeadTracker");
     private String profileFile = "Profiles.json";
     public static float PROFILE_VERSION = 0.02f;
-    private bool profilesChanged = false; //used to not have to write the profiles if nothing has changed since last load
     public List<Profile> Profiles { get; set; }
     public class Profile
     {
@@ -82,6 +81,38 @@ public class UserPersistence
         COMPort = "COM5"
     };
 
+    public Profile EmptyProfile = new Profile
+    {
+        name = "New Profile",
+        id = Guid.NewGuid().ToString(),
+        sensitivityPitch = 0,
+        sensitivityYaw = 0,
+        sensitivityRoll = 0,
+        commonSensitivity = 0,
+        useIndividualSensitivity = false,
+
+        exponentialPitch = 0,
+        exponentialYaw = 0,
+        exponentialRoll = 0,
+        commonExponential = 0,
+        useIndividualExponential = false,
+
+        offsetPitch = 0,
+        offsetYaw = 0,
+        offsetRoll = 0,
+
+        viewLimitPitch = 0,
+        viewLimitYaw = 0,
+        viewLimitRoll = 0,
+
+        enableGyro = false,
+        useExponential = false,
+        useSmoothness = false,
+
+        hotkey = Keys.F1,
+        COMPort = "COM5"
+    };
+
     private class JsonObj
     {
         public float version { get; set; }
@@ -95,27 +126,6 @@ public class UserPersistence
 
     }
 
-    public void createNewProfile()
-    {
-        profilesChanged = true;
-
-        //TODO
-    }
-
-    public void ModifyProfile()
-    {
-        profilesChanged = true;
-
-        //TODO
-    }
-
-    public void RemoveProfile()
-    {
-        profilesChanged = true;
-
-        //TODO
-    }
-
     public void Close()
     {
         writeProfiles();
@@ -123,10 +133,7 @@ public class UserPersistence
 
     private void writeProfiles()
     {
-        if (profilesChanged)
-        {
-            writeProfilesToFile(new JsonObj { version = 0.01f, profiles = Profiles });
-        }
+        writeProfilesToFile(new JsonObj { version = 0.01f, profiles = Profiles });
     }
 
     //returns the profiles in the json file

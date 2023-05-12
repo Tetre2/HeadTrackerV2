@@ -18,6 +18,7 @@ namespace HeadTrackerV2
 
             actHook = new UserActivityHook();
             actHook.KeyDown += new KeyEventHandler(MyKeyDown);
+            _ = UserPersistence.Instance; // create the signleton
         }
 
         public void MyKeyDown(object sender, KeyEventArgs e)
@@ -39,6 +40,7 @@ namespace HeadTrackerV2
         {
             SerialCommunicator.Instance.close();
             Settings.Default.Save();
+            UserPersistence.Instance.Close();
             Application.Exit();
         }
 

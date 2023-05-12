@@ -102,6 +102,7 @@
             this.button3.TabIndex = 4;
             this.button3.Text = "+";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -112,6 +113,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "-";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -123,11 +125,13 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ucpyr1
             // 
             this.ucpyr1.Location = new System.Drawing.Point(3, 3);
             this.ucpyr1.Name = "ucpyr1";
+            this.ucpyr1.Profile = null;
             this.ucpyr1.Size = new System.Drawing.Size(570, 270);
             this.ucpyr1.TabIndex = 0;
             // 
@@ -163,6 +167,7 @@
             this.Name = "ProfilesPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profiles";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProfilesPopup_FormClosed);
             this.Load += new System.EventHandler(this.ProfilesPopup_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
