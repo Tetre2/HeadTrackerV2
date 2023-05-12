@@ -98,6 +98,7 @@
             this.toggleCommon.Size = new System.Drawing.Size(15, 14);
             this.toggleCommon.TabIndex = 1;
             this.toggleCommon.UseVisualStyleBackColor = true;
+            this.toggleCommon.CheckedChanged += new System.EventHandler(this.toggleCommon_CheckedChanged);
             // 
             // InputFieldWithToggle
             // 

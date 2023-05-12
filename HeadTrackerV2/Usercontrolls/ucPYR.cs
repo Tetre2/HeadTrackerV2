@@ -14,6 +14,7 @@ namespace HeadTrackerV2.Usercontrolls
     {
 
         public bool actOnEvents = false;
+        public UserPersistence.Profile Profile { get; set; }
         public ucPYR()
         {
             InitializeComponent();
@@ -24,9 +25,23 @@ namespace HeadTrackerV2.Usercontrolls
             ifAng.SetPlaceholderText("Limit");
 
             ifSens.InputFieldIsValid += IfSens_InputFieldIsValid;
+            ifSens.InputFieldToggled += IfSens_InputFieldToggled;
             ifExp.InputFieldIsValid += IfExp_InputFieldIsValid;
+            ifExp.InputFieldToggled += IfExp_InputFieldToggled;
             ifOff.InputFieldIsValid += IfOff_InputFieldIsValid;
             ifAng.InputFieldIsValid += IfAng_InputFieldIsValid;
+        }
+
+
+
+        private void IfSens_InputFieldToggled(object? sender, EventArgs e)
+        {
+            
+        }
+
+        private void IfExp_InputFieldToggled(object? sender, EventArgs e)
+        {
+            
         }
 
         public void setProfile(UserPersistence.Profile profile)
@@ -40,7 +55,6 @@ namespace HeadTrackerV2.Usercontrolls
             useExp.Checked = profile.useExponential;
             smoothness.Checked = profile.useSmoothness;
         }
-
 
 
         private void IfSens_InputFieldIsValid(object? sender, EventArgs e)

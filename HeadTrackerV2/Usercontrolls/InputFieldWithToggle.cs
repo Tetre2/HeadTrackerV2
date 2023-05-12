@@ -12,6 +12,15 @@ namespace HeadTrackerV2
 {
     public partial class InputFieldWithToggle : InputField
     {
+
+        public event EventHandler InputFieldToggled;
+
+        protected virtual void OnInputFieldToggled(EventArgs e)
+        {
+            InputFieldToggled?.Invoke(this, e);
+            Console.WriteLine("toggle event Invoced by: {0}", this.Name);
+        }
+
         public Utils.UpdatableProperty<bool> ToggleCommon = new Utils.UpdatableProperty<bool>(); // It is possible this is bugged and does not update untill it is observerd via user interaction
         public Utils.UpdatableProperty<float> InputFieldCommon = new Utils.UpdatableProperty<float>();
         public InputFieldWithToggle()
@@ -22,9 +31,6 @@ namespace HeadTrackerV2
             pitchTextBox.DataBindings.Add(nameof(pitchTextBox.Text), InputFieldPitch, "Value", true);
             yawTextBox.DataBindings.Add(nameof(yawTextBox.Text), InputFieldYaw, "Value", true);
             rollTextBox.DataBindings.Add(nameof(rollTextBox.Text), InputFieldRoll, "Value", true);
-
-
-
 
             commonTextBox.DataBindings.Add(nameof(commonTextBox.Text), InputFieldCommon, "Value", true);
             commonTextBox.DataBindings.Add(nameof(commonTextBox.Visible), toggleCommon, "Checked", true);
@@ -76,6 +82,11 @@ namespace HeadTrackerV2
                 OnInputFieldIsValid(new EventArgs());
                 //Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValid, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
             }
+        }
+
+        private void toggleCommon_CheckedChanged(object sender, EventArgs e)
+        {
+            OnInputFieldToggled(e);
         }
     }
 }
