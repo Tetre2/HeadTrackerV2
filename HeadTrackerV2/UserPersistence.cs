@@ -52,7 +52,7 @@ public class UserPersistence
 
     private static Profile defaultprofile = new Profile
     {
-        name = "default Profile",
+        name = "Default Profile",
         id = Guid.NewGuid().ToString(),
         sensitivityPitch = 7000,
         sensitivityYaw = 5000,

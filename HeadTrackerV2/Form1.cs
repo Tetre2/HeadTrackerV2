@@ -10,7 +10,7 @@ namespace HeadTrackerV2
         public Form1()
         {
             InitializeComponent();
-            ucpyr1.useAutoUpdate = true;
+            ucpyr1.actOnEvents = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)

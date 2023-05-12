@@ -13,15 +13,10 @@ namespace HeadTrackerV2.Usercontrolls
     public partial class ucPYR : UserControl
     {
 
-        public bool useAutoUpdate = false;
-        public Utils.UpdatableProperty<bool> checkboxUseExp = new Utils.UpdatableProperty<bool>();
-        public Utils.UpdatableProperty<bool> checkboxUseSmoothness = new Utils.UpdatableProperty<bool>();
+        public bool actOnEvents = false;
         public ucPYR()
         {
             InitializeComponent();
-
-            useExp.DataBindings.Add(nameof(useExp.Checked), checkboxUseExp, "Value", true);
-            smoothness.DataBindings.Add(nameof(smoothness.Checked), checkboxUseSmoothness, "Value", true);
 
             ifSens.SetPlaceholderText("Sens");
             ifExp.SetPlaceholderText("Eep");
@@ -34,29 +29,23 @@ namespace HeadTrackerV2.Usercontrolls
             ifAng.InputFieldIsValid += IfAng_InputFieldIsValid;
         }
 
-        public void setSens(float pitch, float yaw, float roll, float common)
+        public void setProfile(UserPersistence.Profile profile)
         {
-            ifSens.SetValues(pitch, yaw, roll, common, false);
+            ifSens.SetValues(profile.sensitivityPitch, profile.sensitivityYaw, profile.sensitivityRoll, profile.commonSensitivity, false);
+            ifSens.ToggleCommon.Value = profile.useIndividualSensitivity;
+            ifExp.SetValues(profile.exponentialPitch, profile.exponentialYaw, profile.exponentialRoll, profile.commonExponential, false);
+            ifExp.ToggleCommon.Value = profile.useIndividualExponential;
+            ifOff.SetValues(profile.offsetPitch, profile.offsetYaw, profile.offsetRoll, false);
+            ifAng.SetValues(profile.viewLimitPitch, profile.viewLimitYaw, profile.viewLimitRoll, false);
+            useExp.Checked = profile.useExponential;
+            smoothness.Checked = profile.useSmoothness;
         }
 
-        public void setExp(float pitch, float yaw, float roll, float common)
-        {
-            ifExp.SetValues(pitch, yaw, roll, common, false);
-        }
 
-        public void setOffset(float pitch, float yaw, float roll)
-        {
-            ifOff.SetValues(pitch, yaw, roll, false);
-        }
-
-        public void setLimit(float pitch, float yaw, float roll)
-        {
-            ifAng.SetValues(pitch, yaw, roll, false);
-        }
 
         private void IfSens_InputFieldIsValid(object? sender, EventArgs e)
         {
-            if (useAutoUpdate)
+            if (actOnEvents)
             {
                 SerialCommunicator.Instance.setSensitivity(ifSens.InputFieldPitch.Value, ifSens.InputFieldYaw.Value, ifSens.InputFieldRoll.Value);
             }
@@ -64,7 +53,7 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfExp_InputFieldIsValid(object? sender, EventArgs e)
         {
-            if (useAutoUpdate)
+            if (actOnEvents)
             {
                 SerialCommunicator.Instance.setExponentialView(ifExp.InputFieldPitch.Value, ifExp.InputFieldYaw.Value, ifExp.InputFieldRoll.Value);
             }
@@ -72,7 +61,7 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfOff_InputFieldIsValid(object? sender, EventArgs e)
         {
-            if (useAutoUpdate)
+            if (actOnEvents)
             {
                 //Console.WriteLine("ucPYR: {0}", "event recived");
                 SerialCommunicator.Instance.setOffset(ifOff.InputFieldPitch.Value, ifOff.InputFieldYaw.Value, ifOff.InputFieldRoll.Value);
@@ -81,7 +70,7 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void IfAng_InputFieldIsValid(object? sender, EventArgs e)
         {
-            if (useAutoUpdate)
+            if (actOnEvents)
             {
                 SerialCommunicator.Instance.setLimit(ifAng.InputFieldPitch.Value, ifAng.InputFieldYaw.Value, ifAng.InputFieldRoll.Value);
             }
@@ -89,17 +78,17 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void useExp_CheckedChanged(object sender, EventArgs e)
         {
-            if (useAutoUpdate)
+            if (actOnEvents)
             {
-                SerialCommunicator.Instance.setExponentialMode(checkboxUseExp.Value);
+                SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
             }
         }
 
         private void smoothness_CheckedChanged(object sender, EventArgs e)
         {
-            if (useAutoUpdate)
+            if (actOnEvents)
             {
-                SerialCommunicator.Instance.setSmoothness(checkboxUseSmoothness.Value);
+                SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
             }
         }
     }

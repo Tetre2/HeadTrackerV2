@@ -33,10 +33,6 @@ namespace HeadTrackerV2
 
         }
 
-        public void setToggle()
-        {
-
-        }
 
         public void SetValues(float pitch, float yaw, float roll, float common, bool fireEvent)
         {
