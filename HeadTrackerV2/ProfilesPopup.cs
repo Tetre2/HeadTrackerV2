@@ -20,7 +20,11 @@ namespace HeadTrackerV2
 
         private void ProfilesPopup_Load(object sender, EventArgs e)
         {
-            profileList.Items.Add("new Item");
+            List<UserPersistence.Profile> profiles = UserPersistence.Instance.Profiles;
+            foreach (UserPersistence.Profile profile in profiles)
+            {
+                profileList.Items.Add(profile);
+            }
         }
 
         private void profileList_MouseDown(object sender, MouseEventArgs e)
@@ -37,7 +41,7 @@ namespace HeadTrackerV2
 
         private void gfdfgToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Hello");
+            Console.WriteLine(((UserPersistence.Profile) profileList.SelectedItem).id);
         }
 
         

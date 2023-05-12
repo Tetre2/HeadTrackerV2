@@ -43,6 +43,11 @@ public class UserPersistence
 
         public Keys? hotkey { get; set; }
         public String? COMPort { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     private static Profile defaultprofile = new Profile

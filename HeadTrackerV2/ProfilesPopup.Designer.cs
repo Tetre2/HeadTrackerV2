@@ -74,9 +74,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.profileList.FormattingEnabled = true;
             this.profileList.ItemHeight = 17;
-            this.profileList.Items.AddRange(new object[] {
-            "Default",
-            "Test"});
             this.profileList.Location = new System.Drawing.Point(3, 3);
             this.profileList.Name = "profileList";
             this.profileList.Size = new System.Drawing.Size(171, 225);
