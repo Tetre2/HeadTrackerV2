@@ -3,6 +3,9 @@ using System.Text.Json;
 
 public class UserPersistence
 {
+
+    private static readonly Lazy<UserPersistence> lazy = new Lazy<UserPersistence>(() => new UserPersistence());
+    public static UserPersistence Instance { get { return lazy.Value; } }
     private String appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HeadTracker");
     private String profileFile = "Profiles.json";
     public static float PROFILE_VERSION = 0.02f;
@@ -80,7 +83,7 @@ public class UserPersistence
         public List<Profile> profiles { get; set; }
     }
 
-    public UserPersistence()
+    private UserPersistence()
     {
 
         Profiles = loadProfiles();

@@ -140,19 +140,19 @@
             this.gfdfgToolStripMenuItem,
             this.sssToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
             // 
             // gfdfgToolStripMenuItem
             // 
             this.gfdfgToolStripMenuItem.Name = "gfdfgToolStripMenuItem";
-            this.gfdfgToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gfdfgToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.gfdfgToolStripMenuItem.Text = "gfdfg";
             this.gfdfgToolStripMenuItem.Click += new System.EventHandler(this.gfdfgToolStripMenuItem_Click);
             // 
             // sssToolStripMenuItem
             // 
             this.sssToolStripMenuItem.Name = "sssToolStripMenuItem";
-            this.sssToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sssToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.sssToolStripMenuItem.Text = "sss";
             // 
             // ProfilesPopup
@@ -166,6 +166,7 @@
             this.Name = "ProfilesPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profiles";
+            this.Load += new System.EventHandler(this.ProfilesPopup_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

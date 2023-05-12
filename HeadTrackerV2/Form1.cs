@@ -7,7 +7,6 @@ namespace HeadTrackerV2
     public partial class Form1 : Form
     {
         UserActivityHook actHook;
-        UserPersistence userPersistence;
         public Form1()
         {
             InitializeComponent();
@@ -19,9 +18,6 @@ namespace HeadTrackerV2
 
             actHook = new UserActivityHook();
             actHook.KeyDown += new KeyEventHandler(MyKeyDown);
-
-            userPersistence = new UserPersistence();
-
         }
 
         public void MyKeyDown(object sender, KeyEventArgs e)

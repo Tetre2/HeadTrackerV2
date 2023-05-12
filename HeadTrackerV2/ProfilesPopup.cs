@@ -18,6 +18,11 @@ namespace HeadTrackerV2
             
         }
 
+        private void ProfilesPopup_Load(object sender, EventArgs e)
+        {
+            profileList.Items.Add("new Item");
+        }
+
         private void profileList_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -34,5 +39,7 @@ namespace HeadTrackerV2
         {
             Console.WriteLine("Hello");
         }
+
+        
     }
 }
