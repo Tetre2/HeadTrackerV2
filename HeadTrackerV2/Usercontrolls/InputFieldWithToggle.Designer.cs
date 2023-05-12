@@ -46,8 +46,7 @@
             this.commonTextBox.Size = new System.Drawing.Size(355, 35);
             this.commonTextBox.TabIndex = 5;
             this.commonTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.commonTextBox.Leave += new System.EventHandler(this.validateInput);
-            this.commonTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
+            this.commonTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateInput);
             // 
             // rollTextBox
             // 
@@ -60,8 +59,7 @@
             this.rollTextBox.Size = new System.Drawing.Size(105, 35);
             this.rollTextBox.TabIndex = 4;
             this.rollTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.rollTextBox.Leave += new System.EventHandler(this.validateInput);
-            this.rollTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
+            this.rollTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateInput);
             // 
             // yawTextBox
             // 
@@ -74,8 +72,7 @@
             this.yawTextBox.Size = new System.Drawing.Size(105, 35);
             this.yawTextBox.TabIndex = 3;
             this.yawTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.yawTextBox.Leave += new System.EventHandler(this.validateInput);
-            this.yawTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
+            this.yawTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateInput);
             // 
             // pitchTextBox
             // 
@@ -88,8 +85,7 @@
             this.pitchTextBox.Size = new System.Drawing.Size(105, 35);
             this.pitchTextBox.TabIndex = 2;
             this.pitchTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.pitchTextBox.Leave += new System.EventHandler(this.validateInput);
-            this.pitchTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.validating);
+            this.pitchTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateInput);
             // 
             // toggleCommon
             // 

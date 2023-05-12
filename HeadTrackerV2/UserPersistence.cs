@@ -58,7 +58,7 @@ public class UserPersistence
         sensitivityYaw = 5000,
         sensitivityRoll = 10,
         commonSensitivity = 1,
-        useIndividualSensitivity = false,
+        useIndividualSensitivity = true,
 
         exponentialPitch = 30,
         exponentialYaw = 30,

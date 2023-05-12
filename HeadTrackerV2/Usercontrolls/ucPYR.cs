@@ -14,9 +14,14 @@ namespace HeadTrackerV2.Usercontrolls
     {
 
         public bool useAutoUpdate = false;
+        public Utils.UpdatableProperty<bool> checkboxUseExp = new Utils.UpdatableProperty<bool>();
+        public Utils.UpdatableProperty<bool> checkboxUseSmoothness = new Utils.UpdatableProperty<bool>();
         public ucPYR()
         {
             InitializeComponent();
+
+            useExp.DataBindings.Add(nameof(useExp.Checked), checkboxUseExp, "Value", true);
+            smoothness.DataBindings.Add(nameof(smoothness.Checked), checkboxUseSmoothness, "Value", true);
 
             ifSens.SetPlaceholderText("Sens");
             ifExp.SetPlaceholderText("Eep");
@@ -29,7 +34,25 @@ namespace HeadTrackerV2.Usercontrolls
             ifAng.InputFieldIsValid += IfAng_InputFieldIsValid;
         }
 
-        
+        public void setSens(float pitch, float yaw, float roll, float common)
+        {
+            ifSens.SetValues(pitch, yaw, roll, common, false);
+        }
+
+        public void setExp(float pitch, float yaw, float roll, float common)
+        {
+            ifExp.SetValues(pitch, yaw, roll, common, false);
+        }
+
+        public void setOffset(float pitch, float yaw, float roll)
+        {
+            ifOff.SetValues(pitch, yaw, roll, false);
+        }
+
+        public void setLimit(float pitch, float yaw, float roll)
+        {
+            ifAng.SetValues(pitch, yaw, roll, false);
+        }
 
         private void IfSens_InputFieldIsValid(object? sender, EventArgs e)
         {
@@ -68,7 +91,7 @@ namespace HeadTrackerV2.Usercontrolls
         {
             if (useAutoUpdate)
             {
-                SerialCommunicator.Instance.setExponentialMode(useExp.Checked);
+                SerialCommunicator.Instance.setExponentialMode(checkboxUseExp.Value);
             }
         }
 
@@ -76,7 +99,7 @@ namespace HeadTrackerV2.Usercontrolls
         {
             if (useAutoUpdate)
             {
-                SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
+                SerialCommunicator.Instance.setSmoothness(checkboxUseSmoothness.Value);
             }
         }
     }

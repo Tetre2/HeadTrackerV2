@@ -36,6 +36,14 @@ namespace HeadTrackerV2
                 {
                     contextMenuStrip1.Show(Cursor.Position);
                 }
+            }else if (e.Button == MouseButtons.Left)
+            {
+                UserPersistence.Profile p = (UserPersistence.Profile) profileList.SelectedItem;
+                ucpyr1.setSens(p.sensitivityPitch, p.sensitivityYaw, p.sensitivityRoll, p.commonSensitivity);
+                ucpyr1.setExp(p.exponentialPitch, p.exponentialYaw, p.exponentialRoll, p.commonExponential);
+                ucpyr1.setOffset(p.offsetPitch, p.offsetYaw, p.offsetRoll);
+                ucpyr1.setLimit(p.viewLimitPitch, p.viewLimitYaw, p.viewLimitRoll);
+
             }
         }
 

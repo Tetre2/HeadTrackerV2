@@ -20,6 +20,7 @@ namespace HeadTrackerV2
         protected virtual void OnInputFieldIsValid(EventArgs e)
         {
             InputFieldIsValid?.Invoke(this, e);
+            Console.WriteLine("event Invoced by: {0}", this.Name);
         }
 
 
@@ -35,6 +36,17 @@ namespace HeadTrackerV2
             rollTextBox.DataBindings.Add(nameof(rollTextBox.Text), InputFieldRoll, "Value", true);
         }
 
+        public virtual void SetValues(float pitch, float yaw, float roll, bool fireEvent)
+        {
+            InputFieldPitch.Value = pitch;
+            InputFieldYaw.Value = yaw;
+            InputFieldRoll.Value = roll;
+            if (fireEvent)
+            {
+                validateInput(this, new CancelEventArgs());
+            }
+        }
+
         public virtual void SetPlaceholderText(string text)
         {
             pitchTextBox.PlaceholderText = text;
@@ -46,6 +58,7 @@ namespace HeadTrackerV2
         {
             var fmt = new NumberFormatInfo();
             fmt.NegativeSign = "-";
+            fmt.NumberDecimalSeparator = ",";
 
             bool isValid = float.TryParse(possibleFloat, NumberStyles.Float, fmt, out float r);
             result = r;
@@ -55,26 +68,47 @@ namespace HeadTrackerV2
 
         private void validateInput(object sender, EventArgs e)
         {
-            if (sender != null && sender is TextBox)
+            if (AreTextBoxesValid())
             {
-                TextBox textBox = sender as TextBox;
-                if (!tryParseFloat(textBox.Text, out float f)) { textBox.Text = ""; }
+                OnInputFieldIsValid(e);
+                //Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValid, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
             }
         }
 
 
-        private void validating(object sender, CancelEventArgs e)
+        protected virtual bool AreTextBoxesValid()
         {
-            bool isValidFloat = tryParseFloat(pitchTextBox.Text, out float pitch);
-            isValidFloat = tryParseFloat(yawTextBox.Text, out float yaw) && isValidFloat;
-            isValidFloat = tryParseFloat(rollTextBox.Text, out float roll) && isValidFloat;
-            if (isValidFloat){
-                OnInputFieldIsValid(e);
-                //Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValidFloat, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
-            }
-            else
+            bool isValid = true;
+            if (!tryParseFloat(pitchTextBox.Text, out float pitch))
             {
-                SerialCommunicator.Instance.outputString("ERROR: value is not a float!");
+                isValid = false;
+                pitchTextBox.Text = "";
+                SerialCommunicator.Instance.outputString("ERROR: Pitch value is not a float!");
+            }
+
+            if (!tryParseFloat(yawTextBox.Text, out float yaw))
+            {
+                isValid = false;
+                yawTextBox.Text = "";
+                SerialCommunicator.Instance.outputString("ERROR: Yaw value is not a float!");
+            }
+
+            if (!tryParseFloat(rollTextBox.Text, out float roll))
+            {
+                isValid = false;
+                rollTextBox.Text = "";
+                SerialCommunicator.Instance.outputString("ERROR: Roll value is not a float!");
+            }
+            return isValid;
+
+        }
+
+        private void validateInput(object sender, CancelEventArgs e)
+        {
+            if (AreTextBoxesValid())
+            {
+                OnInputFieldIsValid(e);
+                //Console.WriteLine("inputField: {0}, {1}, {2}, {3}", isValid, pitchTextBox.Text, yawTextBox.Text, rollTextBox.Text);
             }
         }
     }
