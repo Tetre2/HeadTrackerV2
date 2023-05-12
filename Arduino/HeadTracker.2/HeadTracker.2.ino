@@ -80,7 +80,9 @@ void setup() {
   Serial.begin(9600);
   while (!Serial); // wait for Leonardo enumeration, others continue immediately
   Serial.flush();
-
+  
+  loadDataFromEEPROM();
+  
   Gamepad.begin();
 
   Wire.begin();
