@@ -24,6 +24,8 @@ namespace HeadTrackerV2
 
             ProfilePopup.ProfileSelected += ProfilePopup_ProfileSelected;
 
+            ucpyr1.Profile = UserPersistence.Instance.GetCurrentUserProfile();
+
         }
 
         private void ProfilePopup_ProfileSelected(object? sender, EventArgs e)

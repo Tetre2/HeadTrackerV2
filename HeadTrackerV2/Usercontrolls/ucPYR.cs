@@ -58,16 +58,6 @@ namespace HeadTrackerV2.Usercontrolls
 
 
 
-        private void IfSens_InputFieldToggled(object? sender, EventArgs e)
-        {
-            Profile.useIndividualSensitivity = ifSens.ToggleCommon.Value;
-        }
-
-        private void IfExp_InputFieldToggled(object? sender, EventArgs e)
-        {
-            Profile.useIndividualExponential = ifExp.ToggleCommon.Value;
-        }
-
 
         private void IfSens_InputFieldIsValid(object? sender, EventArgs e)
         {
@@ -115,7 +105,16 @@ namespace HeadTrackerV2.Usercontrolls
             }
         }
 
-        private void useExp_CheckedChanged(object sender, EventArgs e)
+        private void smoothness_Click(object sender, EventArgs e)
+        {
+            Profile.useSmoothness = smoothness.Checked;
+            if (actOnEvents)
+            {
+                SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
+            }
+        }
+
+        private void useExp_Click(object sender, EventArgs e)
         {
             Profile.useExponential = useExp.Checked;
             if (actOnEvents)
@@ -124,13 +123,17 @@ namespace HeadTrackerV2.Usercontrolls
             }
         }
 
-        private void smoothness_CheckedChanged(object sender, EventArgs e)
+        //Used to toggle the common inputfield
+        private void IfSens_InputFieldToggled(object? sender, EventArgs e)
         {
-            Profile.useSmoothness = smoothness.Checked;
-            if (actOnEvents)
-            {
-                SerialCommunicator.Instance.setSmoothness(smoothness.Checked);
-            }
+
+            Profile.useIndividualSensitivity = ifSens.ToggleCommon.Value;
+        }
+
+        //Used to toggle the common inputfield
+        private void IfExp_InputFieldToggled(object? sender, EventArgs e)
+        {
+            Profile.useIndividualExponential = ifExp.ToggleCommon.Value;
         }
     }
 }

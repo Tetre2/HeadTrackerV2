@@ -27,9 +27,9 @@ namespace HeadTrackerV2
 
         private void ProfilesPopup_Load(object sender, EventArgs e)
         {
-            foreach (UserProfile profile in UserPersistence.Instance.Profiles)
+            foreach (int id in UserPersistence.Instance.GetAllProfileIds())
             {
-                profileList.Items.Add(profile);
+                profileList.Items.Add(UserPersistence.Instance.GetProfile(id));
             }
         }
 
@@ -68,15 +68,11 @@ namespace HeadTrackerV2
 
         private void selectProfile_Click(object sender, EventArgs e)
         {
-            //TODO
             if (profileList.SelectedIndex != -1)
             {
                 OnProfileSelected(new ProfileArgs((UserProfile)profileList.SelectedItem));
 
             }
-
-
-
 
         }
 
@@ -84,7 +80,7 @@ namespace HeadTrackerV2
         {
             UserProfile newProfile = UserPersistence.Instance.EmptyProfile;
             ucpyr1.Profile = newProfile;
-            UserPersistence.Instance.Profiles.Add(newProfile);
+            UserPersistence.Instance.AddProfile(newProfile);
         }
 
         private void removeProfile_Click(object sender, EventArgs e)

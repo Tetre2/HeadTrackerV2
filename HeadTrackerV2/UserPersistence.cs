@@ -13,8 +13,55 @@ public class UserPersistence
     private int currentProfileId = 0;
 
     public static float PROFILE_VERSION = 0.03f;
-    public List<UserProfile> Profiles { get; set; }
+    private List<UserProfile> Profiles = new List<UserProfile>();
     
+    public List<int> GetAllProfileIds()
+    {
+        List<int> profileIds = new List<int>();
+        foreach (UserProfile p in Profiles)
+        {
+            profileIds.Add(p.id);
+        }
+        return profileIds;
+    }
+
+    public UserProfile GetProfile(int id)
+    {
+        foreach (UserProfile p in Profiles)
+        {
+            if (p.id == id)
+            {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public UserProfile GetCurrentUserProfile()
+    {
+        return GetProfile(currentProfileId);
+    }
+
+    public void RemoveProfile(int id)
+    {
+
+    }
+
+    public void AddProfile(UserProfile profile)
+    {
+
+    }
+
+    public void ModifyProfile(int id, UserProfile profile)
+    {
+
+    }
+
+    private static int getCurrentMaxId()
+    {
+        //TODO loop all profiles and get max id
+        return 0;
+    }
 
     private static UserProfile defaultprofile = new UserProfile
     {
@@ -89,10 +136,8 @@ public class UserPersistence
 
     private UserPersistence()
     {
-
         Profiles = loadProfiles();
         Form1.ProfilePopup.ProfileSelected += ProfilePopup_ProfileSelected;
-
     }
 
     private void ProfilePopup_ProfileSelected(object? sender, EventArgs e)
@@ -149,12 +194,6 @@ public class UserPersistence
         var options = new JsonSerializerOptions { WriteIndented = true };
         JsonSerializer.Serialize(createStream, obj, options);
         createStream.Close();
-    }
-
-    private static int getCurrentMaxId()
-    {
-        //TODO loop all profiles and get max id
-        return 0;
     }
 
 }

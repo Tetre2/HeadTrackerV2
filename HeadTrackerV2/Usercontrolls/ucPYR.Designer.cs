@@ -170,7 +170,7 @@
             this.useExp.TabIndex = 75;
             this.useExp.Text = "USE EXPONENTIAL";
             this.useExp.UseVisualStyleBackColor = true;
-            this.useExp.CheckedChanged += new System.EventHandler(this.useExp_CheckedChanged);
+            this.useExp.Click += new System.EventHandler(this.useExp_Click);
             // 
             // smoothness
             // 
@@ -184,7 +184,7 @@
             this.smoothness.TabIndex = 74;
             this.smoothness.Text = "SMOOTHNESS";
             this.smoothness.UseVisualStyleBackColor = true;
-            this.smoothness.CheckedChanged += new System.EventHandler(this.smoothness_CheckedChanged);
+            this.smoothness.Click += new System.EventHandler(this.smoothness_Click);
             // 
             // ucPYR
             // 
