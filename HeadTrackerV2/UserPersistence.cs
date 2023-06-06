@@ -176,9 +176,11 @@ public class UserPersistence
             }
             catch (Exception)
             {
-                MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles",
-     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
+            MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles",
+     MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
  
 
