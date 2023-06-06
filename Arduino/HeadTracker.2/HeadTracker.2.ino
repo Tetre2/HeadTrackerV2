@@ -181,10 +181,6 @@ void updatePRY(){
     timer = millis();
   }*/
 
-    Serial.println("---");
-    Serial.print(rawYaw); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.print(gamepadYaw); Serial.print(" "); Serial.print(getDeltaFromAverage(averageBufferYaw)); Serial.print(" "); Serial.print(getAverage(averageBufferYaw)); Serial.print(" "); Serial.print(lerpNumbYaw);
-
-
   Gamepad.yAxis(gamepadPitch);
   Gamepad.xAxis(gamepadYaw);
   Gamepad.zAxis(gamepadRoll);
