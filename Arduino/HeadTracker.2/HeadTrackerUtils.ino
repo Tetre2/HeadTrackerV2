@@ -40,6 +40,7 @@ float getDeltaFromAverage(float (&averageBuffer) [AVERAGE_BUFFER_SIZE]){
   for(int i = 0; i < AVERAGE_BUFFER_SIZE; i++){
     maxDelta = max(maxDelta, abs(average - averageBuffer[i]));
   }
+  Serial.println(maxDelta);
   return maxDelta;
 }
 

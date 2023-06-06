@@ -108,18 +108,23 @@ void loop()
 void updatePRY(){
   mpu6050.update();
   float rawPitch = mpu6050.getAngleX();
-  float rawRoll = mpu6050.getAngleY();
   float rawYaw = mpu6050.getAngleZ();
+  float rawRoll = mpu6050.getAngleY();
 
   pitch = rawPitch; 
   yaw = rawYaw;
   roll = rawRoll;
 
+  // Apply offsets
+  pitch -= offsetPitch;
+  roll -= offsetRoll;
+  yaw -= offsetYaw;
+
   if(millis() - updateBufferTimer > 20){
       //rotates thought the buffer and updates the oldes value
-      averageBufferPitch[averageBufferIndex] = rawPitch;
-      averageBufferYaw[averageBufferIndex] = rawYaw;
-      averageBufferRoll[averageBufferIndex] = rawRoll;
+      averageBufferPitch[averageBufferIndex] = pitch;
+      averageBufferYaw[averageBufferIndex] = yaw;
+      averageBufferRoll[averageBufferIndex] = roll;
       averageBufferIndex = (averageBufferIndex + 1) % AVERAGE_BUFFER_SIZE;
       
       updateBufferTimer = millis();
@@ -127,32 +132,27 @@ void updatePRY(){
 
   if(useSmoothness){
       
-      if(getDeltaFromAverage(averageBufferPitch) < 0.4){
-          pitch = (getAverage(averageBufferPitch) * 0.05) + (lerpNumbPitch * 0.95);
+      if(getDeltaFromAverage(averageBufferPitch) < 2){
+          pitch = (getAverage(averageBufferPitch) * 0.01) + (lerpNumbPitch * 0.99);
       }else{
-          pitch = (rawPitch * 0.05) + (lerpNumbPitch * 0.95);
+          pitch = (pitch * 0.1) + (lerpNumbPitch * 0.9);
       }
       lerpNumbPitch = pitch;
       
-      if(getDeltaFromAverage(averageBufferYaw) < 0.4){
-          yaw = (getAverage(averageBufferYaw) * 0.05) + (lerpNumbYaw * 0.95);  
+      if(getDeltaFromAverage(averageBufferYaw) < 2){
+          yaw = (getAverage(averageBufferYaw) * 0.01) + (lerpNumbYaw * 0.99);  
       }else{
-          yaw = (rawYaw * 0.05) + (lerpNumbYaw * 0.95);
+          yaw = (yaw * 0.1) + (lerpNumbYaw * 0.9);
       }
       lerpNumbYaw = yaw;
       
-      if(getDeltaFromAverage(averageBufferRoll) < 0.4){
-          roll = (getAverage(averageBufferRoll) * 0.5) + (lerpNumbRoll * 0.95);  
+      if(getDeltaFromAverage(averageBufferRoll) < 2){
+          roll = (getAverage(averageBufferRoll) * 0.01) + (lerpNumbRoll * 0.99);  
       }else{
-          roll = (rawRoll * 0.5) + (lerpNumbRoll * 0.95);  
+          roll = (roll * 0.1) + (lerpNumbRoll * 0.9);  
       }
       lerpNumbRoll = roll;
   }
-
-  // Apply offsets
-  pitch -= offsetPitch;
-  roll -= offsetRoll;
-  yaw -= offsetYaw;
   
   // Apply angel limits
   pitch = constrain(pitch, -pitchLimit, pitchLimit);
@@ -180,6 +180,10 @@ void updatePRY(){
     Serial.print(gamepadPitch); Serial.print(" "); Serial.print(gamepadYaw); Serial.print(" "); Serial.println(gamepadRoll);
     timer = millis();
   }*/
+
+    Serial.println("---");
+    Serial.print(rawYaw); Serial.print(" "); Serial.print(yaw); Serial.print(" "); Serial.print(gamepadYaw); Serial.print(" "); Serial.print(getDeltaFromAverage(averageBufferYaw)); Serial.print(" "); Serial.print(getAverage(averageBufferYaw)); Serial.print(" "); Serial.print(lerpNumbYaw);
+
 
   Gamepad.yAxis(gamepadPitch);
   Gamepad.xAxis(gamepadYaw);
