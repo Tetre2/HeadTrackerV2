@@ -91,7 +91,7 @@
             this.defaultToolStripMenuItem1});
             this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
             this.defaultToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.defaultToolStripMenuItem.Text = "Select Profile";
+            this.defaultToolStripMenuItem.Text = "Select ActiveProfile";
             // 
             // defaultToolStripMenuItem1
             // 
@@ -103,19 +103,19 @@
             // 
             this.newProfileToolStripMenuItem.Name = "newProfileToolStripMenuItem";
             this.newProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.newProfileToolStripMenuItem.Text = "New Profile";
+            this.newProfileToolStripMenuItem.Text = "New ActiveProfile";
             // 
             // updateProfileToolStripMenuItem
             // 
             this.updateProfileToolStripMenuItem.Name = "updateProfileToolStripMenuItem";
             this.updateProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.updateProfileToolStripMenuItem.Text = "Update Profile";
+            this.updateProfileToolStripMenuItem.Text = "Update ActiveProfile";
             // 
             // removeProfileToolStripMenuItem
             // 
             this.removeProfileToolStripMenuItem.Name = "removeProfileToolStripMenuItem";
             this.removeProfileToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.removeProfileToolStripMenuItem.Text = "Remove Profile";
+            this.removeProfileToolStripMenuItem.Text = "Remove ActiveProfile";
             // 
             // mainSC
             // 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HeadTrackerV2.Utils;
 
 namespace HeadTrackerV2.Usercontrolls
 {
@@ -15,9 +16,9 @@ namespace HeadTrackerV2.Usercontrolls
 
         public bool actOnEvents = false;
 
-        private UserPersistence.Profile profile;
+        private UserProfile profile;
 
-        public UserPersistence.Profile Profile
+        public UserProfile Profile
         {
             get { return profile; }
             set { 

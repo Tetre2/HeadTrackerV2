@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text.Json;
+using HeadTrackerV2;
+using HeadTrackerV2.Utils;
 
 public class UserPersistence
 {
@@ -8,51 +10,16 @@ public class UserPersistence
     public static UserPersistence Instance { get { return lazy.Value; } }
     private String appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HeadTracker");
     private String profileFile = "Profiles.json";
-    public static float PROFILE_VERSION = 0.02f;
-    public List<Profile> Profiles { get; set; }
-    public class Profile
-    {
-        public string name { get; set; }
+    private int currentProfileId = 0;
 
-        public string id { get; set; }
+    public static float PROFILE_VERSION = 0.03f;
+    public List<UserProfile> Profiles { get; set; }
+    
 
-        public float sensitivityPitch { get; set; }
-        public float sensitivityYaw { get; set; }
-        public float sensitivityRoll { get; set; }
-        public float commonSensitivity { get; set; }
-        public bool useIndividualSensitivity { get; set; }
-
-        public float exponentialPitch { get; set; }
-        public float exponentialYaw { get; set; }
-        public float exponentialRoll { get; set; }
-        public float commonExponential { get; set; }
-        public bool useIndividualExponential { get; set; }
-
-        public float offsetPitch { get; set; }
-        public float offsetYaw { get; set; }
-        public float offsetRoll { get; set; }
-
-        public float viewLimitPitch { get; set; }
-        public float viewLimitYaw { get; set; }
-        public float viewLimitRoll { get; set; }
-
-        public bool enableGyro { get; set; }
-        public bool useExponential { get; set; }
-        public bool useSmoothness { get; set; }
-
-        public Keys? hotkey { get; set; }
-        public String? COMPort { get; set; }
-
-        public override string ToString()
-        {
-            return name;
-        }
-    }
-
-    private static Profile defaultprofile = new Profile
+    private static UserProfile defaultprofile = new UserProfile
     {
         name = "Default Profile",
-        id = Guid.NewGuid().ToString(),
+        id = 0,
         sensitivityPitch = 7000,
         sensitivityYaw = 5000,
         sensitivityRoll = 10,
@@ -81,12 +48,12 @@ public class UserPersistence
         COMPort = "COM5"
     };
 
-    public Profile EmptyProfile = new Profile
+    public UserProfile EmptyProfile = new UserProfile
     {
         name = "New Profile",
-        id = Guid.NewGuid().ToString(),
+        id = getCurrentMaxId() + 1,
         sensitivityPitch = 0,
-        sensitivityYaw = 0,
+        sensitivityYaw = 10,
         sensitivityRoll = 0,
         commonSensitivity = 0,
         useIndividualSensitivity = false,
@@ -116,14 +83,23 @@ public class UserPersistence
     private class JsonObj
     {
         public float version { get; set; }
-        public List<Profile> profiles { get; set; }
+        public int currentProfile { get; set; }
+        public List<UserProfile> profiles { get; set; }
     }
 
     private UserPersistence()
     {
 
         Profiles = loadProfiles();
+        Form1.ProfilePopup.ProfileSelected += ProfilePopup_ProfileSelected;
 
+    }
+
+    private void ProfilePopup_ProfileSelected(object? sender, EventArgs e)
+    {
+        //TODO set active profile
+        currentProfileId = (e as ProfileArgs).profile.id;
+        Console.WriteLine("UserPersistence: recived Event! {0}", currentProfileId);
     }
 
     public void Close()
@@ -133,11 +109,11 @@ public class UserPersistence
 
     private void writeProfiles()
     {
-        writeProfilesToFile(new JsonObj { version = 0.01f, profiles = Profiles });
+        writeProfilesToFile(new JsonObj { version = 0.01f, currentProfile = currentProfileId, profiles = Profiles });
     }
 
     //returns the profiles in the json file
-    private List<Profile> loadProfiles()
+    private List<UserProfile> loadProfiles()
     {
         Directory.CreateDirectory(appDataPath);
 
@@ -145,19 +121,25 @@ public class UserPersistence
         {
 
             string jsonString = File.ReadAllText(Path.Combine(appDataPath, profileFile));
-            JsonObj? jsonProfiles = JsonSerializer.Deserialize<JsonObj>(jsonString);
-            if (jsonProfiles != null && jsonProfiles.version == PROFILE_VERSION)
+            try
             {
-                return jsonProfiles.profiles;
+                JsonObj? jsonProfiles = JsonSerializer.Deserialize<JsonObj>(jsonString);
+                if (jsonProfiles != null && jsonProfiles.version == PROFILE_VERSION)
+                {
+                    return jsonProfiles.profiles;
+                }
             }
-
+            catch (Exception)
+            {
+                MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles",
+     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        MessageBox.Show("Error loading User Profiles!\nCreating a Default Profile", "Error loading User Profiles",
-            MessageBoxButtons.OK, MessageBoxIcon.Error);
+ 
 
         //Overwrite the current file if deserialization faild or is wrong version or if there does not exist a file from the begining
-        writeProfilesToFile(new JsonObj { version = 0.01f, profiles = (new List<Profile> { defaultprofile }) });
-        return new List<Profile> { defaultprofile };
+        writeProfilesToFile(new JsonObj { version = 0.01f, profiles = (new List<UserProfile> { defaultprofile }) });
+        return new List<UserProfile> { defaultprofile };
 
     }
 
@@ -167,6 +149,12 @@ public class UserPersistence
         var options = new JsonSerializerOptions { WriteIndented = true };
         JsonSerializer.Serialize(createStream, obj, options);
         createStream.Close();
+    }
+
+    private static int getCurrentMaxId()
+    {
+        //TODO loop all profiles and get max id
+        return 0;
     }
 
 }

@@ -32,9 +32,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.profileList = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.newProfile = new System.Windows.Forms.Button();
+            this.removeProfile = new System.Windows.Forms.Button();
+            this.selectProfile = new System.Windows.Forms.Button();
             this.ucpyr1 = new HeadTrackerV2.Usercontrolls.ucPYR();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.gfdfgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,48 +84,48 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.newProfile);
+            this.panel1.Controls.Add(this.removeProfile);
+            this.panel1.Controls.Add(this.selectProfile);
             this.panel1.Location = new System.Drawing.Point(0, 224);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
             this.panel1.Size = new System.Drawing.Size(174, 56);
             this.panel1.TabIndex = 0;
             // 
-            // button3
+            // newProfile
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.Location = new System.Drawing.Point(124, 10);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 36);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "+";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.newProfile.Dock = System.Windows.Forms.DockStyle.Right;
+            this.newProfile.Location = new System.Drawing.Point(124, 10);
+            this.newProfile.Name = "newProfile";
+            this.newProfile.Size = new System.Drawing.Size(20, 36);
+            this.newProfile.TabIndex = 4;
+            this.newProfile.Text = "+";
+            this.newProfile.UseVisualStyleBackColor = true;
+            this.newProfile.Click += new System.EventHandler(this.newProfile_Click);
             // 
-            // button2
+            // removeProfile
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.Location = new System.Drawing.Point(144, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 36);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "-";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.removeProfile.Dock = System.Windows.Forms.DockStyle.Right;
+            this.removeProfile.Location = new System.Drawing.Point(144, 10);
+            this.removeProfile.Name = "removeProfile";
+            this.removeProfile.Size = new System.Drawing.Size(20, 36);
+            this.removeProfile.TabIndex = 3;
+            this.removeProfile.Text = "-";
+            this.removeProfile.UseVisualStyleBackColor = true;
+            this.removeProfile.Click += new System.EventHandler(this.removeProfile_Click);
             // 
-            // button1
+            // selectProfile
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(10, 10);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 36);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.selectProfile.Dock = System.Windows.Forms.DockStyle.Left;
+            this.selectProfile.Location = new System.Drawing.Point(10, 10);
+            this.selectProfile.Margin = new System.Windows.Forms.Padding(0);
+            this.selectProfile.Name = "selectProfile";
+            this.selectProfile.Size = new System.Drawing.Size(75, 36);
+            this.selectProfile.TabIndex = 2;
+            this.selectProfile.Text = "Select";
+            this.selectProfile.UseVisualStyleBackColor = true;
+            this.selectProfile.Click += new System.EventHandler(this.selectProfile_Click);
             // 
             // ucpyr1
             // 
@@ -182,9 +182,9 @@
         #endregion
 
         private SplitContainer splitContainer1;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private Button newProfile;
+        private Button removeProfile;
+        private Button selectProfile;
         private Panel panel1;
         private Usercontrolls.ucPYR ucpyr1;
         private ContextMenuStrip contextMenuStrip1;

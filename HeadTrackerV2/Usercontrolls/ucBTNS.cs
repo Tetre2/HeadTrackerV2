@@ -70,8 +70,7 @@ namespace HeadTrackerV2.Usercontrolls
 
         private void profiles_Click(object sender, EventArgs e)
         {
-            Form f = new ProfilesPopup();
-            f.ShowDialog();
+            Form1.ProfilePopup.ShowDialog();
         }
     }
 }

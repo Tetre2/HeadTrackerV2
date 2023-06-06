@@ -1,11 +1,13 @@
 using HeadTrackerV2.Properties;
 using System.Globalization;
 using gma.System.Windows;
+using HeadTrackerV2.Utils;
 
 namespace HeadTrackerV2
 {
     public partial class Form1 : Form
     {
+        public static ProfilesPopup ProfilePopup = new ProfilesPopup();
         UserActivityHook actHook;
         public Form1()
         {
@@ -19,6 +21,15 @@ namespace HeadTrackerV2
             actHook = new UserActivityHook();
             actHook.KeyDown += new KeyEventHandler(MyKeyDown);
             _ = UserPersistence.Instance; // create the signleton
+
+            ProfilePopup.ProfileSelected += ProfilePopup_ProfileSelected;
+
+        }
+
+        private void ProfilePopup_ProfileSelected(object? sender, EventArgs e)
+        {
+            ucpyr1.Profile = (e as ProfileArgs).profile;
+            Console.WriteLine("Form1: recived Event!");
         }
 
         public void MyKeyDown(object sender, KeyEventArgs e)
@@ -57,6 +68,8 @@ namespace HeadTrackerV2
             }
 
         }
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
